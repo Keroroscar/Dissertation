@@ -1,0 +1,5 @@
+local xx " lpopu_c  lsecgrp_c llaborinsec_c ldelivery_c lwage_c seaside vice  year2-year8"
+xtdpdsys lso2_c  `xx',endog(ldomestic_c lland_c lgov_c lfine) twostep
+est store dycs_2endog
+estat abond 
+estat sargan

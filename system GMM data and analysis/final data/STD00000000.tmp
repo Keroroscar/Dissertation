@@ -1,0 +1,4 @@
+xtset id year
+
+*panel description of dataset
+xtdescribe

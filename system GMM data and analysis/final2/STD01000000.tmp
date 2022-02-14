@@ -1,0 +1,2 @@
+local xx " lpopu_c  lsecgrp_c llaborinsec_c ldelivery_c lwage_c  year2-year8"
+xtreg lso2_c ldomestic_c lland_c lgov_c lfine `xx' ,re cluster(id)

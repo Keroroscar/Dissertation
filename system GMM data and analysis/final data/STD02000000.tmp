@@ -1,0 +1,4 @@
+local xx3  " ldomestic_a gov_a ) pgrp_a secgrp_a  wage_a laborinsec_a  delivery  density_a laborval i.year"
+local gmm3 " lso2   ldomestic_a gov_a   secgrp_a     laborinsec_a  "
+local iv3  "                  delivery      pgrp_a   wage_a  density_a    laborval       i.year"
+xtabond2 lso2 L.lso2 L2.lso2 `xx3', gmm(`gmm3') iv(`iv3') twostep robust

@@ -1,0 +1,4 @@
+local xx   "lfdi L.lfdi  lSO2 lgovcrime  i.year"
+local gmm3 "     L.lfdi           "
+local iv3  "            lgovcrime    lSO2        i.year      "
+xtabond2 `xx', gmm(`gmm3') iv(`iv3') twostep robust

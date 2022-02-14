@@ -1,0 +1,42 @@
+	(1)
+VARIABLES	SYS-GMM6.4
+	
+L.gov_b	-0.077***
+	(0.013)
+rfdi_b	24.882**
+	(12.618)
+L.rfdi_b	-25.110*
+	(14.556)
+lso2	3189116.035**
+	(1261455.384)
+L.lso2	468,355.088
+	(639,120.056)
+pgrp_b	0.986
+	(1.119)
+secgrp_b	-79,261.343**
+	(37,397.715)
+wage_b	0.289***
+	(0.047)
+laborinsec_b	53,866.228
+	(38,734.836)
+delivery	-100.548
+	(80.271)
+density_b	-21,713.035
+	(25,639.362)
+laborval	123,416.229
+	(133,076.761)
+Constant	-1.630e+07
+	(15412250.413)
+	
+Number of id	261
+ar1	-2.891
+ar1p	0.00384
+ar2	1.511
+ar2p	0.131
+sargan	977.9
+sarganp	0
+hansen	179.3
+hansenp	0.107
+N	1441
+Standard errors in parentheses	
+*** p<0.01, ** p<0.05, * p<0.1	

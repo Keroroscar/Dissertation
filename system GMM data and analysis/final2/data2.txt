@@ -1,0 +1,65 @@
+	(1)	(2)
+VARIABLES	lpso2_a	lpso2_a
+		
+L.lso2_b	-0.211***	
+	(0.036)	
+ldomestic_b	0.110	
+	(0.145)	
+lHMT_b	0.016	0.0719
+	(0.063)	(0.0484)
+lfdi_b	-0.061	-0.152***
+	(0.055)	(0.0415)
+lland_b	0.730***	
+	(0.073)	
+lgov_b	0.959**	
+	(0.393)	
+llaborinsec_b	0.500**	
+	(0.196)	
+lpopu_b	-0.223	
+	(0.160)	
+lsecgrp_b	0.128	
+	(0.130)	
+ldelivery_b	0.058***	
+	(0.015)	
+lwage_b	0.470**	
+	(0.228)	
+seaside	1.585***	1.812***
+	(0.414)	(0.397)
+vice	-2.027***	-1.063
+	(0.738)	(0.941)
+lfine	-0.262***	-0.0297
+	(0.096)	(0.0619)
+L.lso2_c		-0.000772
+		(0.0363)
+ldomestic_c		0.333*
+		(0.193)
+lland_c		0.207***
+		(0.0484)
+lpopu_c		-1.172***
+		(0.274)
+lsecgrp_c		-9.693***
+		(2.353)
+llaborinsec_c		-0.203**
+		(0.0893)
+lgov_c		0.671***
+		(0.222)
+ldelivery_c		0.00892
+		(0.0101)
+lwage_c		-0.490***
+		(0.186)
+Constant	-2.314	16.57***
+	(2.966)	(2.571)
+		
+Observations		780
+Number of id	223	223
+ar1	.	.
+ar1p	.	.
+ar2	.	.
+ar2p	.	.
+sargan	65.14	65.16
+sarganp	.	.
+hansen	.	.
+hansenp	.	.
+N	780	780
+Standard errors in parentheses		
+*** p<0.01, ** p<0.05, * p<0.1		

@@ -1,0 +1,878 @@
+-------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\stata\final data\mylognew.log
+  log type:  text
+ opened on:   8 Feb 2022, 17:29:35
+
+. 
+. *input data
+. use cityfinal,clear
+
+. 
+. *data summary
+. summarize
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+          id |      1,830    132.1694    76.26662          1        291
+laborinsec_a |      1,830    46.61886    13.41047       4.46       84.4
+laborinsec_b |      1,830    48.60714    13.96918       7.55      83.43
+         so2 |      1,830    59112.95    51479.94          2     572747
+      rfdi_a |      1,830    84590.95    186244.7          0    2113444
+-------------+---------------------------------------------------------
+      rfdi_b |      1,830    61107.25    168241.5          0    2113444
+    secgrp_a |      1,830    49.38925    10.43894      16.11      90.97
+    secgrp_b |      1,830    50.81365    11.53025       9.74      90.97
+    delivery |      1,830    11704.53    14303.51          2     271483
+       gov_a |      1,830    13161.19    30132.09        .59     467348
+-------------+---------------------------------------------------------
+       gov_b |      1,830     3529674    1.61e+07        .25   3.01e+08
+      wage_a |      1,830     7091058    2.42e+07   12116.04   3.21e+08
+      wage_b |      1,830     5347472    1.80e+07   12140.72   3.18e+08
+  domestic_a |      1,830    1.71e+07    2.36e+07       1066   1.80e+08
+  domestic_b |      1,830     9753958    1.73e+07        979   1.80e+08
+-------------+---------------------------------------------------------
+       HMT_a |      1,781     3460647     9817873    85.7631   1.50e+08
+       HMT_b |      1,726     2253637     7804559    85.7631   1.50e+08
+       fdi_a |      1,830     3651081    1.24e+07       1800   1.51e+08
+       fdi_b |      1,791     2928277    1.06e+07        121   1.51e+08
+        tele |      1,830    99.46205    110.7172          5     935.91
+-------------+---------------------------------------------------------
+      mobile |      1,829    402.2343    437.7487      16.52       4076
+        year |      1,830    4.456831    2.264144          1          8
+    laborval |      1,829    4.692603    2.612515    .379447   30.38095
+      pgrp_a |      1,830     48265.9    57022.79   1839.311   953717.8
+      pgrp_b |      1,830    71545.17    124298.2    453.554    3571284
+-------------+---------------------------------------------------------
+   density_a |      1,830     27.0619    49.30642   .0010755   246.6653
+   density_b |      1,830    18.21807    34.48456   .0013275      299.7
+       year1 |      1,830    .1229508    .3284705          0          1
+       year2 |      1,830    .1289617    .3352492          0          1
+       year3 |      1,830    .1327869     .339437          0          1
+-------------+---------------------------------------------------------
+       year4 |      1,830    .1191257    .3240249          0          1
+       year5 |      1,830     .126776    .3328128          0          1
+       year6 |      1,830    .1278689     .334035          0          1
+       year7 |      1,830    .1322404    .3388446          0          1
+       year8 |      1,830    .1092896    .3120875          0          1
+-------------+---------------------------------------------------------
+        lso2 |      1,830    10.62484    .9849556   .6931472    13.2582
+  _est_heter |      1,830    .9311475    .2532723          0          1
+   _est_fe1a |      1,830    .6125683    .4872968          0          1
+   _est_fe1b |      1,830    .6032787     .489351          0          1
+   _est_fe1c |      1,830    .6125683    .4872968          0          1
+-------------+---------------------------------------------------------
+   _est_fe2a |      1,830    .6010929    .4898074          0          1
+   _est_fe2b |      1,830    .5934426    .4913251          0          1
+   _est_fe2c |      1,830    .6125683    .4872968          0          1
+   _est_re1a |      1,830    .6125683    .4872968          0          1
+   _est_re1b |      1,830    .6032787     .489351          0          1
+-------------+---------------------------------------------------------
+   _est_re1c |      1,830    .6125683    .4872968          0          1
+   _est_re2a |      1,830    .6010929    .4898074          0          1
+   _est_re2b |      1,830    .5934426    .4913251          0          1
+   _est_re2c |      1,830    .6125683    .4872968          0          1
+_est_panel1a |      1,830    .6125683    .4872968          0          1
+-------------+---------------------------------------------------------
+_est_panel1b |      1,830    .6032787     .489351          0          1
+ _est_panelc |      1,830    .6125683    .4872968          0          1
+ _est_paneld |      1,830    .6125683    .4872968          0          1
+_est_panel2a |      1,830    .6010929    .4898074          0          1
+_est_panel2b |      1,830    .5934426    .4913251          0          1
+-------------+---------------------------------------------------------
+_est_panel2c |      1,830    .7874317    .4092365          0          1
+_est_panel2d |      1,830    .7874317    .4092365          0          1
+
+. *declare individual identifier and time indentifier
+. xtset id year
+       panel variable:  id (unbalanced)
+        time variable:  year, 1 to 8, but with gaps
+                delta:  1 unit
+
+. 
+. *panel description of dataset
+. describe
+
+Contains data from cityfinal.dta
+  obs:         1,830                          
+ vars:            57                          8 May 2017 16:22
+ size:       378,810                          
+-------------------------------------------------------------------------------------------------------------
+              storage   display    value
+variable name   type    format     label      variable label
+-------------------------------------------------------------------------------------------------------------
+id              int     %10.0g                id
+laborinsec_a    double  %10.0g                percentage of labor in industry divided by total labor (city)
+laborinsec_b    double  %10.0g                percentage of labor in industry divided by total labor (major
+                                                district)
+so2             long    %10.0g                emission of sulfur dioxide
+rfdi_a          double  %10.0g                real foreign direct investment used (city)
+rfdi_b          double  %10.0g                real foreign direct investment used (major district)
+secgrp_a        double  %10.0g                pervcentage of industrial GRP divided by total GRP (City)
+secgrp_b        double  %10.0g                pervcentage of industrial GRP divided by total GRP (major
+                                                district)
+delivery        double  %10.0g                 railway freight volume
+gov_a           double  %10.0g                government scale (city)
+gov_b           double  %10.0g                government scale (city)
+wage_a          double  %10.0g                average wage per capita(city)
+wage_b          double  %10.0g                average wage per capita(major district)
+domestic_a      long    %10.0g                domestic industry investment (city)
+domestic_b      long    %10.0g                domestic industry investment (major district)
+HMT_a           double  %10.0g                industry investment from Hong Kong Macao Taiwan(city)
+HMT_b           double  %10.0g                industry investment from Hong KONG Macao Taiwan(major district)
+fdi_a           double  %10.0g                foreign direct industry investment (city)
+fdi_b           double  %10.0g                foreign direct industry investment (major district)
+tele            double  %10.0g                fixed telephone user
+mobile          double  %10.0g                mobile phone user
+year            long    %8.0g      yr         year
+laborval        float   %9.0g                 vatality of a city
+pgrp_a          float   %9.0g                 gross region product per capita (city)
+pgrp_b          float   %9.0g                 gross region product per capita (major district)
+density_a       float   %9.0g                 population density(city)
+density_b       float   %9.0g                 population density(major district)
+year1           byte    %8.0g                 year==2008
+year2           byte    %8.0g                 year==2009
+year3           byte    %8.0g                 year==2010
+year4           byte    %8.0g                 year==2011
+year5           byte    %8.0g                 year==2012
+year6           byte    %8.0g                 year==2013
+year7           byte    %8.0g                 year==2014
+year8           byte    %8.0g                 year==2015
+lso2            float   %9.0g                 natural logarithm of sulfur dioxide
+_est_heter      byte    %8.0g                 esample() from estimates store
+_est_fe1a       byte    %8.0g                 esample() from estimates store
+_est_fe1b       byte    %8.0g                 esample() from estimates store
+_est_fe1c       byte    %8.0g                 esample() from estimates store
+_est_fe2a       byte    %8.0g                 esample() from estimates store
+_est_fe2b       byte    %8.0g                 esample() from estimates store
+_est_fe2c       byte    %8.0g                 esample() from estimates store
+_est_re1a       byte    %8.0g                 esample() from estimates store
+_est_re1b       byte    %8.0g                 esample() from estimates store
+_est_re1c       byte    %8.0g                 esample() from estimates store
+_est_re2a       byte    %8.0g                 esample() from estimates store
+_est_re2b       byte    %8.0g                 esample() from estimates store
+_est_re2c       byte    %8.0g                 esample() from estimates store
+_est_panel1a    byte    %8.0g                 esample() from estimates store
+_est_panel1b    byte    %8.0g                 esample() from estimates store
+_est_panelc     byte    %8.0g                 esample() from estimates store
+_est_paneld     byte    %8.0g                 esample() from estimates store
+_est_panel2a    byte    %8.0g                 esample() from estimates store
+_est_panel2b    byte    %8.0g                 esample() from estimates store
+_est_panel2c    byte    %8.0g                 esample() from estimates store
+_est_panel2d    byte    %8.0g                 esample() from estimates store
+-------------------------------------------------------------------------------------------------------------
+Sorted by: id  year
+
+. 
+. *
+. xtdescribe
+
+      id:  1, 2, ..., 291                                    n =        277
+    year:  1, 2, ..., 8                                      T =          8
+           Delta(year) = 1 unit
+           Span(year)  = 8 periods
+           (id*year uniquely identifies each observation)
+
+Distribution of T_i:   min      5%     25%       50%       75%     95%     max
+                         1       2       6         7         8       8       8
+
+     Freq.  Percent    Cum. |  Pattern
+ ---------------------------+----------
+      114     41.16   41.16 |  11111111
+       28     10.11   51.26 |  1111111.
+       14      5.05   56.32 |  111.1111
+       12      4.33   60.65 |  .1111111
+       11      3.97   64.62 |  1.111111
+        7      2.53   67.15 |  111.111.
+        6      2.17   69.31 |  11111.11
+        5      1.81   71.12 |  1111.111
+        4      1.44   72.56 |  111.....
+       76     27.44  100.00 | (other patterns)
+ ---------------------------+----------
+      277    100.00         |  XXXXXXXX
+
+. 
+. xtsum id year *_a *_b delivery so2 lso2 tele mobile  laborval 
+
+Variable         |      Mean   Std. Dev.       Min        Max |    Observations
+-----------------+--------------------------------------------+----------------
+id       overall |  132.1694   76.26662          1        291 |     N =    1830
+         between |             81.19401          1        291 |     n =     277
+         within  |                    0   132.1694   132.1694 | T-bar =  6.6065
+                 |                                            |
+year     overall |  4.456831   2.264144          1          8 |     N =    1830
+         between |             .7114216          1        7.5 |     n =     277
+         within  |             2.215552   .2901639   8.656831 | T-bar =  6.6065
+                 |                                            |
+labori~a overall |  46.61886   13.41047       4.46       84.4 |     N =    1830
+         between |             13.21743      6.225     81.105 |     n =     277
+         within  |             4.955259   22.76886   73.10886 | T-bar =  6.6065
+                 |                                            |
+rfdi_a   overall |  84590.95   186244.7          0    2113444 |     N =    1830
+         between |             173113.2          0    1496730 |     n =     277
+         within  |             73058.87  -628163.7   804266.6 | T-bar =  6.6065
+                 |                                            |
+secgrp_a overall |  49.38925   10.43894      16.11      90.97 |     N =    1830
+         between |             8.079941      19.13     81.835 |     n =     277
+         within  |             7.586225   8.762996   90.04496 | T-bar =  6.6065
+                 |                                            |
+gov_a    overall |  13161.19   30132.09        .59     467348 |     N =    1830
+         between |             11371.37       1.47   119802.9 |     n =     277
+         within  |             28031.48  -106607.7   360706.3 | T-bar =  6.6065
+                 |                                            |
+wage_a   overall |   7091058   2.42e+07   12116.04   3.21e+08 |     N =    1830
+         between |             1.04e+07   26863.21   1.03e+08 |     n =     277
+         within  |             2.19e+07  -9.59e+07   2.63e+08 | T-bar =  6.6065
+                 |                                            |
+domest~a overall |  1.71e+07   2.36e+07       1066   1.80e+08 |     N =    1830
+         between |             1.71e+07      15838   1.05e+08 |     n =     277
+         within  |             1.61e+07  -7.33e+07   1.43e+08 | T-bar =  6.6065
+                 |                                            |
+HMT_a    overall |   3460647    9817873    85.7631   1.50e+08 |     N =    1781
+         between |              8416053        836   7.89e+07 |     n =     268
+         within  |              4853072  -3.48e+07   9.68e+07 | T-bar = 6.64552
+                 |                                            |
+fdi_a    overall |   3651081   1.24e+07       1800   1.51e+08 |     N =    1830
+         between |              9900467       4327   9.03e+07 |     n =     277
+         within  |              7137522  -8.66e+07   6.45e+07 | T-bar =  6.6065
+                 |                                            |
+pgrp_a   overall |   48265.9   57022.79   1839.311   953717.8 |     N =    1830
+         between |             40842.47   7535.306   333942.6 |     n =     277
+         within  |             38926.72  -261742.5   826217.3 | T-bar =  6.6065
+                 |                                            |
+densit~a overall |   27.0619   49.30642   .0010755   246.6653 |     N =    1830
+         between |              14.0695   .0030937    85.7077 |     n =     277
+         within  |             47.88769  -45.29544   224.3361 | T-bar =  6.6065
+                 |                                            |
+labori~b overall |  48.60714   13.96918       7.55      83.43 |     N =    1830
+         between |             14.13048       7.55   78.40625 |     n =     277
+         within  |             5.424362   17.90589   75.09714 | T-bar =  6.6065
+                 |                                            |
+rfdi_b   overall |  61107.25   168241.5          0    2113444 |     N =    1830
+         between |             157813.1          0    1457021 |     n =     277
+         within  |             59749.99  -517668.2   717529.8 | T-bar =  6.6065
+                 |                                            |
+secgrp_b overall |  50.81365   11.53025       9.74      90.97 |     N =    1830
+         between |             8.710187      18.37     81.835 |     n =     277
+         within  |             8.403113    7.33365   91.36222 | T-bar =  6.6065
+                 |                                            |
+gov_b    overall |   3529674   1.61e+07        .25   3.01e+08 |     N =    1830
+         between |              5608412        .68   5.02e+07 |     n =     277
+         within  |             1.52e+07  -4.67e+07   2.54e+08 | T-bar =  6.6065
+                 |                                            |
+wage_b   overall |   5347472   1.80e+07   12140.72   3.18e+08 |     N =    1830
+         between |              7868703   24504.58   7.25e+07 |     n =     277
+         within  |             1.63e+07  -6.71e+07   2.51e+08 | T-bar =  6.6065
+                 |                                            |
+domest~b overall |   9753958   1.73e+07        979   1.80e+08 |     N =    1830
+         between |             1.45e+07       3392   1.07e+08 |     n =     277
+         within  |              9230182  -6.32e+07   1.10e+08 | T-bar =  6.6065
+                 |                                            |
+HMT_b    overall |   2253637    7804559    85.7631   1.50e+08 |     N =    1726
+         between |              6314832        836   5.71e+07 |     n =     260
+         within  |              4529891  -5.47e+07   9.51e+07 | T-bar = 6.63846
+                 |                                            |
+fdi_b    overall |   2928277   1.06e+07        121   1.51e+08 |     N =    1791
+         between |              8696660        829   9.03e+07 |     n =     272
+         within  |              6063113  -8.73e+07   6.37e+07 | T-bar = 6.58456
+                 |                                            |
+pgrp_b   overall |  71545.17   124298.2    453.554    3571284 |     N =    1830
+         between |             58414.54   9958.713   559521.6 |     n =     277
+         within  |             109441.1  -450838.3    3083308 | T-bar =  6.6065
+                 |                                            |
+densit~b overall |  18.21807   34.48456   .0013275      299.7 |     N =    1830
+         between |             11.24804   .0110296   96.80968 |     n =     277
+         within  |             33.13546  -78.56102   221.1084 | T-bar =  6.6065
+                 |                                            |
+delivery overall |  11704.53   14303.51          2     271483 |     N =    1830
+         between |             12417.43       1210   171134.7 |     n =     277
+         within  |             10499.74  -152738.1   238870.2 | T-bar =  6.6065
+                 |                                            |
+so2      overall |  59112.95   51479.94          2     572747 |     N =    1830
+         between |             52286.65         70   552043.5 |     n =     277
+         within  |             22336.04  -115757.7   405954.5 | T-bar =  6.6065
+                 |                                            |
+lso2     overall |  10.62484   .9849556   .6931472    13.2582 |     N =    1830
+         between |             1.040907   3.327279   13.22068 |     n =     277
+         within  |             .4292755   6.758007   12.95935 | T-bar =  6.6065
+                 |                                            |
+tele     overall |  99.46205   110.7172          5     935.91 |     N =    1830
+         between |             109.5375     9.1575   899.7867 |     n =     277
+         within  |             25.23751   -77.6567   441.4871 | T-bar =  6.6065
+                 |                                            |
+mobile   overall |  402.2343   437.7487      16.52       4076 |     N =    1829
+         between |             414.2828       29.6   2938.394 |     n =     277
+         within  |             158.3049  -920.0095   2909.098 | T-bar = 6.60289
+                 |                                            |
+laborval overall |  4.692603   2.612515    .379447   30.38095 |     N =    1829
+         between |             1.857045   1.203057   13.62101 |     n =     277
+         within  |             2.027566   -5.82592   21.45255 | T-bar = 6.60289
+
+. *panel summary statistics (within and between variation)
+. xtsum id year *_a *_b delivery so2 lso2 tele mobile 
+
+Variable         |      Mean   Std. Dev.       Min        Max |    Observations
+-----------------+--------------------------------------------+----------------
+id       overall |  132.1694   76.26662          1        291 |     N =    1830
+         between |             81.19401          1        291 |     n =     277
+         within  |                    0   132.1694   132.1694 | T-bar =  6.6065
+                 |                                            |
+year     overall |  4.456831   2.264144          1          8 |     N =    1830
+         between |             .7114216          1        7.5 |     n =     277
+         within  |             2.215552   .2901639   8.656831 | T-bar =  6.6065
+                 |                                            |
+labori~a overall |  46.61886   13.41047       4.46       84.4 |     N =    1830
+         between |             13.21743      6.225     81.105 |     n =     277
+         within  |             4.955259   22.76886   73.10886 | T-bar =  6.6065
+                 |                                            |
+rfdi_a   overall |  84590.95   186244.7          0    2113444 |     N =    1830
+         between |             173113.2          0    1496730 |     n =     277
+         within  |             73058.87  -628163.7   804266.6 | T-bar =  6.6065
+                 |                                            |
+secgrp_a overall |  49.38925   10.43894      16.11      90.97 |     N =    1830
+         between |             8.079941      19.13     81.835 |     n =     277
+         within  |             7.586225   8.762996   90.04496 | T-bar =  6.6065
+                 |                                            |
+gov_a    overall |  13161.19   30132.09        .59     467348 |     N =    1830
+         between |             11371.37       1.47   119802.9 |     n =     277
+         within  |             28031.48  -106607.7   360706.3 | T-bar =  6.6065
+                 |                                            |
+wage_a   overall |   7091058   2.42e+07   12116.04   3.21e+08 |     N =    1830
+         between |             1.04e+07   26863.21   1.03e+08 |     n =     277
+         within  |             2.19e+07  -9.59e+07   2.63e+08 | T-bar =  6.6065
+                 |                                            |
+domest~a overall |  1.71e+07   2.36e+07       1066   1.80e+08 |     N =    1830
+         between |             1.71e+07      15838   1.05e+08 |     n =     277
+         within  |             1.61e+07  -7.33e+07   1.43e+08 | T-bar =  6.6065
+                 |                                            |
+HMT_a    overall |   3460647    9817873    85.7631   1.50e+08 |     N =    1781
+         between |              8416053        836   7.89e+07 |     n =     268
+         within  |              4853072  -3.48e+07   9.68e+07 | T-bar = 6.64552
+                 |                                            |
+fdi_a    overall |   3651081   1.24e+07       1800   1.51e+08 |     N =    1830
+         between |              9900467       4327   9.03e+07 |     n =     277
+         within  |              7137522  -8.66e+07   6.45e+07 | T-bar =  6.6065
+                 |                                            |
+pgrp_a   overall |   48265.9   57022.79   1839.311   953717.8 |     N =    1830
+         between |             40842.47   7535.306   333942.6 |     n =     277
+         within  |             38926.72  -261742.5   826217.3 | T-bar =  6.6065
+                 |                                            |
+densit~a overall |   27.0619   49.30642   .0010755   246.6653 |     N =    1830
+         between |              14.0695   .0030937    85.7077 |     n =     277
+         within  |             47.88769  -45.29544   224.3361 | T-bar =  6.6065
+                 |                                            |
+labori~b overall |  48.60714   13.96918       7.55      83.43 |     N =    1830
+         between |             14.13048       7.55   78.40625 |     n =     277
+         within  |             5.424362   17.90589   75.09714 | T-bar =  6.6065
+                 |                                            |
+rfdi_b   overall |  61107.25   168241.5          0    2113444 |     N =    1830
+         between |             157813.1          0    1457021 |     n =     277
+         within  |             59749.99  -517668.2   717529.8 | T-bar =  6.6065
+                 |                                            |
+secgrp_b overall |  50.81365   11.53025       9.74      90.97 |     N =    1830
+         between |             8.710187      18.37     81.835 |     n =     277
+         within  |             8.403113    7.33365   91.36222 | T-bar =  6.6065
+                 |                                            |
+gov_b    overall |   3529674   1.61e+07        .25   3.01e+08 |     N =    1830
+         between |              5608412        .68   5.02e+07 |     n =     277
+         within  |             1.52e+07  -4.67e+07   2.54e+08 | T-bar =  6.6065
+                 |                                            |
+wage_b   overall |   5347472   1.80e+07   12140.72   3.18e+08 |     N =    1830
+         between |              7868703   24504.58   7.25e+07 |     n =     277
+         within  |             1.63e+07  -6.71e+07   2.51e+08 | T-bar =  6.6065
+                 |                                            |
+domest~b overall |   9753958   1.73e+07        979   1.80e+08 |     N =    1830
+         between |             1.45e+07       3392   1.07e+08 |     n =     277
+         within  |              9230182  -6.32e+07   1.10e+08 | T-bar =  6.6065
+                 |                                            |
+HMT_b    overall |   2253637    7804559    85.7631   1.50e+08 |     N =    1726
+         between |              6314832        836   5.71e+07 |     n =     260
+         within  |              4529891  -5.47e+07   9.51e+07 | T-bar = 6.63846
+                 |                                            |
+fdi_b    overall |   2928277   1.06e+07        121   1.51e+08 |     N =    1791
+         between |              8696660        829   9.03e+07 |     n =     272
+         within  |              6063113  -8.73e+07   6.37e+07 | T-bar = 6.58456
+                 |                                            |
+pgrp_b   overall |  71545.17   124298.2    453.554    3571284 |     N =    1830
+         between |             58414.54   9958.713   559521.6 |     n =     277
+         within  |             109441.1  -450838.3    3083308 | T-bar =  6.6065
+                 |                                            |
+densit~b overall |  18.21807   34.48456   .0013275      299.7 |     N =    1830
+         between |             11.24804   .0110296   96.80968 |     n =     277
+         within  |             33.13546  -78.56102   221.1084 | T-bar =  6.6065
+                 |                                            |
+delivery overall |  11704.53   14303.51          2     271483 |     N =    1830
+         between |             12417.43       1210   171134.7 |     n =     277
+         within  |             10499.74  -152738.1   238870.2 | T-bar =  6.6065
+                 |                                            |
+so2      overall |  59112.95   51479.94          2     572747 |     N =    1830
+         between |             52286.65         70   552043.5 |     n =     277
+         within  |             22336.04  -115757.7   405954.5 | T-bar =  6.6065
+                 |                                            |
+lso2     overall |  10.62484   .9849556   .6931472    13.2582 |     N =    1830
+         between |             1.040907   3.327279   13.22068 |     n =     277
+         within  |             .4292755   6.758007   12.95935 | T-bar =  6.6065
+                 |                                            |
+tele     overall |  99.46205   110.7172          5     935.91 |     N =    1830
+         between |             109.5375     9.1575   899.7867 |     n =     277
+         within  |             25.23751   -77.6567   441.4871 | T-bar =  6.6065
+                 |                                            |
+mobile   overall |  402.2343   437.7487      16.52       4076 |     N =    1829
+         between |             414.2828       29.6   2938.394 |     n =     277
+         within  |             158.3049  -920.0095   2909.098 | T-bar = 6.60289
+
+. estpost tabstat *_a *_b delivery so2 tele mobile  laborval , listwise statistics(mean min p25 p50 p75 max) 
+> columns(statistics)
+
+Summary statistics: mean min p25 p50 p75 max
+     for variables: laborinsec_a rfdi_a secgrp_a gov_a wage_a domestic_a HMT_a fdi_a pgrp_a density_a laborin
+> sec_b rfdi_b secgrp_b gov_b wage_b domestic_b HMT_b fdi_b pgrp_b density_b delivery so2 tele mobile laborva
+> l
+
+             |   e(mean)     e(min)     e(p25)     e(p50)     e(p75)     e(max) 
+-------------+------------------------------------------------------------------
+laborinsec_a |  47.35548       8.62     38.135     47.355      56.36       84.4 
+      rfdi_a |  89676.98         15      10959      26311      81597    2113444 
+    secgrp_a |  49.82189      16.11      43.43       50.6      56.38      90.97 
+       gov_a |  12955.44        .59      4.105      71.24       4365     467348 
+      wage_a |   7572784   12116.04   31076.65   44486.31    2038101   3.21e+08 
+  domestic_a |  1.78e+07       1066    2357355    9076987   2.13e+07   1.80e+08 
+       HMT_a |   3604039    85.7631   188337.5   622482.5    2313583   1.50e+08 
+       fdi_a |   3879022       1800   46770.21     367652    1750844   1.51e+08 
+      pgrp_a |  49529.79   1839.311   20933.84   33253.24   55722.63   953717.8 
+   density_a |  27.88754   .0010755   .0300969   .0629307   59.01076   244.7228 
+laborinsec_b |  49.32472      10.27       40.4     49.785     58.755      83.43 
+      rfdi_b |   65137.1          0     4322.5    12451.5    43618.5    2113444 
+    secgrp_b |  51.21665       9.74     44.075      51.42     58.745      90.97 
+       gov_b |   3787917        .25       1.52     450.39      18615   3.01e+08 
+      wage_b |   5723292   12140.72   34110.08   47173.25    2952185   3.18e+08 
+  domestic_b |  1.03e+07       2063    1437562    4673123   1.09e+07   1.80e+08 
+       HMT_b |   2285748    85.7631   36628.42   212605.5   946373.5   1.50e+08 
+       fdi_b |   3077601        950   40931.13   181098.5   999582.5   1.51e+08 
+      pgrp_b |  73910.71    453.554   31985.64   51225.75   81627.69    3571284 
+   density_b |  18.64936   .0013275    .065559   .1120508   39.90541      299.7 
+    delivery |  11973.64          2       5015       8910      15200     271483 
+         so2 |  60268.63         92    26126.5      47787      80847     572747 
+        tele |  103.7373         10         44      67.99     113.78     935.91 
+      mobile |  416.8744      16.52     177.01    283.005    470.775       4076 
+    laborval |  4.609128    .379447    2.88224   4.119564    5.66895   30.38095 
+
+. esttab using xtsum1.xls, cells("mean min p25 p50 p75 max") replace
+(output written to xtsum1.xls)
+
+. 
+. shellout xtsum1.xls
+
+. 
+. 
+. *autocorrelation test 1
+. local xx "*_a delivery lso2 tele mobile laborval "
+
+. xtserial `xx'
+
+Wooldridge test for autocorrelation in panel data
+H0: no first-order autocorrelation
+    F(  1,     239) =     32.106
+           Prob > F =      0.0000
+
+. *autocorrelation test 2
+. local xx "*_b delivery lso2 tele mobile  laborval"
+
+. xtserial `xx'
+
+Wooldridge test for autocorrelation in panel data
+H0: no first-order autocorrelation
+    F(  1,     237) =     42.170
+           Prob > F =      0.0000
+
+. 
+. 
+. *heteroskedastic test 1
+. local xx "*_a delivery lso2 tele mobile  laborval "
+
+. xtgls `xx',igls panels(heteroskedastic)
+Iteration 1: tolerance = .38957829
+Iteration 2: tolerance = .37173259
+Iteration 3: tolerance = .32798703
+Iteration 4: tolerance = .28500945
+Iteration 5: tolerance = .2223277
+Iteration 6: tolerance = .09753477
+Iteration 7: tolerance = .03683624
+Iteration 8: tolerance = .00365404
+Iteration 9: tolerance = .02565601
+Iteration 10: tolerance = .04541683
+Iteration 11: tolerance = .06176728
+Iteration 12: tolerance = .07610403
+Iteration 13: tolerance = .0893168
+Iteration 14: tolerance = .10206291
+Iteration 15: tolerance = .10076703
+Iteration 16: tolerance = .09057446
+Iteration 17: tolerance = .08080514
+Iteration 18: tolerance = .07176848
+Iteration 19: tolerance = .06357539
+Iteration 20: tolerance = .05623386
+Iteration 21: tolerance = .04970135
+Iteration 22: tolerance = .04391297
+Iteration 23: tolerance = .03879646
+Iteration 24: tolerance = .03427996
+Iteration 25: tolerance = .03029572
+Iteration 26: tolerance = .02678179
+Iteration 27: tolerance = .02368246
+Iteration 28: tolerance = .02094819
+Iteration 29: tolerance = .01853517
+Iteration 30: tolerance = .01640484
+Iteration 31: tolerance = .0145233
+Iteration 32: tolerance = .01286082
+Iteration 33: tolerance = .0113913
+Iteration 34: tolerance = .01009184
+Iteration 35: tolerance = .00894236
+Iteration 36: tolerance = .0079252
+Iteration 37: tolerance = .00702485
+Iteration 38: tolerance = .00622767
+Iteration 39: tolerance = .00552167
+Iteration 40: tolerance = .00489626
+Iteration 41: tolerance = .00434214
+Iteration 42: tolerance = .00385108
+Iteration 43: tolerance = .00341583
+Iteration 44: tolerance = .00303
+Iteration 45: tolerance = .00268792
+Iteration 46: tolerance = .0023846
+Iteration 47: tolerance = .00211561
+Iteration 48: tolerance = .00187706
+Iteration 49: tolerance = .00166547
+Iteration 50: tolerance = .00147778
+Iteration 51: tolerance = .00131129
+Iteration 52: tolerance = .00116359
+Iteration 53: tolerance = .00103255
+Iteration 54: tolerance = .00091629
+Iteration 55: tolerance = .00081314
+Iteration 56: tolerance = .00072161
+Iteration 57: tolerance = .00064039
+Iteration 58: tolerance = .00056833
+Iteration 59: tolerance = .00050437
+Iteration 60: tolerance = .00044762
+Iteration 61: tolerance = .00039726
+Iteration 62: tolerance = .00035257
+Iteration 63: tolerance = .00031291
+Iteration 64: tolerance = .00027771
+Iteration 65: tolerance = .00024647
+Iteration 66: tolerance = .00021875
+Iteration 67: tolerance = .00019415
+Iteration 68: tolerance = .00017231
+Iteration 69: tolerance = .00015293
+Iteration 70: tolerance = .00013573
+Iteration 71: tolerance = .00012047
+Iteration 72: tolerance = .00010692
+Iteration 73: tolerance = .0000949
+Iteration 74: tolerance = .00008423
+Iteration 75: tolerance = .00007476
+Iteration 76: tolerance = .00006635
+Iteration 77: tolerance = .00005889
+Iteration 78: tolerance = .00005227
+Iteration 79: tolerance = .00004639
+Iteration 80: tolerance = .00004117
+Iteration 81: tolerance = .00003654
+Iteration 82: tolerance = .00003243
+Iteration 83: tolerance = .00002879
+Iteration 84: tolerance = .00002555
+Iteration 85: tolerance = .00002268
+Iteration 86: tolerance = .00002013
+Iteration 87: tolerance = .00001786
+Iteration 88: tolerance = .00001586
+Iteration 89: tolerance = .00001407
+Iteration 90: tolerance = .00001249
+Iteration 91: tolerance = .00001109
+Iteration 92: tolerance = 9.839e-06
+Iteration 93: tolerance = 8.733e-06
+Iteration 94: tolerance = 7.751e-06
+Iteration 95: tolerance = 6.880e-06
+Iteration 96: tolerance = 6.106e-06
+Iteration 97: tolerance = 5.420e-06
+Iteration 98: tolerance = 4.810e-06
+Iteration 99: tolerance = 4.269e-06
+Iteration 100: tolerance = 3.789e-06
+Iteration 101: tolerance = 3.363e-06
+Iteration 102: tolerance = 2.985e-06
+Iteration 103: tolerance = 2.649e-06
+Iteration 104: tolerance = 2.352e-06
+Iteration 105: tolerance = 2.087e-06
+Iteration 106: tolerance = 1.852e-06
+Iteration 107: tolerance = 1.644e-06
+Iteration 108: tolerance = 1.459e-06
+Iteration 109: tolerance = 1.295e-06
+Iteration 110: tolerance = 1.150e-06
+Iteration 111: tolerance = 1.020e-06
+Iteration 112: tolerance = 9.056e-07
+Iteration 113: tolerance = 8.038e-07
+Iteration 114: tolerance = 7.134e-07
+Iteration 115: tolerance = 6.332e-07
+Iteration 116: tolerance = 5.620e-07
+Iteration 117: tolerance = 4.988e-07
+Iteration 118: tolerance = 4.427e-07
+Iteration 119: tolerance = 3.929e-07
+Iteration 120: tolerance = 3.487e-07
+Iteration 121: tolerance = 3.095e-07
+Iteration 122: tolerance = 2.748e-07
+Iteration 123: tolerance = 2.439e-07
+Iteration 124: tolerance = 2.164e-07
+Iteration 125: tolerance = 1.921e-07
+Iteration 126: tolerance = 1.705e-07
+Iteration 127: tolerance = 1.513e-07
+Iteration 128: tolerance = 1.343e-07
+Iteration 129: tolerance = 1.192e-07
+Iteration 130: tolerance = 1.058e-07
+Iteration 131: tolerance = 9.391e-08
+
+
+Cross-sectional time-series FGLS regression
+
+Coefficients:  generalized least squares
+Panels:        heteroskedastic
+Correlation:   no autocorrelation
+
+Estimated covariances      =       268          Number of obs     =      1,780
+Estimated autocorrelations =         0          Number of groups  =        268
+Estimated coefficients     =        15          Obs per group:
+                                                              min =          1
+                                                              avg =   6.641791
+                                                              max =          8
+                                                Wald chi2(14)     =    2614.08
+Log likelihood             = -6250.728          Prob > chi2       =     0.0000
+
+------------------------------------------------------------------------------
+laborinsec_a |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      rfdi_a |  -2.64e-06   7.03e-07    -3.76   0.000    -4.02e-06   -1.26e-06
+    secgrp_a |   .1764155   .0123051    14.34   0.000     .1522979    .2005331
+       gov_a |  -4.03e-06   4.53e-06    -0.89   0.374    -.0000129    4.86e-06
+      wage_a |   8.13e-08   9.63e-09     8.44   0.000     6.24e-08    1.00e-07
+  domestic_a |   1.18e-07   9.03e-09    13.09   0.000     1.00e-07    1.36e-07
+       HMT_a |   1.87e-07   3.34e-08     5.58   0.000     1.21e-07    2.52e-07
+       fdi_a |   8.32e-08   2.40e-08     3.47   0.001     3.63e-08    1.30e-07
+      pgrp_a |   .0000308   3.66e-06     8.41   0.000     .0000236    .0000379
+   density_a |  -.0017283   .0027354    -0.63   0.527    -.0070895    .0036329
+    delivery |  -.0001155   .0000128    -9.04   0.000    -.0001406   -.0000905
+        lso2 |   2.992042   .1525727    19.61   0.000     2.693005    3.291079
+        tele |   .0024487   .0032251     0.76   0.448    -.0038724    .0087697
+      mobile |  -.0041249   .0007754    -5.32   0.000    -.0056447    -.002605
+    laborval |   .4844238   .0683422     7.09   0.000     .3504756     .618372
+       _cons |   1.548039   1.625049     0.95   0.341    -1.636997    4.733076
+------------------------------------------------------------------------------
+
+. estimates store heter
+
+. xtgls `xx',igls
+Iteration 1: tolerance = 0
+
+
+Cross-sectional time-series FGLS regression
+
+Coefficients:  generalized least squares
+Panels:        homoskedastic
+Correlation:   no autocorrelation
+
+Estimated covariances      =         1          Number of obs     =      1,780
+Estimated autocorrelations =         0          Number of groups  =        268
+Estimated coefficients     =        15          Obs per group:
+                                                              min =          1
+                                                              avg =   6.641791
+                                                              max =          8
+                                                Wald chi2(14)     =     768.09
+Log likelihood             = -6804.276          Prob > chi2       =     0.0000
+
+------------------------------------------------------------------------------
+laborinsec_a |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      rfdi_a |  -7.87e-06   2.40e-06    -3.28   0.001    -.0000126   -3.17e-06
+    secgrp_a |    .334225   .0282079    11.85   0.000     .2789386    .3895114
+       gov_a |  -4.98e-06   .0000119    -0.42   0.674    -.0000282    .0000183
+      wage_a |   1.00e-07   2.00e-08     5.02   0.000     6.11e-08    1.39e-07
+  domestic_a |   1.71e-07   1.80e-08     9.49   0.000     1.36e-07    2.06e-07
+       HMT_a |   1.29e-07   5.41e-08     2.39   0.017     2.35e-08    2.35e-07
+       fdi_a |   8.86e-08   3.66e-08     2.42   0.016     1.68e-08    1.60e-07
+      pgrp_a |   .0000269   5.32e-06     5.06   0.000     .0000165    .0000374
+   density_a |  -.0138147   .0059327    -2.33   0.020    -.0254425    -.002187
+    delivery |  -.0001405   .0000196    -7.17   0.000    -.0001789   -.0001021
+        lso2 |   2.205125   .3123293     7.06   0.000     1.592971    2.817279
+        tele |  -.0221106   .0067788    -3.26   0.001    -.0353968   -.0088244
+      mobile |   .0005171   .0017012     0.30   0.761    -.0028172    .0038515
+    laborval |  -.3067658   .1371911    -2.24   0.025    -.5756554   -.0378762
+       _cons |    7.32527   3.206607     2.28   0.022     1.040436     13.6101
+------------------------------------------------------------------------------
+
+. local df=e(N_g)-1
+
+. display e(N_g)-1
+267
+
+. *result of 267 shows
+. lrtest heter ., df(267)
+
+Likelihood-ratio test                                 LR chi2(267)=   1107.10
+(Assumption: . nested in heter)                       Prob > chi2 =    0.0000
+
+. 
+. *heteroskedastic test 2
+. local xx "*_b delivery so2 tele mobile  laborval "
+
+. xtgls `xx',igls panels(heteroskedastic)
+Iteration 1: tolerance = .07301842
+Iteration 2: tolerance = .0641598
+Iteration 3: tolerance = .05510497
+Iteration 4: tolerance = .04400819
+Iteration 5: tolerance = .03398757
+Iteration 6: tolerance = .02305223
+Iteration 7: tolerance = .01511715
+Iteration 8: tolerance = .0126891
+Iteration 9: tolerance = .01306155
+Iteration 10: tolerance = .01261233
+Iteration 11: tolerance = .01136617
+Iteration 12: tolerance = .01024739
+Iteration 13: tolerance = .00956186
+Iteration 14: tolerance = .00921457
+Iteration 15: tolerance = .00899433
+Iteration 16: tolerance = .00867425
+Iteration 17: tolerance = .00806194
+Iteration 18: tolerance = .00707905
+Iteration 19: tolerance = .00582302
+Iteration 20: tolerance = .00450738
+Iteration 21: tolerance = .0033241
+Iteration 22: tolerance = .00236854
+Iteration 23: tolerance = .0016514
+Iteration 24: tolerance = .0011389
+Iteration 25: tolerance = .00078398
+Iteration 26: tolerance = .00054265
+Iteration 27: tolerance = .00042426
+Iteration 28: tolerance = .00034673
+Iteration 29: tolerance = .00028127
+Iteration 30: tolerance = .00022692
+Iteration 31: tolerance = .00018232
+Iteration 32: tolerance = .00014603
+Iteration 33: tolerance = .0001167
+Iteration 34: tolerance = .00009309
+Iteration 35: tolerance = .0000748
+Iteration 36: tolerance = .00006035
+Iteration 37: tolerance = .0000486
+Iteration 38: tolerance = .00003907
+Iteration 39: tolerance = .00003137
+Iteration 40: tolerance = .00002516
+Iteration 41: tolerance = .00002016
+Iteration 42: tolerance = .00001615
+Iteration 43: tolerance = .00001293
+Iteration 44: tolerance = .00001034
+Iteration 45: tolerance = 8.273e-06
+Iteration 46: tolerance = 6.614e-06
+Iteration 47: tolerance = 5.287e-06
+Iteration 48: tolerance = 4.225e-06
+Iteration 49: tolerance = 3.375e-06
+Iteration 50: tolerance = 2.696e-06
+Iteration 51: tolerance = 2.153e-06
+Iteration 52: tolerance = 1.719e-06
+Iteration 53: tolerance = 1.373e-06
+Iteration 54: tolerance = 1.096e-06
+Iteration 55: tolerance = 8.747e-07
+Iteration 56: tolerance = 6.980e-07
+Iteration 57: tolerance = 5.570e-07
+Iteration 58: tolerance = 4.444e-07
+Iteration 59: tolerance = 3.546e-07
+Iteration 60: tolerance = 2.829e-07
+Iteration 61: tolerance = 2.256e-07
+Iteration 62: tolerance = 1.799e-07
+Iteration 63: tolerance = 1.435e-07
+Iteration 64: tolerance = 1.144e-07
+Iteration 65: tolerance = 9.125e-08
+
+
+Cross-sectional time-series FGLS regression
+
+Coefficients:  generalized least squares
+Panels:        heteroskedastic
+Correlation:   no autocorrelation
+
+Estimated covariances      =       259          Number of obs     =      1,704
+Estimated autocorrelations =         0          Number of groups  =        259
+Estimated coefficients     =        15          Obs per group:
+                                                              min =          1
+                                                              avg =   6.579151
+                                                              max =          8
+                                                Wald chi2(14)     =    1148.16
+Log likelihood             = -6150.483          Prob > chi2       =     0.0000
+
+------------------------------------------------------------------------------
+laborinsec_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      rfdi_b |  -1.72e-06   9.10e-07    -1.89   0.059    -3.50e-06    6.54e-08
+    secgrp_b |    .242839   .0158773    15.29   0.000       .21172     .273958
+       gov_b |  -6.04e-09   7.85e-09    -0.77   0.441    -2.14e-08    9.34e-09
+      wage_b |   5.53e-08   9.93e-09     5.57   0.000     3.58e-08    7.47e-08
+  domestic_b |   1.47e-07   1.22e-08    12.06   0.000     1.23e-07    1.71e-07
+       HMT_b |   1.07e-07   2.84e-08     3.76   0.000     5.12e-08    1.62e-07
+       fdi_b |  -6.56e-08   2.20e-08    -2.99   0.003    -1.09e-07   -2.26e-08
+      pgrp_b |   3.18e-06   1.30e-06     2.44   0.015     6.27e-07    5.72e-06
+   density_b |  -.0109945   .0051236    -2.15   0.032    -.0210365   -.0009525
+    delivery |  -.0000978   .0000167    -5.86   0.000    -.0001305   -.0000651
+         so2 |   .0000393   3.66e-06    10.74   0.000     .0000321    .0000464
+        tele |  -.0041912   .0032108    -1.31   0.192    -.0104842    .0021019
+      mobile |   -.001807   .0007481    -2.42   0.016    -.0032733   -.0003407
+    laborval |   .2254373   .0921342     2.45   0.014     .0448576    .4060171
+       _cons |   35.54036   1.069161    33.24   0.000     33.44485    37.63588
+------------------------------------------------------------------------------
+
+. estimates store heter
+
+. xtgls `xx',igls
+Iteration 1: tolerance = 0
+
+
+Cross-sectional time-series FGLS regression
+
+Coefficients:  generalized least squares
+Panels:        homoskedastic
+Correlation:   no autocorrelation
+
+Estimated covariances      =         1          Number of obs     =      1,704
+Estimated autocorrelations =         0          Number of groups  =        259
+Estimated coefficients     =        15          Obs per group:
+                                                              min =          1
+                                                              avg =   6.579151
+                                                              max =          8
+                                                Wald chi2(14)     =     484.74
+Log likelihood             = -6619.709          Prob > chi2       =     0.0000
+
+------------------------------------------------------------------------------
+laborinsec_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      rfdi_b |  -.0000143   3.09e-06    -4.63   0.000    -.0000203   -8.24e-06
+    secgrp_b |   .3900604   .0262651    14.85   0.000     .3385818     .441539
+       gov_b |  -6.54e-09   2.65e-08    -0.25   0.805    -5.85e-08    4.54e-08
+      wage_b |   1.10e-07   3.17e-08     3.46   0.001     4.76e-08    1.72e-07
+  domestic_b |   1.91e-07   2.92e-08     6.56   0.000     1.34e-07    2.49e-07
+       HMT_b |   1.43e-07   7.61e-08     1.88   0.061    -6.45e-09    2.92e-07
+       fdi_b |   1.17e-07   5.17e-08     2.26   0.024     1.53e-08    2.18e-07
+      pgrp_b |   6.56e-06   2.29e-06     2.86   0.004     2.07e-06    .0000111
+   density_b |  -.0263883   .0094541    -2.79   0.005    -.0449181   -.0078585
+    delivery |   -.000123   .0000211    -5.82   0.000    -.0001644   -.0000816
+         so2 |   .0000177   6.09e-06     2.91   0.004     5.77e-06    .0000296
+        tele |  -.0188372   .0072274    -2.61   0.009    -.0330026   -.0046717
+      mobile |   .0007439   .0017676     0.42   0.674    -.0027207    .0042084
+    laborval |  -.4183207    .151148    -2.77   0.006    -.7145653   -.1220761
+       _cons |   30.98074   1.697104    18.26   0.000     27.65448    34.30701
+------------------------------------------------------------------------------
+
+. local df=e(N_g)-1
+
+. display e(N_g)-1
+258
+
+. *result of 267 shows
+. lrtest heter ., df(267)
+
+Likelihood-ratio test                                 LR chi2(267)=    938.45
+(Assumption: . nested in heter)                       Prob > chi2 =    0.0000
+
+. log close
+      name:  <unnamed>
+       log:  C:\stata\final data\mylognew.log
+  log type:  text
+ closed on:   8 May 2017, 17:30:32
+-------------------------------------------------------------------------------------------------------------

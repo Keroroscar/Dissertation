@@ -1,0 +1,2090 @@
+---------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\stata\final2\mylog2.log
+  log type:  text
+ opened on:  17 Jan 2022, 13:56:44
+
+. *System GMM
+. *Arellano and Bond
+. 
+. *Assume with L2.lfdi and lgdp, lwage,lpopu are endogenous (appliable)
+. 
+.   local xx "ldomestic_b   lgov_b  lsecgrp_b ldelivery_b lwage_b seaside vice lfine  year1-year8"
+
+. xtdpdsys ldso2_b  `xx', endog(ldomestic_b  llaborinsec_b lgov_b ) twostep
+note: seaside dropped from div() because of collinearity
+note: vice dropped from div() because of collinearity
+note: year8 dropped from div() because of collinearity
+note: ldomestic_b dropped because of collinearity
+note: lgov_b dropped because of collinearity
+note: year1 dropped because of collinearity
+note: year4 dropped because of collinearity
+
+System dynamic panel-data estimation            Number of obs     =        780
+Group variable: id                              Number of groups  =        223
+Time variable: year
+                                                Obs per group:
+                                                              min =          1
+                                                              avg =   3.497758
+                                                              max =          6
+
+Number of instruments =     94                  Wald chi2(16)     =     419.47
+                                                Prob > chi2       =     0.0000
+Two-step results
+-------------------------------------------------------------------------------
+      ldso2_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+      ldso2_b |
+          L1. |  -.2416516   .0391619    -6.17   0.000    -.3184075   -.1648957
+              |
+  ldomestic_b |   .4943443   .1916318     2.58   0.010     .1187528    .8699358
+llaborinsec_b |  -3.465896   .3787723    -9.15   0.000    -4.208276   -2.723516
+       lgov_b |  -1.160757   .3874127    -3.00   0.003    -1.920072   -.4014422
+    lsecgrp_b |  -.1141312   .1799534    -0.63   0.526    -.4668334     .238571
+  ldelivery_b |   .0135463   .0271912     0.50   0.618    -.0397475    .0668401
+      lwage_b |   .9196607   .3659477     2.51   0.012     .2024163    1.636905
+      seaside |    3.13715    .989591     3.17   0.002     1.197587    5.076713
+         vice |   .8564037   1.180101     0.73   0.468    -1.456551    3.169359
+        lfine |  -.3589836   .1289054    -2.78   0.005    -.6116336   -.1063337
+        year2 |  -.0488968   .1172826    -0.42   0.677    -.2787665    .1809728
+        year3 |  -.1961836    .063246    -3.10   0.002    -.3201435   -.0722237
+        year5 |  -.0822202   .0516662    -1.59   0.112    -.1834841    .0190437
+        year6 |  -.3934093   .1717808    -2.29   0.022    -.7300934   -.0567252
+        year7 |   -.357183   .1580454    -2.26   0.024    -.6669462   -.0474197
+        year8 |   9.450456   2.605835     3.63   0.000     4.343114     14.5578
+        _cons |   15.62537   4.672054     3.34   0.001     6.468312    24.78243
+-------------------------------------------------------------------------------
+Warning: gmm two-step standard errors are biased; robust standard 
+         errors are recommended.
+Instruments for differenced equation
+        GMM-type: L(2/.).ldso2_b L(2/.).ldomestic_b L(2/.).llaborinsec_b
+                  L(2/.).lgov_b
+        Standard: D.ldomestic_b D.lgov_b D.lsecgrp_b D.ldelivery_b D.lwage_b
+                  D.lfine D.year1 D.year2 D.year3 D.year4 D.year5 D.year6
+                  D.year7
+Instruments for level equation
+        GMM-type: LD.ldso2_b LD.ldomestic_b LD.llaborinsec_b LD.lgov_b
+        Standard: _cons
+
+.  est store dycs_2endog
+
+.  estat abond 
+
+Arellano-Bond test for zero autocorrelation in first-differenced errors
+  +-----------------------+
+  |Order |  z     Prob > z|
+  |------+----------------|
+  |   1  |-2.7255  0.0064 |
+  |   2  |-.30533  0.7601 |
+  +-----------------------+
+   H0: no autocorrelation 
+
+.  estat sargan
+Sargan test of overidentifying restrictions
+        H0: overidentifying restrictions are valid
+
+        chi2(77)     =  56.70822
+        Prob > chi2  =    0.9600
+
+.  outreg2 using data2,excel replace ctitle ("ldso2_a") drop(year1-year8) e(ar1 ar1p ar2 ar2p sargan sarganp hansen hansenp N)  noobs bdec(3)
+>  sdec(3) 
+check eret list for the existence of e(ar1)
+check eret list for the existence of e(ar1p)
+check eret list for the existence of e(ar2)
+check eret list for the existence of e(ar2p)
+check eret list for the existence of e(sarganp)
+check eret list for the existence of e(hansen)
+check eret list for the existence of e(hansenp)
+data2.xml
+dir : seeout
+
+. 
+.    local xx "ldomestic_b  land_b lgov_b  lsecgrp_b ldelivery_b lwage_b seaside vice lfine  year1-year8"
+
+. xtdpdsys lpso2_b  `xx', endog(ldomestic_b llaborinsec_b lgov_b ) twostep
+note: seaside dropped from div() because of collinearity
+note: vice dropped from div() because of collinearity
+note: year1 dropped from div() because of collinearity
+note: lgov_b dropped because of collinearity
+note: ldomestic_b dropped because of collinearity
+note: year1 dropped because of collinearity
+note: year4 dropped because of collinearity
+
+System dynamic panel-data estimation            Number of obs     =        780
+Group variable: id                              Number of groups  =        223
+Time variable: year
+                                                Obs per group:
+                                                              min =          1
+                                                              avg =   3.497758
+                                                              max =          6
+
+Number of instruments =     95                  Wald chi2(17)     =     486.09
+                                                Prob > chi2       =     0.0000
+Two-step results
+-------------------------------------------------------------------------------
+      lpso2_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+      lpso2_b |
+          L1. |   .1072413   .0503354     2.13   0.033     .0085858    .2058969
+              |
+  ldomestic_b |   .1854029   .1233653     1.50   0.133    -.0563887    .4271945
+llaborinsec_b |  -.7177141   .1751649    -4.10   0.000    -1.061031   -.3743973
+       land_b |   .0000364   .0000188     1.93   0.053    -4.89e-07    .0000732
+       lgov_b |   .5920195   .3275034     1.81   0.071    -.0498753    1.233914
+    lsecgrp_b |   .1279826   .0826794     1.55   0.122     -.034066    .2900313
+  ldelivery_b |   .0153191   .0180082     0.85   0.395    -.0199764    .0506145
+      lwage_b |  -.0762982   .2279874    -0.33   0.738    -.5231453    .3705489
+      seaside |   3.523381   1.059873     3.32   0.001     1.446069    5.600694
+         vice |    .541062   1.295903     0.42   0.676     -1.99886    3.080984
+        lfine |  -.1077132    .072167    -1.49   0.136    -.2491579    .0337316
+        year2 |  -.3227369   .0682897    -4.73   0.000    -.4565823   -.1888916
+        year3 |  -.3559872   .0453822    -7.84   0.000    -.4449346   -.2670397
+        year5 |   -.031473   .0311358    -1.01   0.312     -.092498     .029552
+        year6 |  -.3944826   .1108436    -3.56   0.000     -.611732   -.1772332
+        year7 |  -.2330312   .0931116    -2.50   0.012    -.4155265   -.0505358
+        year8 |   -6.95517   2.314636    -3.00   0.003    -11.49177   -2.418566
+        _cons |   8.298158   2.474573     3.35   0.001     3.448083    13.14823
+-------------------------------------------------------------------------------
+Warning: gmm two-step standard errors are biased; robust standard 
+         errors are recommended.
+Instruments for differenced equation
+        GMM-type: L(2/.).lpso2_b L(2/.).ldomestic_b L(2/.).llaborinsec_b
+                  L(2/.).lgov_b
+        Standard: D.ldomestic_b D.land_b D.lgov_b D.lsecgrp_b D.ldelivery_b
+                  D.lwage_b D.lfine D.year2 D.year3 D.year4 D.year5 D.year6
+                  D.year7 D.year8
+Instruments for level equation
+        GMM-type: LD.lpso2_b LD.ldomestic_b LD.llaborinsec_b LD.lgov_b
+        Standard: _cons
+
+.  est store dycs_2endog
+
+.  estat abond 
+
+Arellano-Bond test for zero autocorrelation in first-differenced errors
+  +-----------------------+
+  |Order |  z     Prob > z|
+  |------+----------------|
+  |   1  |-2.4077  0.0161 |
+  |   2  |-1.5366  0.1244 |
+  +-----------------------+
+   H0: no autocorrelation 
+
+.  estat sargan
+Sargan test of overidentifying restrictions
+        H0: overidentifying restrictions are valid
+
+        chi2(77)     =  53.67341
+        Prob > chi2  =    0.9802
+
+.  outreg2 using data3,excel replace ctitle ("lpso2_a") drop(year1-year8) e(ar1 ar1p ar2 ar2p sargan sarganp hansen hansenp N)  noobs bdec(3)
+>  sdec(3) 
+check eret list for the existence of e(ar1)
+check eret list for the existence of e(ar1p)
+check eret list for the existence of e(ar2)
+check eret list for the existence of e(ar2p)
+check eret list for the existence of e(sarganp)
+check eret list for the existence of e(hansen)
+check eret list for the existence of e(hansenp)
+data3.xml
+dir : seeout
+
+. 
+.  local xx "ldomestic_b lpopu_b  lgov_b llaborinsec_b lsecgrp_b ldelivery_b lwage_b seaside vice lfine  year1-year8"
+
+. xtdpdsys lso2_b  `xx', endog(ldomestic_b lpopu_b land_b lgov_b ) twostep
+note: seaside dropped from div() because of collinearity
+note: vice dropped from div() because of collinearity
+note: year8 dropped from div() because of collinearity
+note: ldomestic_b dropped because of collinearity
+note: lgov_b dropped because of collinearity
+note: lpopu_b dropped because of collinearity
+note: year1 dropped because of collinearity
+note: year4 dropped because of collinearity
+
+System dynamic panel-data estimation            Number of obs     =        780
+Group variable: id                              Number of groups  =        223
+Time variable: year
+                                                Obs per group:
+                                                              min =          1
+                                                              avg =   3.497758
+                                                              max =          6
+
+Number of instruments =    116                  Wald chi2(18)     =    3430.50
+                                                Prob > chi2       =     0.0000
+Two-step results
+-------------------------------------------------------------------------------
+       lso2_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+       lso2_b |
+          L1. |   -.289894   .0440217    -6.59   0.000    -.3761749   -.2036131
+              |
+      lpopu_b |  -.1809087   .1830289    -0.99   0.323    -.5396387    .1778213
+       land_b |   .0002083   .0000325     6.40   0.000     .0001446    .0002721
+  ldomestic_b |   .5923104   .1097179     5.40   0.000     .3772674    .8073535
+       lgov_b |   .4820557   .3493596     1.38   0.168    -.2026765    1.166788
+llaborinsec_b |   .1354458   .1174728     1.15   0.249    -.0947967    .3656884
+    lsecgrp_b |    -.11236   .1219098    -0.92   0.357    -.3512988    .1265789
+  ldelivery_b |   .0515631   .0169547     3.04   0.002     .0183325    .0847937
+      lwage_b |  -.0822674   .2578755    -0.32   0.750    -.5876941    .4231593
+      seaside |   2.179311   .3368277     6.47   0.000      1.51914    2.839481
+         vice |  -.8800097   .4190673    -2.10   0.036    -1.701367   -.0586529
+        lfine |  -.4726504   .0709048    -6.67   0.000    -.6116212   -.3336796
+        year2 |   .0211291   .0739856     0.29   0.775      -.12388    .1661382
+        year3 |  -.0302517   .0367082    -0.82   0.410    -.1021985    .0416951
+        year5 |   .0344568   .0408702     0.84   0.399    -.0456472    .1145609
+        year6 |  -.4971611   .1099878    -4.52   0.000    -.7127331    -.281589
+        year7 |  -.1792613   .1059196    -1.69   0.091      -.38686    .0283373
+        year8 |  -11.92028   3.198887    -3.73   0.000    -18.18999    -5.65058
+        _cons |    4.46441   3.175125     1.41   0.160    -1.758721    10.68754
+-------------------------------------------------------------------------------
+Warning: gmm two-step standard errors are biased; robust standard 
+         errors are recommended.
+Instruments for differenced equation
+        GMM-type: L(2/.).lso2_b L(2/.).ldomestic_b L(2/.).lpopu_b
+                  L(2/.).land_b L(2/.).lgov_b
+        Standard: D.ldomestic_b D.lpopu_b D.lgov_b D.llaborinsec_b
+                  D.lsecgrp_b D.ldelivery_b D.lwage_b D.lfine D.year1 D.year2
+                  D.year3 D.year4 D.year5 D.year6 D.year7
+Instruments for level equation
+        GMM-type: LD.lso2_b LD.ldomestic_b LD.lpopu_b LD.land_b LD.lgov_b
+        Standard: _cons
+
+.  est store dycs_2endog
+
+.  estat abond 
+
+Arellano-Bond test for zero autocorrelation in first-differenced errors
+  +-----------------------+
+  |Order |  z     Prob > z|
+  |------+----------------|
+  |   1  |-2.7399  0.0061 |
+  |   2  | .35579  0.7220 |
+  +-----------------------+
+   H0: no autocorrelation 
+
+.  estat sargan
+Sargan test of overidentifying restrictions
+        H0: overidentifying restrictions are valid
+
+        chi2(97)     =  61.01892
+        Prob > chi2  =    0.9984
+
+.  outreg2 using data1,excel replace ctitle ("lso2_b") drop(year1-year8) e(ar1 ar1p ar2 ar2p sargan sarganp hansen hansenp N)  noobs bdec(3) 
+> sdec(3) 
+check eret list for the existence of e(ar1)
+check eret list for the existence of e(ar1p)
+check eret list for the existence of e(ar2)
+check eret list for the existence of e(ar2p)
+check eret list for the existence of e(sarganp)
+check eret list for the existence of e(hansen)
+check eret list for the existence of e(hansenp)
+data1.xml
+dir : seeout
+
+. 
+.   local xx "   lsecgrp_b  ldelivery_b lwage_b seaside vice lfine  year1-year8"
+
+. xtdpdsys ldso2_b  `xx', endog(lHMT_b llaborinsec_b lgov_b) twostep
+note: seaside dropped from div() because of collinearity
+note: vice dropped from div() because of collinearity
+note: year8 dropped from div() because of collinearity
+note: year1 dropped because of collinearity
+note: year8 dropped because of collinearity
+
+System dynamic panel-data estimation            Number of obs     =        780
+Group variable: id                              Number of groups  =        223
+Time variable: year
+                                                Obs per group:
+                                                              min =          1
+                                                              avg =   3.497758
+                                                              max =          6
+
+Number of instruments =     92                  Wald chi2(16)     =     640.49
+                                                Prob > chi2       =     0.0000
+Two-step results
+-------------------------------------------------------------------------------
+      ldso2_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+      ldso2_b |
+          L1. |  -.3666863   .0552755    -6.63   0.000    -.4750243   -.2583484
+              |
+       lHMT_b |  -.0851123   .0728852    -1.17   0.243    -.2279646    .0577401
+llaborinsec_b |  -2.393061   .3173839    -7.54   0.000    -3.015122      -1.771
+       lgov_b |   .1313051   .4940282     0.27   0.790    -.8369723    1.099583
+    lsecgrp_b |  -.2884255   .1641599    -1.76   0.079     -.610173     .033322
+  ldelivery_b |   .0506199   .0277869     1.82   0.068    -.0038414    .1050812
+      lwage_b |   .5658118   .2709355     2.09   0.037     .0347879    1.096836
+      seaside |   5.612694   1.002148     5.60   0.000      3.64852    7.576869
+         vice |   -1.02972   1.127549    -0.91   0.361    -3.239676    1.180237
+        lfine |  -.4976552   .0763814    -6.52   0.000    -.6473601   -.3479503
+        year2 |  -1.516249   3.235158    -0.47   0.639    -7.857042    4.824544
+        year3 |  -1.488512   3.255243    -0.46   0.647     -7.86867    4.891647
+        year4 |  -1.282535   3.284525    -0.39   0.696    -7.720085    5.155015
+        year5 |  -1.315231   3.280135    -0.40   0.688    -7.744178    5.113715
+        year6 |  -1.523664   3.258225    -0.47   0.640    -7.909667     4.86234
+        year7 |  -1.348498   3.254478    -0.41   0.679    -7.727158    5.030163
+        _cons |   26.45329   3.718746     7.11   0.000     19.16468     33.7419
+-------------------------------------------------------------------------------
+Warning: gmm two-step standard errors are biased; robust standard 
+         errors are recommended.
+Instruments for differenced equation
+        GMM-type: L(2/.).ldso2_b L(2/.).lHMT_b L(2/.).llaborinsec_b
+                  L(2/.).lgov_b
+        Standard: D.lsecgrp_b D.ldelivery_b D.lwage_b D.lfine D.year1 D.year2
+                  D.year3 D.year4 D.year5 D.year6 D.year7
+Instruments for level equation
+        GMM-type: LD.ldso2_b LD.lHMT_b LD.llaborinsec_b LD.lgov_b
+        Standard: _cons
+
+.  est store dycs_2endog
+
+.  estat abond 
+
+Arellano-Bond test for zero autocorrelation in first-differenced errors
+  +-----------------------+
+  |Order |  z     Prob > z|
+  |------+----------------|
+  |   1  |-2.1169  0.0343 |
+  |   2  | -.3329  0.7392 |
+  +-----------------------+
+   H0: no autocorrelation 
+
+.  estat sargan
+Sargan test of overidentifying restrictions
+        H0: overidentifying restrictions are valid
+
+        chi2(75)     =  44.09112
+        Prob > chi2  =    0.9983
+
+.   outreg2 using data2,excel append ctitle ("ldso2_b") drop(year1-year8)e(ar1 ar1p ar2 ar2p sargan sarganp hansen hansenp N)  noobs bdec(3) 
+> sdec(3)
+check eret list for the existence of e(ar1)
+check eret list for the existence of e(ar1p)
+check eret list for the existence of e(ar2)
+check eret list for the existence of e(ar2p)
+check eret list for the existence of e(sarganp)
+check eret list for the existence of e(hansen)
+check eret list for the existence of e(hansenp)
+data2.xml
+dir : seeout
+
+.  
+.    local xx "   lsecgrp_b  ldelivery_b lwage_b seaside vice lfine  year1-year8"
+
+. xtdpdsys lpso2_b  `xx', endog(lHMT_b llaborinsec_b lgov_b) twostep
+note: seaside dropped from div() because of collinearity
+note: vice dropped from div() because of collinearity
+note: year8 dropped from div() because of collinearity
+note: year1 dropped because of collinearity
+note: year8 dropped because of collinearity
+
+System dynamic panel-data estimation            Number of obs     =        780
+Group variable: id                              Number of groups  =        223
+Time variable: year
+                                                Obs per group:
+                                                              min =          1
+                                                              avg =   3.497758
+                                                              max =          6
+
+Number of instruments =     92                  Wald chi2(16)     =     815.25
+                                                Prob > chi2       =     0.0000
+Two-step results
+-------------------------------------------------------------------------------
+      lpso2_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+      lpso2_b |
+          L1. |   .0825839   .0587331     1.41   0.160    -.0325308    .1976985
+              |
+       lHMT_b |    -.03175   .0419516    -0.76   0.449    -.1139735    .0504736
+llaborinsec_b |  -.5305117   .2400853    -2.21   0.027     -1.00107   -.0599532
+       lgov_b |   1.326759   .4480156     2.96   0.003      .448664    2.204853
+    lsecgrp_b |   .1584161   .0741896     2.14   0.033     .0130071    .3038251
+  ldelivery_b |   .0254941   .0195924     1.30   0.193    -.0129063    .0638944
+      lwage_b |  -.1871659   .2044831    -0.92   0.360    -.5879453    .2136136
+      seaside |   5.266597   1.694665     3.11   0.002     1.945116    8.588078
+         vice |  -3.940784    1.99066    -1.98   0.048    -7.842405   -.0391619
+        lfine |  -.1299618   .0568011    -2.29   0.022    -.2412899   -.0186337
+        year2 |   9.388839    2.96775     3.16   0.002     3.572157    15.20552
+        year3 |   9.420682   2.968637     3.17   0.002     3.602261     15.2391
+        year4 |   9.753732   2.970673     3.28   0.001      3.93132    15.57614
+        year5 |   9.751702   2.964907     3.29   0.001     3.940592    15.56281
+        year6 |   9.493291   2.957536     3.21   0.001     3.696627    15.28995
+        year7 |   9.742042   2.953124     3.30   0.001     3.954025    15.53006
+        _cons |   1.778553   3.607949     0.49   0.622    -5.292896    8.850003
+-------------------------------------------------------------------------------
+Warning: gmm two-step standard errors are biased; robust standard 
+         errors are recommended.
+Instruments for differenced equation
+        GMM-type: L(2/.).lpso2_b L(2/.).lHMT_b L(2/.).llaborinsec_b
+                  L(2/.).lgov_b
+        Standard: D.lsecgrp_b D.ldelivery_b D.lwage_b D.lfine D.year1 D.year2
+                  D.year3 D.year4 D.year5 D.year6 D.year7
+Instruments for level equation
+        GMM-type: LD.lpso2_b LD.lHMT_b LD.llaborinsec_b LD.lgov_b
+        Standard: _cons
+
+.  est store dycs_2endog
+
+.  estat abond 
+
+Arellano-Bond test for zero autocorrelation in first-differenced errors
+  +-----------------------+
+  |Order |  z     Prob > z|
+  |------+----------------|
+  |   1  |-2.3803  0.0173 |
+  |   2  |-.72685  0.4673 |
+  +-----------------------+
+   H0: no autocorrelation 
+
+.  estat sargan
+Sargan test of overidentifying restrictions
+        H0: overidentifying restrictions are valid
+
+        chi2(75)     =  50.36502
+        Prob > chi2  =    0.9871
+
+.   outreg2 using data3,excel append ctitle ("lpso2_b") drop(year1-year8)e(ar1 ar1p ar2 ar2p sargan sarganp hansen hansenp N)  noobs bdec(3) 
+> sdec(3)
+check eret list for the existence of e(ar1)
+check eret list for the existence of e(ar1p)
+check eret list for the existence of e(ar2)
+check eret list for the existence of e(ar2p)
+check eret list for the existence of e(sarganp)
+check eret list for the existence of e(hansen)
+check eret list for the existence of e(hansenp)
+data3.xml
+dir : seeout
+
+.  
+.  
+.    local xx "   lsecgrp_b  ldelivery_b lwage_b seaside vice lfine  year1-year8"
+
+. xtdpdsys lso2_b  `xx', endog(lHMT_b llaborinsec_b lgov_b) twostep
+note: seaside dropped from div() because of collinearity
+note: vice dropped from div() because of collinearity
+note: year8 dropped from div() because of collinearity
+note: year1 dropped because of collinearity
+note: year4 dropped because of collinearity
+
+System dynamic panel-data estimation            Number of obs     =        780
+Group variable: id                              Number of groups  =        223
+Time variable: year
+                                                Obs per group:
+                                                              min =          1
+                                                              avg =   3.497758
+                                                              max =          6
+
+Number of instruments =     92                  Wald chi2(16)     =     424.75
+                                                Prob > chi2       =     0.0000
+Two-step results
+-------------------------------------------------------------------------------
+       lso2_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+       lso2_b |
+          L1. |   -.423216   .0505888    -8.37   0.000    -.5223682   -.3240638
+              |
+       lHMT_b |   .0720574   .0642612     1.12   0.262    -.0538922     .198007
+llaborinsec_b |   .0744169   .3363258     0.22   0.825    -.5847696    .7336033
+       lgov_b |   .8123069   .3514707     2.31   0.021      .123437    1.501177
+    lsecgrp_b |  -.3716326   .1518869    -2.45   0.014    -.6693254   -.0739398
+  ldelivery_b |   .1024511   .0290144     3.53   0.000     .0455838    .1593183
+      lwage_b |   .7517081   .3221227     2.33   0.020     .1203592    1.383057
+      seaside |    4.47308   .9680101     4.62   0.000     2.575815    6.370345
+         vice |  -2.175394   1.168545    -1.86   0.063      -4.4657    .1149123
+        lfine |  -.6355881   .1117736    -5.69   0.000    -.8546604   -.4165159
+        year2 |    .103182   .1019673     1.01   0.312    -.0966704    .3030343
+        year3 |   .1005993   .0595936     1.69   0.091     -.016202    .2174005
+        year5 |   .0708837   .0448293     1.58   0.114    -.0169802    .1587476
+        year6 |  -.6119514   .1670142    -3.66   0.000    -.9392933   -.2846094
+        year7 |  -.2315222   .1506677    -1.54   0.124    -.5268254    .0637811
+        year8 |  -4.431838   2.300711    -1.93   0.054    -8.941149    .0774723
+        _cons |    5.82263   3.384929     1.72   0.085    -.8117092    12.45697
+-------------------------------------------------------------------------------
+Warning: gmm two-step standard errors are biased; robust standard 
+         errors are recommended.
+Instruments for differenced equation
+        GMM-type: L(2/.).lso2_b L(2/.).lHMT_b L(2/.).llaborinsec_b
+                  L(2/.).lgov_b
+        Standard: D.lsecgrp_b D.ldelivery_b D.lwage_b D.lfine D.year1 D.year2
+                  D.year3 D.year4 D.year5 D.year6 D.year7
+Instruments for level equation
+        GMM-type: LD.lso2_b LD.lHMT_b LD.llaborinsec_b LD.lgov_b
+        Standard: _cons
+
+.  est store dycs_2endog
+
+.  estat abond 
+
+Arellano-Bond test for zero autocorrelation in first-differenced errors
+  +-----------------------+
+  |Order |  z     Prob > z|
+  |------+----------------|
+  |   1  |-2.7196  0.0065 |
+  |   2  | 1.2987  0.1940 |
+  +-----------------------+
+   H0: no autocorrelation 
+
+.  estat sargan
+Sargan test of overidentifying restrictions
+        H0: overidentifying restrictions are valid
+
+        chi2(75)     =  50.23761
+        Prob > chi2  =    0.9876
+
+.   outreg2 using data1,excel append ctitle ("lso2_b") drop(year1-year8)e(ar1 ar1p ar2 ar2p sargan sarganp hansen hansenp N)  noobs bdec(3) s
+> dec(3)
+check eret list for the existence of e(ar1)
+check eret list for the existence of e(ar1p)
+check eret list for the existence of e(ar2)
+check eret list for the existence of e(ar2p)
+check eret list for the existence of e(sarganp)
+check eret list for the existence of e(hansen)
+check eret list for the existence of e(hansenp)
+data1.xml
+dir : seeout
+
+.  
+.    local xx " llaborinsec_b  lsecgrp_b ldelivery_b  seaside vice lfine  year1-year8"
+
+. xtdpdsys lpso2_b  `xx', endog(lfdi_b lland_b lgov_b lwage_b) twostep
+note: seaside dropped from div() because of collinearity
+note: vice dropped from div() because of collinearity
+note: year8 dropped from div() because of collinearity
+note: year1 dropped because of collinearity
+note: year4 dropped because of collinearity
+
+System dynamic panel-data estimation            Number of obs     =        780
+Group variable: id                              Number of groups  =        223
+Time variable: year
+                                                Obs per group:
+                                                              min =          1
+                                                              avg =   3.497758
+                                                              max =          6
+
+Number of instruments =    112                  Wald chi2(17)     =     362.63
+                                                Prob > chi2       =     0.0000
+Two-step results
+-------------------------------------------------------------------------------
+      lpso2_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+      lpso2_b |
+          L1. |    .083802   .0362093     2.31   0.021     .0128332    .1547709
+              |
+       lfdi_b |  -.0186957   .0519877    -0.36   0.719    -.1205896    .0831983
+      lland_b |    .170474   .0478135     3.57   0.000     .0767612    .2641867
+       lgov_b |   1.380239   .2698016     5.12   0.000     .8514377    1.909041
+      lwage_b |  -.0726849   .2947306    -0.25   0.805    -.6503463    .5049765
+llaborinsec_b |   .2804324    .135256     2.07   0.038     .0153355    .5455293
+    lsecgrp_b |   .1183971   .0820546     1.44   0.149    -.0424269    .2792211
+  ldelivery_b |   .0370339   .0187397     1.98   0.048     .0003047    .0737631
+      seaside |   1.903973   .3730348     5.10   0.000     1.172838    2.635108
+         vice |  -1.106103    .611079    -1.81   0.070    -2.303796    .0915899
+        lfine |   .0070803   .0617326     0.11   0.909    -.1139134     .128074
+        year2 |  -.1623924   .0657577    -2.47   0.014     -.291275   -.0335098
+        year3 |   -.182214   .0382368    -4.77   0.000    -.2571568   -.1072712
+        year5 |  -.0246591    .047045    -0.52   0.600    -.1168656    .0675474
+        year6 |  -.3295271   .1337088    -2.46   0.014    -.5915915   -.0674627
+        year7 |  -.2110524   .1271418    -1.66   0.097    -.4602457    .0381409
+        year8 |  -10.84758   1.770554    -6.13   0.000     -14.3178   -7.377354
+        _cons |   5.169779   3.182085     1.62   0.104    -1.066993    11.40655
+-------------------------------------------------------------------------------
+Warning: gmm two-step standard errors are biased; robust standard 
+         errors are recommended.
+Instruments for differenced equation
+        GMM-type: L(2/.).lpso2_b L(2/.).lfdi_b L(2/.).lland_b L(2/.).lgov_b
+                  L(2/.).lwage_b
+        Standard: D.llaborinsec_b D.lsecgrp_b D.ldelivery_b D.lfine D.year1
+                  D.year2 D.year3 D.year4 D.year5 D.year6 D.year7
+Instruments for level equation
+        GMM-type: LD.lpso2_b LD.lfdi_b LD.lland_b LD.lgov_b LD.lwage_b
+        Standard: _cons
+
+.  est store dycs_2endog
+
+.  estat abond 
+
+Arellano-Bond test for zero autocorrelation in first-differenced errors
+  +-----------------------+
+  |Order |  z     Prob > z|
+  |------+----------------|
+  |   1  |-2.5113  0.0120 |
+  |   2  |-.37084  0.7108 |
+  +-----------------------+
+   H0: no autocorrelation 
+
+.  estat sargan
+Sargan test of overidentifying restrictions
+        H0: overidentifying restrictions are valid
+
+        chi2(94)     =  54.70669
+        Prob > chi2  =    0.9996
+
+.   outreg2 usilng data3,excel append ctitle ("lpso2_b") drop(year1-year8)e(ar1 ar1p ar2 ar2p sargan sarganp hansen hansenp N)  noobs bdec(3)
+>  sdec(3)
+option excel not allowed
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "C:\stata\final2\STD01000000.tmp"
+
+.  
+.    local xx " llaborinsec_b  lsecgrp_b ldelivery_b  seaside vice lfine  year1-year8"
+
+. xtdpdsys lpso2_b  `xx', endog(lfdi_b lland_b lgov_b lwage_b) twostep
+note: seaside dropped from div() because of collinearity
+note: vice dropped from div() because of collinearity
+note: year8 dropped from div() because of collinearity
+note: year1 dropped because of collinearity
+note: year4 dropped because of collinearity
+
+System dynamic panel-data estimation            Number of obs     =        780
+Group variable: id                              Number of groups  =        223
+Time variable: year
+                                                Obs per group:
+                                                              min =          1
+                                                              avg =   3.497758
+                                                              max =          6
+
+Number of instruments =    112                  Wald chi2(17)     =     362.63
+                                                Prob > chi2       =     0.0000
+Two-step results
+-------------------------------------------------------------------------------
+      lpso2_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+      lpso2_b |
+          L1. |    .083802   .0362093     2.31   0.021     .0128332    .1547709
+              |
+       lfdi_b |  -.0186957   .0519877    -0.36   0.719    -.1205896    .0831983
+      lland_b |    .170474   .0478135     3.57   0.000     .0767612    .2641867
+       lgov_b |   1.380239   .2698016     5.12   0.000     .8514377    1.909041
+      lwage_b |  -.0726849   .2947306    -0.25   0.805    -.6503463    .5049765
+llaborinsec_b |   .2804324    .135256     2.07   0.038     .0153355    .5455293
+    lsecgrp_b |   .1183971   .0820546     1.44   0.149    -.0424269    .2792211
+  ldelivery_b |   .0370339   .0187397     1.98   0.048     .0003047    .0737631
+      seaside |   1.903973   .3730348     5.10   0.000     1.172838    2.635108
+         vice |  -1.106103    .611079    -1.81   0.070    -2.303796    .0915899
+        lfine |   .0070803   .0617326     0.11   0.909    -.1139134     .128074
+        year2 |  -.1623924   .0657577    -2.47   0.014     -.291275   -.0335098
+        year3 |   -.182214   .0382368    -4.77   0.000    -.2571568   -.1072712
+        year5 |  -.0246591    .047045    -0.52   0.600    -.1168656    .0675474
+        year6 |  -.3295271   .1337088    -2.46   0.014    -.5915915   -.0674627
+        year7 |  -.2110524   .1271418    -1.66   0.097    -.4602457    .0381409
+        year8 |  -10.84758   1.770554    -6.13   0.000     -14.3178   -7.377354
+        _cons |   5.169779   3.182085     1.62   0.104    -1.066993    11.40655
+-------------------------------------------------------------------------------
+Warning: gmm two-step standard errors are biased; robust standard 
+         errors are recommended.
+Instruments for differenced equation
+        GMM-type: L(2/.).lpso2_b L(2/.).lfdi_b L(2/.).lland_b L(2/.).lgov_b
+                  L(2/.).lwage_b
+        Standard: D.llaborinsec_b D.lsecgrp_b D.ldelivery_b D.lfine D.year1
+                  D.year2 D.year3 D.year4 D.year5 D.year6 D.year7
+Instruments for level equation
+        GMM-type: LD.lpso2_b LD.lfdi_b LD.lland_b LD.lgov_b LD.lwage_b
+        Standard: _cons
+
+.  est store dycs_2endog
+
+.  estat abond 
+
+Arellano-Bond test for zero autocorrelation in first-differenced errors
+  +-----------------------+
+  |Order |  z     Prob > z|
+  |------+----------------|
+  |   1  |-2.5113  0.0120 |
+  |   2  |-.37084  0.7108 |
+  +-----------------------+
+   H0: no autocorrelation 
+
+.  estat sargan
+Sargan test of overidentifying restrictions
+        H0: overidentifying restrictions are valid
+
+        chi2(94)     =  54.70669
+        Prob > chi2  =    0.9996
+
+.   outreg2 using data3,excel append ctitle ("lpso2_b") drop(year1-year8)e(ar1 ar1p ar2 ar2p sargan sarganp hansen hansenp N)  noobs bdec(3) 
+> sdec(3)
+check eret list for the existence of e(ar1)
+check eret list for the existence of e(ar1p)
+check eret list for the existence of e(ar2)
+check eret list for the existence of e(ar2p)
+check eret list for the existence of e(sarganp)
+check eret list for the existence of e(hansen)
+check eret list for the existence of e(hansenp)
+data3.xml
+dir : seeout
+
+. 
+.  
+.  
+.  
+.   local xx " llaborinsec_b  lsecgrp_b ldelivery_b lwage_b seaside vice lfine  year1-year8"
+
+. xtdpdsys lso2_b  `xx', endog(lfdi_b lpopu_b lgov_b) twostep
+note: seaside dropped from div() because of collinearity
+note: vice dropped from div() because of collinearity
+note: year8 dropped from div() because of collinearity
+note: year1 dropped because of collinearity
+note: year4 dropped because of collinearity
+
+System dynamic panel-data estimation            Number of obs     =        780
+Group variable: id                              Number of groups  =        223
+Time variable: year
+                                                Obs per group:
+                                                              min =          1
+                                                              avg =   3.497758
+                                                              max =          6
+
+Number of instruments =     93                  Wald chi2(17)     =     353.72
+                                                Prob > chi2       =     0.0000
+Two-step results
+-------------------------------------------------------------------------------
+       lso2_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+       lso2_b |
+          L1. |  -.3464436   .0534433    -6.48   0.000    -.4511905   -.2416968
+              |
+       lfdi_b |   .0706097   .1056355     0.67   0.504     -.136432    .2776514
+      lpopu_b |   .2064565   .4301496     0.48   0.631    -.6366213    1.049534
+       lgov_b |   .3647815   .6761932     0.54   0.590    -.9605328    1.690096
+llaborinsec_b |  -.1114309    .271528    -0.41   0.682     -.643616    .4207542
+    lsecgrp_b |  -.1382411   .1646111    -0.84   0.401    -.4608728    .1843906
+  ldelivery_b |   .0699857   .0292261     2.39   0.017     .0127036    .1272678
+      lwage_b |    .470167   .3288981     1.43   0.153    -.1744613    1.114795
+      seaside |   1.639858   .4067317     4.03   0.000     .8426785    2.437037
+         vice |   .9800511   1.041695     0.94   0.347    -1.061633    3.021736
+        lfine |  -.4614078   .0962439    -4.79   0.000    -.6500424   -.2727732
+        year2 |  -.1231607   .0956661    -1.29   0.198    -.3106629    .0643414
+        year3 |  -.1055065   .0548585    -1.92   0.054    -.2130273    .0020142
+        year5 |   .0897421   .0572916     1.57   0.117    -.0225475    .2020316
+        year6 |  -.4311363   .1495694    -2.88   0.004    -.7242868   -.1379857
+        year7 |  -.1127747   .1498559    -0.75   0.452    -.4064869    .1809375
+        year8 |  -1.563376   4.380138    -0.36   0.721    -10.14829    7.021536
+        _cons |   6.913594   4.074328     1.70   0.090    -1.071943    14.89913
+-------------------------------------------------------------------------------
+Warning: gmm two-step standard errors are biased; robust standard 
+         errors are recommended.
+Instruments for differenced equation
+        GMM-type: L(2/.).lso2_b L(2/.).lfdi_b L(2/.).lpopu_b L(2/.).lgov_b
+        Standard: D.llaborinsec_b D.lsecgrp_b D.ldelivery_b D.lwage_b D.lfine
+                  D.year1 D.year2 D.year3 D.year4 D.year5 D.year6 D.year7
+Instruments for level equation
+        GMM-type: LD.lso2_b LD.lfdi_b LD.lpopu_b LD.lgov_b
+        Standard: _cons
+
+.  est store dycs_2endog
+
+.  estat abond 
+
+Arellano-Bond test for zero autocorrelation in first-differenced errors
+  +-----------------------+
+  |Order |  z     Prob > z|
+  |------+----------------|
+  |   1  |-2.8634  0.0042 |
+  |   2  | .65076  0.5152 |
+  +-----------------------+
+   H0: no autocorrelation 
+
+.  estat sargan
+Sargan test of overidentifying restrictions
+        H0: overidentifying restrictions are valid
+
+        chi2(75)     =  51.19154
+        Prob > chi2  =    0.9839
+
+.   outreg2 usilng data1,excel append ctitle ("lso2_b") drop(year1-year8)e(ar1 ar1p ar2 ar2p sargan sarganp hansen hansenp N)  noobs bdec(3) 
+> sdec(3)
+option excel not allowed
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "C:\stata\final2\STD01000000.tmp"
+
+.  
+.    
+.    local xx " llaborinsec_c  lsecgrp_c lgov_c ldelivery_c lwage_c seaside vice fine finedfirm year1-year8"
+
+. xtdpdsys lso2_c  `xx', endog(lfdi_c lland_c) twostep
+note: seaside dropped from div() because of collinearity
+note: vice dropped from div() because of collinearity
+note: year1 dropped from div() because of collinearity
+note: year1 dropped because of collinearity
+note: year4 dropped because of collinearity
+
+System dynamic panel-data estimation            Number of obs     =        780
+Group variable: id                              Number of groups  =        223
+Time variable: year
+                                                Obs per group:
+                                                              min =          1
+                                                              avg =   3.497758
+                                                              max =          6
+
+Number of instruments =     75                  Wald chi2(18)     =   15625.13
+                                                Prob > chi2       =     0.0000
+Two-step results
+-------------------------------------------------------------------------------
+       lso2_c |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+       lso2_c |
+          L1. |   .0660938   .0292397     2.26   0.024     .0087851    .1234026
+              |
+       lfdi_c |   .2459884   .0263441     9.34   0.000     .1943548     .297622
+      lland_c |   .2600444   .0453317     5.74   0.000     .1711959     .348893
+llaborinsec_c |   .1356208   .1336682     1.01   0.310    -.1263641    .3976058
+    lsecgrp_c |   -8.54326   3.101124    -2.75   0.006    -14.62135    -2.46517
+       lgov_c |  -.0196801   .2214384    -0.09   0.929    -.4536914    .4143311
+  ldelivery_c |   .0053907    .011154     0.48   0.629    -.0164708    .0272522
+      lwage_c |   -.118194   .1987078    -0.59   0.552    -.5076542    .2712662
+      seaside |   .8870821   .2239543     3.96   0.000     .4481398    1.326024
+         vice |  -.0786289   .5146184    -0.15   0.879    -1.087263    .9300047
+         fine |  -357.9973   81.13809    -4.41   0.000     -517.025   -198.9695
+    finedfirm |   10.25554   2.632262     3.90   0.000     5.096397    15.41468
+        year2 |  -.0012154   .0640873    -0.02   0.985    -.1268242    .1243934
+        year3 |   -.065741   .0393119    -1.67   0.094    -.1427909    .0113089
+        year5 |   -.025491   .0320461    -0.80   0.426    -.0883001    .0373182
+        year6 |  -.3978121   .0684716    -5.81   0.000    -.5320139   -.2636103
+        year7 |  -.2048742   .0789725    -2.59   0.009    -.3596574    -.050091
+        year8 |    -3.0725   1.773336    -1.73   0.083    -6.548175    .4031746
+        _cons |   4.961243   2.470781     2.01   0.045     .1186019    9.803884
+-------------------------------------------------------------------------------
+Warning: gmm two-step standard errors are biased; robust standard 
+         errors are recommended.
+Instruments for differenced equation
+        GMM-type: L(2/.).lso2_c L(2/.).lfdi_c L(2/.).lland_c
+        Standard: D.llaborinsec_c D.lsecgrp_c D.lgov_c D.ldelivery_c
+                  D.lwage_c D.fine D.finedfirm D.year2 D.year3 D.year4
+                  D.year5 D.year6 D.year7 D.year8
+Instruments for level equation
+        GMM-type: LD.lso2_c LD.lfdi_c LD.lland_c
+        Standard: _cons
+
+.  est store dycs_2endog
+
+.  estat abond 
+
+Arellano-Bond test for zero autocorrelation in first-differenced errors
+  +-----------------------+
+  |Order |  z     Prob > z|
+  |------+----------------|
+  |   1  |-1.6952  0.0900 |
+  |   2  |-1.3181  0.1875 |
+  +-----------------------+
+   H0: no autocorrelation 
+
+.  estat sargan
+Sargan test of overidentifying restrictions
+        H0: overidentifying restrictions are valid
+
+        chi2(56)     =  46.74218
+        Prob > chi2  =    0.8063
+
+.    outreg2 using data1,excel append ctitle ("lso2_c") drop(year1-year8)e(ar1 ar1p ar2 ar2p sargan sarganp hansen hansenp N)  noobs bdec(3) 
+> sdec(3)
+check eret list for the existence of e(ar1)
+check eret list for the existence of e(ar1p)
+check eret list for the existence of e(ar2)
+check eret list for the existence of e(ar2p)
+check eret list for the existence of e(sarganp)
+check eret list for the existence of e(hansen)
+check eret list for the existence of e(hansenp)
+data1.xml
+dir : seeout
+
+.   
+. 
+.    
+. 
+end of do-file
+
+. do "C:\stata\final2\STD01000000.tmp"
+
+.    
+.  
+.    local xx " llaborinsec_c  lsecgrp_c lgov_c ldelivery_c lwage_c seaside vice fine finedfirm year1-year8"
+
+. xtdpdsys lpso2_c  `xx', endog(lfdi_c lland_c) twostep
+note: seaside dropped from div() because of collinearity
+note: vice dropped from div() because of collinearity
+note: year1 dropped from div() because of collinearity
+note: year1 dropped because of collinearity
+note: year8 dropped because of collinearity
+
+System dynamic panel-data estimation            Number of obs     =        780
+Group variable: id                              Number of groups  =        223
+Time variable: year
+                                                Obs per group:
+                                                              min =          1
+                                                              avg =   3.497758
+                                                              max =          6
+
+Number of instruments =     75                  Wald chi2(18)     =    3022.98
+                                                Prob > chi2       =     0.0000
+Two-step results
+-------------------------------------------------------------------------------
+      lpso2_c |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+      lpso2_c |
+          L1. |   .0314796   .0285177     1.10   0.270    -.0244142    .0873733
+              |
+       lfdi_c |   .2597096   .0274275     9.47   0.000     .2059526    .3134665
+      lland_c |   .0918132   .0472442     1.94   0.052    -.0007838    .1844102
+llaborinsec_c |   .0863691   .0827952     1.04   0.297    -.0759065    .2486448
+    lsecgrp_c |  -12.67426   2.899436    -4.37   0.000    -18.35705   -6.991474
+       lgov_c |   .3954124   .2294186     1.72   0.085    -.0542397    .8450645
+  ldelivery_c |   .0051118   .0113693     0.45   0.653    -.0171715    .0273952
+      lwage_c |  -.1242767   .1736608    -0.72   0.474    -.4646456    .2160922
+      seaside |   .7749502   .1783291     4.35   0.000     .4254316    1.124469
+         vice |  -1.155082   .4468718    -2.58   0.010    -2.030935   -.2792297
+         fine |  -369.6098   71.52402    -5.17   0.000    -509.7943   -229.4253
+    finedfirm |   13.28115   2.950415     4.50   0.000     7.498439    19.06385
+        year2 |   4.215842   1.841114     2.29   0.022     .6073257    7.824359
+        year3 |   4.139173   1.849553     2.24   0.025     .5141159     7.76423
+        year4 |   4.171962   1.843903     2.26   0.024      .557979    7.785944
+        year5 |   4.103616   1.845072     2.22   0.026     .4873412     7.71989
+        year6 |   3.805919   1.844402     2.06   0.039     .1909578     7.42088
+        year7 |   4.022115   1.859978     2.16   0.031     .3766254    7.667604
+        _cons |   2.045061   2.551813     0.80   0.423      -2.9564    7.046523
+-------------------------------------------------------------------------------
+Warning: gmm two-step standard errors are biased; robust standard 
+         errors are recommended.
+Instruments for differenced equation
+        GMM-type: L(2/.).lpso2_c L(2/.).lfdi_c L(2/.).lland_c
+        Standard: D.llaborinsec_c D.lsecgrp_c D.lgov_c D.ldelivery_c
+                  D.lwage_c D.fine D.finedfirm D.year2 D.year3 D.year4
+                  D.year5 D.year6 D.year7 D.year8
+Instruments for level equation
+        GMM-type: LD.lpso2_c LD.lfdi_c LD.lland_c
+        Standard: _cons
+
+.  est store dycs_2endog
+
+.  estat abond 
+
+Arellano-Bond test for zero autocorrelation in first-differenced errors
+  +-----------------------+
+  |Order |  z     Prob > z|
+  |------+----------------|
+  |   1  |-1.5344  0.1249 |
+  |   2  |-.66627  0.5052 |
+  +-----------------------+
+   H0: no autocorrelation 
+
+.  estat sargan
+Sargan test of overidentifying restrictions
+        H0: overidentifying restrictions are valid
+
+        chi2(56)     =   52.2198
+        Prob > chi2  =    0.6187
+
+.    outreg2 using data1,excel append ctitle ("lpso2_c") drop(year1-year8)e(ar1 ar1p ar2 ar2p sargan sarganp hansen hansenp N)  noobs bdec(3)
+>  sdec(3)
+check eret list for the existence of e(ar1)
+check eret list for the existence of e(ar1p)
+check eret list for the existence of e(ar2)
+check eret list for the existence of e(ar2p)
+check eret list for the existence of e(sarganp)
+check eret list for the existence of e(hansen)
+check eret list for the existence of e(hansenp)
+data1.xml
+dir : seeout
+
+.   
+.    local xx " llaborinsec_c  lsecgrp_c lgov_c ldelivery_c lwage_c seaside vice fine finedfirm year1-year8"
+
+. xtdpdsys ldso2_c  `xx', endog(lfdi_c ) twostep
+note: seaside dropped from div() because of collinearity
+note: vice dropped from div() because of collinearity
+note: year1 dropped from div() because of collinearity
+note: year1 dropped because of collinearity
+note: year8 dropped because of collinearity
+
+System dynamic panel-data estimation            Number of obs     =        780
+Group variable: id                              Number of groups  =        223
+Time variable: year
+                                                Obs per group:
+                                                              min =          1
+                                                              avg =   3.497758
+                                                              max =          6
+
+Number of instruments =     55                  Wald chi2(17)     =    1579.59
+                                                Prob > chi2       =     0.0000
+Two-step results
+-------------------------------------------------------------------------------
+      ldso2_c |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+      ldso2_c |
+          L1. |  -.2114067   .0680872    -3.10   0.002    -.3448552   -.0779582
+              |
+       lfdi_c |   .2187236   .0409323     5.34   0.000     .1384978    .2989493
+llaborinsec_c |   .0021542   .1867435     0.01   0.991    -.3638563    .3681647
+    lsecgrp_c |  -5.360677    6.36365    -0.84   0.400     -17.8332    7.111848
+       lgov_c |  -.6758351    .541226    -1.25   0.212    -1.736619    .3849484
+  ldelivery_c |    .014344   .0136704     1.05   0.294    -.0124495    .0411375
+      lwage_c |   .3142434   .3914963     0.80   0.422    -.4530753    1.081562
+      seaside |  -.2637064   .7820162    -0.34   0.736     -1.79643    1.269017
+         vice |   1.703786    1.47622     1.15   0.248    -1.189552    4.597124
+         fine |   751.6214   289.1853     2.60   0.009     184.8286    1318.414
+    finedfirm |   33.91047   8.029201     4.22   0.000     18.17353    49.64741
+        year2 |  -2.396844   4.195669    -0.57   0.568     -10.6202    5.826516
+        year3 |  -2.439775   4.194055    -0.58   0.561    -10.65997    5.780422
+        year4 |  -2.479997   4.167695    -0.60   0.552    -10.64853    5.688536
+        year5 |  -2.577545   4.161641    -0.62   0.536    -10.73421    5.579122
+        year6 |  -2.388859   4.183478    -0.57   0.568    -10.58833    5.810608
+        year7 |  -2.245105   4.179797    -0.54   0.591    -10.43736    5.947147
+        _cons |   12.21534   6.488876     1.88   0.060    -.5026269     24.9333
+-------------------------------------------------------------------------------
+Warning: gmm two-step standard errors are biased; robust standard 
+         errors are recommended.
+Instruments for differenced equation
+        GMM-type: L(2/.).ldso2_c L(2/.).lfdi_c
+        Standard: D.llaborinsec_c D.lsecgrp_c D.lgov_c D.ldelivery_c
+                  D.lwage_c D.fine D.finedfirm D.year2 D.year3 D.year4
+                  D.year5 D.year6 D.year7 D.year8
+Instruments for level equation
+        GMM-type: LD.ldso2_c LD.lfdi_c
+        Standard: _cons
+
+.  est store dycs_2endog
+
+.  estat abond 
+
+Arellano-Bond test for zero autocorrelation in first-differenced errors
+  +-----------------------+
+  |Order |  z     Prob > z|
+  |------+----------------|
+  |   1  |-2.5473  0.0109 |
+  |   2  | 1.2632  0.2065 |
+  +-----------------------+
+   H0: no autocorrelation 
+
+.  estat sargan
+Sargan test of overidentifying restrictions
+        H0: overidentifying restrictions are valid
+
+        chi2(37)     =  40.89443
+        Prob > chi2  =    0.3034
+
+.    outreg2 using data1,excel append ctitle ("ldso2_c") drop(year1-year8)e(ar1 ar1p ar2 ar2p sargan sarganp hansen hansenp N)  noobs bdec(3)
+>  sdec(3)
+check eret list for the existence of e(ar1)
+check eret list for the existence of e(ar1p)
+check eret list for the existence of e(ar2)
+check eret list for the existence of e(ar2p)
+check eret list for the existence of e(sarganp)
+check eret list for the existence of e(hansen)
+check eret list for the existence of e(hansenp)
+data1.xml
+dir : seeout
+
+.   
+. 
+end of do-file
+
+. do "C:\stata\final2\STD01000000.tmp"
+
+.    local xx "  land_b lgov_b  lsecgrp_b ldelivery_b lwage_b seaside vice lfine  year1-year8"
+
+. xtdpdsys lpso2_b  `xx', endog(ldomestic_b llaborinsec_b lgov_b ) twostep
+note: seaside dropped from div() because of collinearity
+note: vice dropped from div() because of collinearity
+note: year1 dropped from div() because of collinearity
+note: lgov_b dropped because of collinearity
+note: year1 dropped because of collinearity
+note: year4 dropped because of collinearity
+
+System dynamic panel-data estimation            Number of obs     =        780
+Group variable: id                              Number of groups  =        223
+Time variable: year
+                                                Obs per group:
+                                                              min =          1
+                                                              avg =   3.497758
+                                                              max =          6
+
+Number of instruments =     94                  Wald chi2(17)     =     306.59
+                                                Prob > chi2       =     0.0000
+Two-step results
+-------------------------------------------------------------------------------
+      lpso2_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+      lpso2_b |
+          L1. |   .1062306   .0551521     1.93   0.054    -.0018655    .2143267
+              |
+  ldomestic_b |  -.0685099   .1351574    -0.51   0.612    -.3334136    .1963938
+llaborinsec_b |  -.5539788   .2301654    -2.41   0.016    -1.005095   -.1028629
+       land_b |   .0000288   .0000174     1.65   0.099    -5.42e-06    .0000629
+       lgov_b |   .8526635   .3641146     2.34   0.019      .139012    1.566315
+    lsecgrp_b |    .187324   .0873071     2.15   0.032     .0162052    .3584427
+  ldelivery_b |   .0345935   .0212185     1.63   0.103     -.006994     .076181
+      lwage_b |   .0743715   .2173366     0.34   0.732    -.3516003    .5003434
+      seaside |   3.057115   1.126843     2.71   0.007     .8485435    5.265686
+         vice |   .5567368    1.18495     0.47   0.638    -1.765722    2.879195
+        lfine |  -.1096752   .0678379    -1.62   0.106     -.242635    .0232845
+        year2 |  -.3888954   .0899018    -4.33   0.000    -.5650998    -.212691
+        year3 |  -.3771547   .0541144    -6.97   0.000     -.483217   -.2710924
+        year5 |  -.0393231    .033707    -1.17   0.243    -.1053876    .0267414
+        year6 |   -.364774   .1037036    -3.52   0.000    -.5680294   -.1615186
+        year7 |  -.1573602   .0936277    -1.68   0.093    -.3408671    .0261467
+        year8 |  -8.218417   2.573634    -3.19   0.001    -13.26265   -3.174187
+        _cons |   9.463496   2.954968     3.20   0.001     3.671865    15.25513
+-------------------------------------------------------------------------------
+Warning: gmm two-step standard errors are biased; robust standard 
+         errors are recommended.
+Instruments for differenced equation
+        GMM-type: L(2/.).lpso2_b L(2/.).ldomestic_b L(2/.).llaborinsec_b
+                  L(2/.).lgov_b
+        Standard: D.land_b D.lgov_b D.lsecgrp_b D.ldelivery_b D.lwage_b
+                  D.lfine D.year2 D.year3 D.year4 D.year5 D.year6 D.year7
+                  D.year8
+Instruments for level equation
+        GMM-type: LD.lpso2_b LD.ldomestic_b LD.llaborinsec_b LD.lgov_b
+        Standard: _cons
+
+.  est store dycs_2endog
+
+.  estat abond 
+
+Arellano-Bond test for zero autocorrelation in first-differenced errors
+  +-----------------------+
+  |Order |  z     Prob > z|
+  |------+----------------|
+  |   1  |-2.6375  0.0084 |
+  |   2  |-1.5565  0.1196 |
+  +-----------------------+
+   H0: no autocorrelation 
+
+.  estat sargan
+Sargan test of overidentifying restrictions
+        H0: overidentifying restrictions are valid
+
+        chi2(76)     =  57.42132
+        Prob > chi2  =    0.9447
+
+. 
+end of do-file
+
+. do "C:\stata\final2\STD01000000.tmp"
+
+. 
+.   local xx "   lgov_b  lsecgrp_b ldelivery_b lwage_b seaside vice lfine  year1-year8"
+
+. xtdpdsys ldso2_b  `xx', endog(ldomestic_b  llaborinsec_b lgov_b ) twostep
+note: seaside dropped from div() because of collinearity
+note: vice dropped from div() because of collinearity
+note: year8 dropped from div() because of collinearity
+note: lgov_b dropped because of collinearity
+note: year1 dropped because of collinearity
+note: year4 dropped because of collinearity
+
+System dynamic panel-data estimation            Number of obs     =        780
+Group variable: id                              Number of groups  =        223
+Time variable: year
+                                                Obs per group:
+                                                              min =          1
+                                                              avg =   3.497758
+                                                              max =          6
+
+Number of instruments =     93                  Wald chi2(16)     =     299.48
+                                                Prob > chi2       =     0.0000
+Two-step results
+-------------------------------------------------------------------------------
+      ldso2_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+      ldso2_b |
+          L1. |  -.2362841   .0402821    -5.87   0.000    -.3152356   -.1573326
+              |
+  ldomestic_b |   .4194731   .2378065     1.76   0.078     -.046619    .8855653
+llaborinsec_b |  -3.209785   .3714928    -8.64   0.000    -3.937898   -2.481673
+       lgov_b |  -.9556713   .3939591    -2.43   0.015    -1.727817   -.1835257
+    lsecgrp_b |  -.1004748   .1760278    -0.57   0.568    -.4454829    .2445333
+  ldelivery_b |   .0124964   .0289462     0.43   0.666    -.0442371      .06923
+      lwage_b |    .846996   .3524422     2.40   0.016     .1562219     1.53777
+      seaside |    4.00405   1.166409     3.43   0.001      1.71793     6.29017
+         vice |   .2720422   1.491541     0.18   0.855    -2.651324    3.195408
+        lfine |  -.3959253   .1361215    -2.91   0.004    -.6627186    -.129132
+        year2 |   -.139209   .1109297    -1.25   0.210    -.3566272    .0782092
+        year3 |  -.2540496   .0603378    -4.21   0.000    -.3723095   -.1357897
+        year5 |   -.071166   .0454741    -1.56   0.118    -.1602936    .0179616
+        year6 |  -.4119057   .1743117    -2.36   0.018    -.7535503   -.0702611
+        year7 |  -.3274726   .1520388    -2.15   0.031    -.6254632    -.029482
+        year8 |   8.222079   2.621907     3.14   0.002     3.083235    13.36092
+        _cons |   16.46236   4.244977     3.88   0.000     8.142354    24.78236
+-------------------------------------------------------------------------------
+Warning: gmm two-step standard errors are biased; robust standard 
+         errors are recommended.
+Instruments for differenced equation
+        GMM-type: L(2/.).ldso2_b L(2/.).ldomestic_b L(2/.).llaborinsec_b
+                  L(2/.).lgov_b
+        Standard: D.lgov_b D.lsecgrp_b D.ldelivery_b D.lwage_b D.lfine
+                  D.year1 D.year2 D.year3 D.year4 D.year5 D.year6 D.year7
+Instruments for level equation
+        GMM-type: LD.ldso2_b LD.ldomestic_b LD.llaborinsec_b LD.lgov_b
+        Standard: _cons
+
+.  est store dycs_2endog
+
+.  estat abond 
+
+Arellano-Bond test for zero autocorrelation in first-differenced errors
+  +-----------------------+
+  |Order |  z     Prob > z|
+  |------+----------------|
+  |   1  |-2.7109  0.0067 |
+  |   2  |-.40078  0.6886 |
+  +-----------------------+
+   H0: no autocorrelation 
+
+.  estat sargan
+Sargan test of overidentifying restrictions
+        H0: overidentifying restrictions are valid
+
+        chi2(76)     =  54.84422
+        Prob > chi2  =    0.9680
+
+. 
+end of do-file
+
+. do "C:\stata\final2\STD01000000.tmp"
+
+. 
+.  local xx " lpopu_b  lgov_b llaborinsec_b lsecgrp_b ldelivery_b lwage_b seaside vice lfine  year1-year8"
+
+. xtdpdsys lso2_b  `xx', endog(ldomestic_b lpopu_b land_b lgov_b ) twostep
+note: seaside dropped from div() because of collinearity
+note: vice dropped from div() because of collinearity
+note: year8 dropped from div() because of collinearity
+note: lpopu_b dropped because of collinearity
+note: lgov_b dropped because of collinearity
+note: year1 dropped because of collinearity
+note: year4 dropped because of collinearity
+
+System dynamic panel-data estimation            Number of obs     =        780
+Group variable: id                              Number of groups  =        223
+Time variable: year
+                                                Obs per group:
+                                                              min =          1
+                                                              avg =   3.497758
+                                                              max =          6
+
+Number of instruments =    115                  Wald chi2(18)     =    6098.44
+                                                Prob > chi2       =     0.0000
+Two-step results
+-------------------------------------------------------------------------------
+       lso2_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+       lso2_b |
+          L1. |  -.2939067   .0457665    -6.42   0.000    -.3836073   -.2042062
+              |
+  ldomestic_b |   .6004708   .1531148     3.92   0.000     .3003713    .9005704
+      lpopu_b |  -.1581166   .1885323    -0.84   0.402    -.5276331    .2113999
+       land_b |   .0002063   .0000326     6.32   0.000     .0001424    .0002703
+       lgov_b |   .4687658     .35976     1.30   0.193    -.2363508    1.173882
+llaborinsec_b |   .1609751   .1286897     1.25   0.211    -.0912521    .4132023
+    lsecgrp_b |  -.1192755   .1285844    -0.93   0.354    -.3712963    .1327454
+  ldelivery_b |   .0511802   .0181674     2.82   0.005     .0155728    .0867876
+      lwage_b |   -.040037    .259807    -0.15   0.878    -.5492494    .4691753
+      seaside |    2.15333   .3405415     6.32   0.000     1.485881    2.820779
+         vice |  -.9512677   .4289807    -2.22   0.027    -1.792054   -.1104809
+        lfine |  -.4547718    .073433    -6.19   0.000    -.5986978   -.3108457
+        year2 |    .028351   .0891621     0.32   0.751    -.1464034    .2031055
+        year3 |   -.038424   .0399187    -0.96   0.336    -.1166632    .0398152
+        year5 |   .0275205   .0400644     0.69   0.492    -.0510042    .1060453
+        year6 |  -.4656872   .1073464    -4.34   0.000    -.6760823   -.2552922
+        year7 |  -.1747295   .1076224    -1.62   0.104    -.3856656    .0362067
+        year8 |   -11.7466   3.300307    -3.56   0.000    -18.21508   -5.278119
+        _cons |   3.677244   3.493068     1.05   0.292    -3.169044    10.52353
+-------------------------------------------------------------------------------
+Warning: gmm two-step standard errors are biased; robust standard 
+         errors are recommended.
+Instruments for differenced equation
+        GMM-type: L(2/.).lso2_b L(2/.).ldomestic_b L(2/.).lpopu_b
+                  L(2/.).land_b L(2/.).lgov_b
+        Standard: D.lpopu_b D.lgov_b D.llaborinsec_b D.lsecgrp_b
+                  D.ldelivery_b D.lwage_b D.lfine D.year1 D.year2 D.year3
+                  D.year4 D.year5 D.year6 D.year7
+Instruments for level equation
+        GMM-type: LD.lso2_b LD.ldomestic_b LD.lpopu_b LD.land_b LD.lgov_b
+        Standard: _cons
+
+.  est store dycs_2endog
+
+.  estat abond 
+
+Arellano-Bond test for zero autocorrelation in first-differenced errors
+  +-----------------------+
+  |Order |  z     Prob > z|
+  |------+----------------|
+  |   1  | -2.679  0.0074 |
+  |   2  | .26781  0.7888 |
+  +-----------------------+
+   H0: no autocorrelation 
+
+.  estat sargan
+Sargan test of overidentifying restrictions
+        H0: overidentifying restrictions are valid
+
+        chi2(96)     =  60.20323
+        Prob > chi2  =    0.9984
+
+. 
+end of do-file
+
+. do "C:\stata\final2\STD01000000.tmp"
+
+.    local xx "  land_b lgov_b  lsecgrp_b ldelivery_b lwage_b seaside vice lfine  year1-year8"
+
+. xtdpdsys lpso2_b  `xx', endog(ldomestic_b llaborinsec_b lgov_b ) twostep
+note: seaside dropped from div() because of collinearity
+note: vice dropped from div() because of collinearity
+note: year1 dropped from div() because of collinearity
+note: lgov_b dropped because of collinearity
+note: year1 dropped because of collinearity
+note: year4 dropped because of collinearity
+
+System dynamic panel-data estimation            Number of obs     =        780
+Group variable: id                              Number of groups  =        223
+Time variable: year
+                                                Obs per group:
+                                                              min =          1
+                                                              avg =   3.497758
+                                                              max =          6
+
+Number of instruments =     94                  Wald chi2(17)     =     306.59
+                                                Prob > chi2       =     0.0000
+Two-step results
+-------------------------------------------------------------------------------
+      lpso2_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+      lpso2_b |
+          L1. |   .1062306   .0551521     1.93   0.054    -.0018655    .2143267
+              |
+  ldomestic_b |  -.0685099   .1351574    -0.51   0.612    -.3334136    .1963938
+llaborinsec_b |  -.5539788   .2301654    -2.41   0.016    -1.005095   -.1028629
+       land_b |   .0000288   .0000174     1.65   0.099    -5.42e-06    .0000629
+       lgov_b |   .8526635   .3641146     2.34   0.019      .139012    1.566315
+    lsecgrp_b |    .187324   .0873071     2.15   0.032     .0162052    .3584427
+  ldelivery_b |   .0345935   .0212185     1.63   0.103     -.006994     .076181
+      lwage_b |   .0743715   .2173366     0.34   0.732    -.3516003    .5003434
+      seaside |   3.057115   1.126843     2.71   0.007     .8485435    5.265686
+         vice |   .5567368    1.18495     0.47   0.638    -1.765722    2.879195
+        lfine |  -.1096752   .0678379    -1.62   0.106     -.242635    .0232845
+        year2 |  -.3888954   .0899018    -4.33   0.000    -.5650998    -.212691
+        year3 |  -.3771547   .0541144    -6.97   0.000     -.483217   -.2710924
+        year5 |  -.0393231    .033707    -1.17   0.243    -.1053876    .0267414
+        year6 |   -.364774   .1037036    -3.52   0.000    -.5680294   -.1615186
+        year7 |  -.1573602   .0936277    -1.68   0.093    -.3408671    .0261467
+        year8 |  -8.218417   2.573634    -3.19   0.001    -13.26265   -3.174187
+        _cons |   9.463496   2.954968     3.20   0.001     3.671865    15.25513
+-------------------------------------------------------------------------------
+Warning: gmm two-step standard errors are biased; robust standard 
+         errors are recommended.
+Instruments for differenced equation
+        GMM-type: L(2/.).lpso2_b L(2/.).ldomestic_b L(2/.).llaborinsec_b
+                  L(2/.).lgov_b
+        Standard: D.land_b D.lgov_b D.lsecgrp_b D.ldelivery_b D.lwage_b
+                  D.lfine D.year2 D.year3 D.year4 D.year5 D.year6 D.year7
+                  D.year8
+Instruments for level equation
+        GMM-type: LD.lpso2_b LD.ldomestic_b LD.llaborinsec_b LD.lgov_b
+        Standard: _cons
+
+.  est store dycs_2endog
+
+.  estat abond 
+
+Arellano-Bond test for zero autocorrelation in first-differenced errors
+  +-----------------------+
+  |Order |  z     Prob > z|
+  |------+----------------|
+  |   1  |-2.6375  0.0084 |
+  |   2  |-1.5565  0.1196 |
+  +-----------------------+
+   H0: no autocorrelation 
+
+.  estat sargan
+Sargan test of overidentifying restrictions
+        H0: overidentifying restrictions are valid
+
+        chi2(76)     =  57.42132
+        Prob > chi2  =    0.9447
+
+. 
+end of do-file
+
+. do "C:\stata\final2\STD01000000.tmp"
+
+. local xx " lpopu_c  lsecgrp_c llaborinsec_c ldelivery_c lwage_c seaside vice lfine year2-year8"
+
+. xtdpdsys lso2_c  `xx',endog(ldomestic_c lland_c lgov_c ) twostep
+note: seaside dropped from div() because of collinearity
+note: vice dropped from div() because of collinearity
+note: year8 dropped because of collinearity
+
+System dynamic panel-data estimation            Number of obs     =        780
+Group variable: id                              Number of groups  =        223
+Time variable: year
+                                                Obs per group:
+                                                              min =          1
+                                                              avg =   3.497758
+                                                              max =          6
+
+Number of instruments =     94                  Wald chi2(18)     =    3277.89
+                                                Prob > chi2       =     0.0000
+Two-step results
+-------------------------------------------------------------------------------
+       lso2_c |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+       lso2_c |
+          L1. |    .055757   .0293333     1.90   0.057    -.0017352    .1132492
+              |
+  ldomestic_c |     .41019   .1110245     3.69   0.000     .1925861    .6277939
+      lland_c |   .2434194   .0443454     5.49   0.000      .156504    .3303347
+       lgov_c |    1.20897   .3493517     3.46   0.001     .5242532    1.893687
+      lpopu_c |  -1.082642   .2216941    -4.88   0.000    -1.517154   -.6481293
+    lsecgrp_c |  -12.10047   2.789377    -4.34   0.000    -17.56754   -6.633387
+llaborinsec_c |  -.5516882   .1330339    -4.15   0.000    -.8124298   -.2909466
+  ldelivery_c |   .0066111   .0101296     0.65   0.514    -.0132426    .0264647
+      lwage_c |  -.7330345     .18993    -3.86   0.000     -1.10529   -.3607786
+      seaside |   2.005376   .4540202     4.42   0.000     1.115513    2.895239
+         vice |   .0638032   .5203719     0.12   0.902    -.9561071    1.083713
+        lfine |  -.0780737   .0516327    -1.51   0.131    -.1792719    .0231245
+        year2 |   12.02835     2.6539     4.53   0.000     6.826801     17.2299
+        year3 |   11.96949   2.669652     4.48   0.000     6.737065    17.20191
+        year4 |   12.23849   2.671372     4.58   0.000       7.0027    17.47429
+        year5 |   12.10774   2.664807     4.54   0.000     6.884811    17.33066
+        year6 |   11.75232   2.668466     4.40   0.000     6.522223    16.98242
+        year7 |   12.01714   2.672141     4.50   0.000     6.779845    17.25444
+        _cons |   4.013948   3.165125     1.27   0.205    -2.189583    10.21748
+-------------------------------------------------------------------------------
+Warning: gmm two-step standard errors are biased; robust standard 
+         errors are recommended.
+Instruments for differenced equation
+        GMM-type: L(2/.).lso2_c L(2/.).ldomestic_c L(2/.).lland_c
+                  L(2/.).lgov_c
+        Standard: D.lpopu_c D.lsecgrp_c D.llaborinsec_c D.ldelivery_c
+                  D.lwage_c D.lfine D.year2 D.year3 D.year4 D.year5 D.year6
+                  D.year7 D.year8
+Instruments for level equation
+        GMM-type: LD.lso2_c LD.ldomestic_c LD.lland_c LD.lgov_c
+        Standard: _cons
+
+. est store dycs_2endog
+
+. estat abond 
+
+Arellano-Bond test for zero autocorrelation in first-differenced errors
+  +-----------------------+
+  |Order |  z     Prob > z|
+  |------+----------------|
+  |   1  |-2.6001  0.0093 |
+  |   2  |-1.4725  0.1409 |
+  +-----------------------+
+   H0: no autocorrelation 
+
+. estat sargan
+Sargan test of overidentifying restrictions
+        H0: overidentifying restrictions are valid
+
+        chi2(75)     =  63.25323
+        Prob > chi2  =    0.8313
+
+. 
+end of do-file
+
+. do "C:\stata\final2\STD01000000.tmp"
+
+.   
+.   local xx "  lsecgrp_c llaborinsec_c ldelivery_c lwage_c seaside vice lfine year2-year8"
+
+. xtdpdsys lpso2_c  `xx',endog(ldomestic_c lland_c lgov_c ) twostep
+note: seaside dropped from div() because of collinearity
+note: vice dropped from div() because of collinearity
+note: year8 dropped because of collinearity
+
+System dynamic panel-data estimation            Number of obs     =        780
+Group variable: id                              Number of groups  =        223
+Time variable: year
+                                                Obs per group:
+                                                              min =          1
+                                                              avg =   3.497758
+                                                              max =          6
+
+Number of instruments =     93                  Wald chi2(17)     =    4857.39
+                                                Prob > chi2       =     0.0000
+Two-step results
+-------------------------------------------------------------------------------
+      lpso2_c |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+      lpso2_c |
+          L1. |   .0350593   .0300516     1.17   0.243    -.0238407    .0939593
+              |
+  ldomestic_c |  -.0218996   .1541991    -0.14   0.887    -.3241243     .280325
+      lland_c |    .050873   .0473492     1.07   0.283    -.0419296    .1436757
+       lgov_c |   .8488634   .1943814     4.37   0.000     .4678829    1.229844
+    lsecgrp_c |  -11.46688   2.952497    -3.88   0.000    -17.25367   -5.680089
+llaborinsec_c |  -.9427185   .0915907   -10.29   0.000    -1.122233   -.7632041
+  ldelivery_c |   .0121606   .0098322     1.24   0.216    -.0071102    .0314313
+      lwage_c |  -.2471437   .1719695    -1.44   0.151    -.5841978    .0899104
+      seaside |   1.771017   .4451357     3.98   0.000     .8985665    2.643467
+         vice |    .453951   .4527946     1.00   0.316    -.4335101    1.341412
+        lfine |  -.0155453   .0512572    -0.30   0.762    -.1160075     .084917
+        year2 |   7.491008   1.439603     5.20   0.000     4.669439    10.31258
+        year3 |   7.483412   1.453834     5.15   0.000      4.63395    10.33287
+        year4 |   7.841821   1.453993     5.39   0.000     4.992047    10.69159
+        year5 |   7.738576   1.458993     5.30   0.000     4.879003    10.59815
+        year6 |   7.489962    1.48941     5.03   0.000     4.570773    10.40915
+        year7 |   7.672693   1.476842     5.20   0.000     4.778136    10.56725
+        _cons |    7.48307   2.774933     2.70   0.007     2.044302    12.92184
+-------------------------------------------------------------------------------
+Warning: gmm two-step standard errors are biased; robust standard 
+         errors are recommended.
+Instruments for differenced equation
+        GMM-type: L(2/.).lpso2_c L(2/.).ldomestic_c L(2/.).lland_c
+                  L(2/.).lgov_c
+        Standard: D.lsecgrp_c D.llaborinsec_c D.ldelivery_c D.lwage_c D.lfine
+                  D.year2 D.year3 D.year4 D.year5 D.year6 D.year7 D.year8
+Instruments for level equation
+        GMM-type: LD.lpso2_c LD.ldomestic_c LD.lland_c LD.lgov_c
+        Standard: _cons
+
+.  est store dycs_2endog
+
+.  estat abond 
+
+Arellano-Bond test for zero autocorrelation in first-differenced errors
+  +-----------------------+
+  |Order |  z     Prob > z|
+  |------+----------------|
+  |   1  | -2.826  0.0047 |
+  |   2  |-1.5537  0.1202 |
+  +-----------------------+
+   H0: no autocorrelation 
+
+.  estat sargan
+Sargan test of overidentifying restrictions
+        H0: overidentifying restrictions are valid
+
+        chi2(75)     =  60.45316
+        Prob > chi2  =    0.8886
+
+. 
+end of do-file
+
+. do "C:\stata\final2\STD01000000.tmp"
+
+. 
+.     local xx " llaborinsec_c lsecgrp_c  ldelivery_c lwage_c seaside vice lfine year1-year8"
+
+. xtdpdsys lpso2_c  `xx', endog (lHMT_c lland_c lgov_c) twostep
+note: seaside dropped from div() because of collinearity
+note: vice dropped from div() because of collinearity
+note: year1 dropped from div() because of collinearity
+note: year1 dropped because of collinearity
+note: year4 dropped because of collinearity
+
+System dynamic panel-data estimation            Number of obs     =        780
+Group variable: id                              Number of groups  =        223
+Time variable: year
+                                                Obs per group:
+                                                              min =          1
+                                                              avg =   3.497758
+                                                              max =          6
+
+Number of instruments =     93                  Wald chi2(17)     =    5656.44
+                                                Prob > chi2       =     0.0000
+Two-step results
+-------------------------------------------------------------------------------
+      lpso2_c |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+      lpso2_c |
+          L1. |   .0185495   .0261885     0.71   0.479     -.032779     .069878
+              |
+       lHMT_c |   .0413348   .0157503     2.62   0.009     .0104648    .0722048
+      lland_c |   .0529399   .0402818     1.31   0.189     -.026011    .1318907
+       lgov_c |   .7280103   .2111581     3.45   0.001      .314148    1.141873
+llaborinsec_c |  -.3609834   .1106708    -3.26   0.001    -.5778942   -.1440725
+    lsecgrp_c |  -6.155336   3.160807    -1.95   0.051     -12.3504    .0397318
+  ldelivery_c |   .0165669   .0114393     1.45   0.148    -.0058537    .0389876
+      lwage_c |  -.1121524   .1553347    -0.72   0.470    -.4166028    .1922979
+      seaside |     .94651   .1076824     8.79   0.000     .7354564    1.157564
+         vice |    .775052   .4686318     1.65   0.098    -.1434495    1.693553
+        lfine |  -.1077847    .048364    -2.23   0.026    -.2025765   -.0129929
+        year2 |  -.3011212   .0644913    -4.67   0.000    -.4275217   -.1747206
+        year3 |  -.3087175   .0427267    -7.23   0.000    -.3924604   -.2249747
+        year5 |  -.0507785   .0255964    -1.98   0.047    -.1009466   -.0006105
+        year6 |  -.2839256   .0517123    -5.49   0.000    -.3852797   -.1825714
+        year7 |  -.1099469   .0631907    -1.74   0.082    -.2337984    .0139046
+        year8 |  -6.823138   1.641366    -4.16   0.000    -10.04016    -3.60612
+        _cons |   11.41566   1.819491     6.27   0.000     7.849519    14.98179
+-------------------------------------------------------------------------------
+Warning: gmm two-step standard errors are biased; robust standard 
+         errors are recommended.
+Instruments for differenced equation
+        GMM-type: L(2/.).lpso2_c L(2/.).lHMT_c L(2/.).lland_c L(2/.).lgov_c
+        Standard: D.llaborinsec_c D.lsecgrp_c D.ldelivery_c D.lwage_c D.lfine
+                  D.year2 D.year3 D.year4 D.year5 D.year6 D.year7 D.year8
+Instruments for level equation
+        GMM-type: LD.lpso2_c LD.lHMT_c LD.lland_c LD.lgov_c
+        Standard: _cons
+
+.  est store dycs_2endog
+
+.  estat abond 
+
+Arellano-Bond test for zero autocorrelation in first-differenced errors
+  +-----------------------+
+  |Order |  z     Prob > z|
+  |------+----------------|
+  |   1  |-2.2632  0.0236 |
+  |   2  |-.13476  0.8928 |
+  +-----------------------+
+   H0: no autocorrelation 
+
+.  estat sargan
+Sargan test of overidentifying restrictions
+        H0: overidentifying restrictions are valid
+
+        chi2(75)     =  46.29006
+        Prob > chi2  =    0.9963
+
+. 
+end of do-file
+
+. do "C:\stata\final2\STD01000000.tmp"
+
+.     local xx " llaborinsec_c lsecgrp_c lpopu_c ldelivery_c lwage_c seaside vice lfine year1-year8"
+
+. xtdpdsys lpso2_c  `xx', endog (lHMT_c lland_c lgov_c) twostep
+note: seaside dropped from div() because of collinearity
+note: vice dropped from div() because of collinearity
+note: year1 dropped from div() because of collinearity
+note: year1 dropped because of collinearity
+note: year4 dropped because of collinearity
+
+System dynamic panel-data estimation            Number of obs     =        780
+Group variable: id                              Number of groups  =        223
+Time variable: year
+                                                Obs per group:
+                                                              min =          1
+                                                              avg =   3.497758
+                                                              max =          6
+
+Number of instruments =     94                  Wald chi2(18)     =    2572.36
+                                                Prob > chi2       =     0.0000
+Two-step results
+-------------------------------------------------------------------------------
+      lpso2_c |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+      lpso2_c |
+          L1. |   .0748309   .0249479     3.00   0.003     .0259339    .1237279
+              |
+       lHMT_c |   .0480199   .0148845     3.23   0.001     .0188468     .077193
+      lland_c |    .091158   .0267728     3.40   0.001     .0386843    .1436317
+       lgov_c |   1.025176   .2634426     3.89   0.000     .5088381    1.541514
+llaborinsec_c |  -.3141914   .1054229    -2.98   0.003    -.5208164   -.1075663
+    lsecgrp_c |  -9.481302    2.94166    -3.22   0.001    -15.24685   -3.715755
+      lpopu_c |  -.1193058   .1837657    -0.65   0.516      -.47948    .2408684
+  ldelivery_c |   .0290522   .0126755     2.29   0.022     .0042086    .0538958
+      lwage_c |  -.2519618   .1491751    -1.69   0.091    -.5443397    .0404161
+      seaside |   1.068648   .1252906     8.53   0.000     .8230828    1.314213
+         vice |   1.173218   .5076356     2.31   0.021     .1782703    2.168165
+        lfine |   -.108516   .0496577    -2.19   0.029    -.2058434   -.0111886
+        year2 |  -.3071647   .0575862    -5.33   0.000    -.4200315   -.1942979
+        year3 |   -.308067    .036725    -8.39   0.000    -.3800466   -.2360874
+        year5 |   -.025164   .0231751    -1.09   0.278    -.0705863    .0202583
+        year6 |  -.2191981   .0560196    -3.91   0.000    -.3289945   -.1094018
+        year7 |   .0150655   .0580064     0.26   0.795    -.0986249    .1287559
+        year8 |  -8.711088   2.057328    -4.23   0.000    -12.74338     -4.6788
+        _cons |   11.89911   1.814064     6.56   0.000     8.343606    15.45461
+-------------------------------------------------------------------------------
+Warning: gmm two-step standard errors are biased; robust standard 
+         errors are recommended.
+Instruments for differenced equation
+        GMM-type: L(2/.).lpso2_c L(2/.).lHMT_c L(2/.).lland_c L(2/.).lgov_c
+        Standard: D.llaborinsec_c D.lsecgrp_c D.lpopu_c D.ldelivery_c
+                  D.lwage_c D.lfine D.year2 D.year3 D.year4 D.year5 D.year6
+                  D.year7 D.year8
+Instruments for level equation
+        GMM-type: LD.lpso2_c LD.lHMT_c LD.lland_c LD.lgov_c
+        Standard: _cons
+
+.  est store dycs_2endog
+
+.  estat abond 
+
+Arellano-Bond test for zero autocorrelation in first-differenced errors
+  +-----------------------+
+  |Order |  z     Prob > z|
+  |------+----------------|
+  |   1  |-2.3571  0.0184 |
+  |   2  | 1.0385  0.2990 |
+  +-----------------------+
+   H0: no autocorrelation 
+
+.  estat sargan
+Sargan test of overidentifying restrictions
+        H0: overidentifying restrictions are valid
+
+        chi2(75)     =   56.8754
+        Prob > chi2  =    0.9411
+
+. 
+end of do-file
+
+. do "C:\stata\final2\STD01000000.tmp"
+
+.    local xx " llaborinsec_c  lsecgrp_c  ldelivery_c lwage_c seaside vice fine finedfirm year1-year8"
+
+. xtdpdsys lso2_c  `xx', endog(lfdi_c lland_c lgov_c) twostep
+note: seaside dropped from div() because of collinearity
+note: vice dropped from div() because of collinearity
+note: year1 dropped from div() because of collinearity
+note: year1 dropped because of collinearity
+note: year4 dropped because of collinearity
+
+System dynamic panel-data estimation            Number of obs     =        780
+Group variable: id                              Number of groups  =        223
+Time variable: year
+                                                Obs per group:
+                                                              min =          1
+                                                              avg =   3.497758
+                                                              max =          6
+
+Number of instruments =     94                  Wald chi2(18)     =   10565.48
+                                                Prob > chi2       =     0.0000
+Two-step results
+-------------------------------------------------------------------------------
+       lso2_c |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+       lso2_c |
+          L1. |   .1000026   .0285702     3.50   0.000      .044006    .1559992
+              |
+       lfdi_c |   .2437612   .0223113    10.93   0.000     .2000318    .2874906
+      lland_c |   .2739267    .050852     5.39   0.000     .1742587    .3735947
+       lgov_c |  -.0000289   .2293492    -0.00   1.000    -.4495451    .4494873
+llaborinsec_c |  -.0037194   .1273855    -0.03   0.977    -.2533903    .2459515
+    lsecgrp_c |  -12.41493   2.684614    -4.62   0.000    -17.67667   -7.153179
+  ldelivery_c |   .0162518   .0092117     1.76   0.078    -.0018029    .0343064
+      lwage_c |  -.1373349   .1618569    -0.85   0.396    -.4545687    .1798989
+      seaside |   .7346145   .1415004     5.19   0.000     .4572788     1.01195
+         vice |   .3541452   .6430089     0.55   0.582    -.9061291     1.61442
+         fine |  -227.4839   73.52563    -3.09   0.002    -371.5915   -83.37632
+    finedfirm |   8.751468   2.491586     3.51   0.000     3.868049    13.63489
+        year2 |  -.0642748   .0553969    -1.16   0.246    -.1728507    .0443011
+        year3 |  -.1379213   .0333337    -4.14   0.000    -.2032541   -.0725885
+        year5 |  -.0683337   .0208207    -3.28   0.001    -.1091415   -.0275258
+        year6 |  -.3401192   .0607583    -5.60   0.000    -.4592034   -.2210351
+        year7 |  -.0947301   .0718854    -1.32   0.188    -.2356229    .0461628
+        year8 |  -3.176217   1.806199    -1.76   0.079    -6.716302    .3638687
+        _cons |   5.189528   1.833198     2.83   0.005     1.596526     8.78253
+-------------------------------------------------------------------------------
+Warning: gmm two-step standard errors are biased; robust standard 
+         errors are recommended.
+Instruments for differenced equation
+        GMM-type: L(2/.).lso2_c L(2/.).lfdi_c L(2/.).lland_c L(2/.).lgov_c
+        Standard: D.llaborinsec_c D.lsecgrp_c D.ldelivery_c D.lwage_c D.fine
+                  D.finedfirm D.year2 D.year3 D.year4 D.year5 D.year6 D.year7
+                  D.year8
+Instruments for level equation
+        GMM-type: LD.lso2_c LD.lfdi_c LD.lland_c LD.lgov_c
+        Standard: _cons
+
+.  est store dycs_2endog
+
+.  estat abond 
+
+Arellano-Bond test for zero autocorrelation in first-differenced errors
+  +-----------------------+
+  |Order |  z     Prob > z|
+  |------+----------------|
+  |   1  | -1.835  0.0665 |
+  |   2  |-1.6999  0.0891 |
+  +-----------------------+
+   H0: no autocorrelation 
+
+.  estat sargan
+Sargan test of overidentifying restrictions
+        H0: overidentifying restrictions are valid
+
+        chi2(75)     =  55.36814
+        Prob > chi2  =    0.9567
+
+. 
+end of do-file
+
+. do "C:\stata\final2\STD01000000.tmp"
+
+.    local xx " llaborinsec_c  lsecgrp_c lgov_c ldelivery_c lwage_c seaside vice fine finedfirm year1-year8"
+
+. xtdpdsys lso2_c  `xx', endog(lfdi_c lland_c ) twostep
+note: seaside dropped from div() because of collinearity
+note: vice dropped from div() because of collinearity
+note: year1 dropped from div() because of collinearity
+note: year1 dropped because of collinearity
+note: year4 dropped because of collinearity
+
+System dynamic panel-data estimation            Number of obs     =        780
+Group variable: id                              Number of groups  =        223
+Time variable: year
+                                                Obs per group:
+                                                              min =          1
+                                                              avg =   3.497758
+                                                              max =          6
+
+Number of instruments =     75                  Wald chi2(18)     =   15625.13
+                                                Prob > chi2       =     0.0000
+Two-step results
+-------------------------------------------------------------------------------
+       lso2_c |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+       lso2_c |
+          L1. |   .0660938   .0292397     2.26   0.024     .0087851    .1234026
+              |
+       lfdi_c |   .2459884   .0263441     9.34   0.000     .1943548     .297622
+      lland_c |   .2600444   .0453317     5.74   0.000     .1711959     .348893
+llaborinsec_c |   .1356208   .1336682     1.01   0.310    -.1263641    .3976058
+    lsecgrp_c |   -8.54326   3.101124    -2.75   0.006    -14.62135    -2.46517
+       lgov_c |  -.0196801   .2214384    -0.09   0.929    -.4536914    .4143311
+  ldelivery_c |   .0053907    .011154     0.48   0.629    -.0164708    .0272522
+      lwage_c |   -.118194   .1987078    -0.59   0.552    -.5076542    .2712662
+      seaside |   .8870821   .2239543     3.96   0.000     .4481398    1.326024
+         vice |  -.0786289   .5146184    -0.15   0.879    -1.087263    .9300047
+         fine |  -357.9973   81.13809    -4.41   0.000     -517.025   -198.9695
+    finedfirm |   10.25554   2.632262     3.90   0.000     5.096397    15.41468
+        year2 |  -.0012154   .0640873    -0.02   0.985    -.1268242    .1243934
+        year3 |   -.065741   .0393119    -1.67   0.094    -.1427909    .0113089
+        year5 |   -.025491   .0320461    -0.80   0.426    -.0883001    .0373182
+        year6 |  -.3978121   .0684716    -5.81   0.000    -.5320139   -.2636103
+        year7 |  -.2048742   .0789725    -2.59   0.009    -.3596574    -.050091
+        year8 |    -3.0725   1.773336    -1.73   0.083    -6.548175    .4031746
+        _cons |   4.961243   2.470781     2.01   0.045     .1186019    9.803884
+-------------------------------------------------------------------------------
+Warning: gmm two-step standard errors are biased; robust standard 
+         errors are recommended.
+Instruments for differenced equation
+        GMM-type: L(2/.).lso2_c L(2/.).lfdi_c L(2/.).lland_c
+        Standard: D.llaborinsec_c D.lsecgrp_c D.lgov_c D.ldelivery_c
+                  D.lwage_c D.fine D.finedfirm D.year2 D.year3 D.year4
+                  D.year5 D.year6 D.year7 D.year8
+Instruments for level equation
+        GMM-type: LD.lso2_c LD.lfdi_c LD.lland_c
+        Standard: _cons
+
+.  est store dycs_2endog
+
+.  estat abond 
+
+Arellano-Bond test for zero autocorrelation in first-differenced errors
+  +-----------------------+
+  |Order |  z     Prob > z|
+  |------+----------------|
+  |   1  |-1.6952  0.0900 |
+  |   2  |-1.3181  0.1875 |
+  +-----------------------+
+   H0: no autocorrelation 
+
+.  estat sargan
+Sargan test of overidentifying restrictions
+        H0: overidentifying restrictions are valid
+
+        chi2(56)     =  46.74218
+        Prob > chi2  =    0.8063
+
+. 
+end of do-file
+
+. do "C:\stata\final2\STD01000000.tmp"
+
+.  
+.    local xx " llaborinsec_c lpopu_c lsecgrp_c  ldelivery_c lwage_c seaside vice lfine year1-year8"
+
+. xtdpdsys lso2_c  `xx', endog (lHMT_c lland_c lgov_c) twostep
+note: seaside dropped from div() because of collinearity
+note: vice dropped from div() because of collinearity
+note: year1 dropped from div() because of collinearity
+note: year1 dropped because of collinearity
+note: year4 dropped because of collinearity
+
+System dynamic panel-data estimation            Number of obs     =        780
+Group variable: id                              Number of groups  =        223
+Time variable: year
+                                                Obs per group:
+                                                              min =          1
+                                                              avg =   3.497758
+                                                              max =          6
+
+Number of instruments =     94                  Wald chi2(18)     =    1048.26
+                                                Prob > chi2       =     0.0000
+Two-step results
+-------------------------------------------------------------------------------
+       lso2_c |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+       lso2_c |
+          L1. |   .0735426   .0239955     3.06   0.002     .0265122    .1205729
+              |
+       lHMT_c |   .0579917   .0237458     2.44   0.015     .0114507    .1045327
+      lland_c |   .1904487   .0519352     3.67   0.000     .0886575    .2922399
+       lgov_c |   1.169083   .2633178     4.44   0.000     .6529897    1.685177
+llaborinsec_c |  -.0444562   .1186813    -0.37   0.708    -.2770673     .188155
+      lpopu_c |  -.3870533   .1875621    -2.06   0.039    -.7546682   -.0194384
+    lsecgrp_c |  -11.02694    3.11007    -3.55   0.000    -17.12256   -4.931311
+  ldelivery_c |   .0208334   .0111728     1.86   0.062    -.0010649    .0427317
+      lwage_c |   -.318506   .1728021    -1.84   0.065    -.6571919      .02018
+      seaside |   .9533341   .1135309     8.40   0.000     .7308176     1.17585
+         vice |    .834431   .4228678     1.97   0.048     .0056252    1.663237
+        lfine |   .0116247   .0441902     0.26   0.793    -.0749864    .0982359
+        year2 |  -.2545652    .060377    -4.22   0.000     -.372902   -.1362284
+        year3 |  -.2693573   .0382547    -7.04   0.000    -.3443352   -.1943793
+        year5 |  -.0582713   .0258205    -2.26   0.024    -.1088784   -.0076641
+        year6 |  -.2430542   .0614078    -3.96   0.000    -.3634112   -.1226972
+        year7 |  -.0086242   .0703325    -0.12   0.902    -.1464733    .1292249
+        year8 |  -11.83242   2.063409    -5.73   0.000    -15.87663   -7.788213
+        _cons |   11.55884   2.231444     5.18   0.000     7.185293    15.93239
+-------------------------------------------------------------------------------
+Warning: gmm two-step standard errors are biased; robust standard 
+         errors are recommended.
+Instruments for differenced equation
+        GMM-type: L(2/.).lso2_c L(2/.).lHMT_c L(2/.).lland_c L(2/.).lgov_c
+        Standard: D.llaborinsec_c D.lpopu_c D.lsecgrp_c D.ldelivery_c
+                  D.lwage_c D.lfine D.year2 D.year3 D.year4 D.year5 D.year6
+                  D.year7 D.year8
+Instruments for level equation
+        GMM-type: LD.lso2_c LD.lHMT_c LD.lland_c LD.lgov_c
+        Standard: _cons
+
+.  est store dycs_2endog
+
+.  estat abond 
+
+Arellano-Bond test for zero autocorrelation in first-differenced errors
+  +-----------------------+
+  |Order |  z     Prob > z|
+  |------+----------------|
+  |   1  |-2.4975  0.0125 |
+  |   2  |-.91899  0.3581 |
+  +-----------------------+
+   H0: no autocorrelation 
+
+.  estat sargan
+Sargan test of overidentifying restrictions
+        H0: overidentifying restrictions are valid
+
+        chi2(75)     =    57.573
+        Prob > chi2  =    0.9326
+
+.    outreg2 using data1,excel append ctitle ("lso2_b") drop(year1-year8)e(ar1 ar1p ar2 ar2p sargan sarganp hansen hansenp N)  noobs bdec(3) 
+> sdec(3)
+check eret list for the existence of e(ar1)
+check eret list for the existence of e(ar1p)
+check eret list for the existence of e(ar2)
+check eret list for the existence of e(ar2p)
+check eret list for the existence of e(sarganp)
+check eret list for the existence of e(hansen)
+check eret list for the existence of e(hansenp)
+data1.xml
+dir : seeout
+
+. 
+.     local xx " llaborinsec_c lsecgrp_c ldelivery_c lwage_c seaside vice lfine year1-year8"
+
+. xtdpdsys lpso2_c  `xx', endog (lHMT_c lland_c lgov_c) twostep
+note: seaside dropped from div() because of collinearity
+note: vice dropped from div() because of collinearity
+note: year1 dropped from div() because of collinearity
+note: year1 dropped because of collinearity
+note: year4 dropped because of collinearity
+
+System dynamic panel-data estimation            Number of obs     =        780
+Group variable: id                              Number of groups  =        223
+Time variable: year
+                                                Obs per group:
+                                                              min =          1
+                                                              avg =   3.497758
+                                                              max =          6
+
+Number of instruments =     93                  Wald chi2(17)     =    5656.44
+                                                Prob > chi2       =     0.0000
+Two-step results
+-------------------------------------------------------------------------------
+      lpso2_c |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+      lpso2_c |
+          L1. |   .0185495   .0261885     0.71   0.479     -.032779     .069878
+              |
+       lHMT_c |   .0413348   .0157503     2.62   0.009     .0104648    .0722048
+      lland_c |   .0529399   .0402818     1.31   0.189     -.026011    .1318907
+       lgov_c |   .7280103   .2111581     3.45   0.001      .314148    1.141873
+llaborinsec_c |  -.3609834   .1106708    -3.26   0.001    -.5778942   -.1440725
+    lsecgrp_c |  -6.155336   3.160807    -1.95   0.051     -12.3504    .0397318
+  ldelivery_c |   .0165669   .0114393     1.45   0.148    -.0058537    .0389876
+      lwage_c |  -.1121524   .1553347    -0.72   0.470    -.4166028    .1922979
+      seaside |     .94651   .1076824     8.79   0.000     .7354564    1.157564
+         vice |    .775052   .4686318     1.65   0.098    -.1434495    1.693553
+        lfine |  -.1077847    .048364    -2.23   0.026    -.2025765   -.0129929
+        year2 |  -.3011212   .0644913    -4.67   0.000    -.4275217   -.1747206
+        year3 |  -.3087175   .0427267    -7.23   0.000    -.3924604   -.2249747
+        year5 |  -.0507785   .0255964    -1.98   0.047    -.1009466   -.0006105
+        year6 |  -.2839256   .0517123    -5.49   0.000    -.3852797   -.1825714
+        year7 |  -.1099469   .0631907    -1.74   0.082    -.2337984    .0139046
+        year8 |  -6.823138   1.641366    -4.16   0.000    -10.04016    -3.60612
+        _cons |   11.41566   1.819491     6.27   0.000     7.849519    14.98179
+-------------------------------------------------------------------------------
+Warning: gmm two-step standard errors are biased; robust standard 
+         errors are recommended.
+Instruments for differenced equation
+        GMM-type: L(2/.).lpso2_c L(2/.).lHMT_c L(2/.).lland_c L(2/.).lgov_c
+        Standard: D.llaborinsec_c D.lsecgrp_c D.ldelivery_c D.lwage_c D.lfine
+                  D.year2 D.year3 D.year4 D.year5 D.year6 D.year7 D.year8
+Instruments for level equation
+        GMM-type: LD.lpso2_c LD.lHMT_c LD.lland_c LD.lgov_c
+        Standard: _cons
+
+.  est store dycs_2endog
+
+.  estat abond 
+
+Arellano-Bond test for zero autocorrelation in first-differenced errors
+  +-----------------------+
+  |Order |  z     Prob > z|
+  |------+----------------|
+  |   1  |-2.2632  0.0236 |
+  |   2  |-.13476  0.8928 |
+  +-----------------------+
+   H0: no autocorrelation 
+
+.  estat sargan
+Sargan test of overidentifying restrictions
+        H0: overidentifying restrictions are valid
+
+        chi2(75)     =  46.29006
+        Prob > chi2  =    0.9963
+
+.    outreg2 using data2,excel append ctitle ("ldso2_b") drop(year1-year8)e(ar1 ar1p ar2 ar2p sargan sarganp hansen hansenp N)  noobs bdec(3)
+>  sdec(3)
+check eret list for the existence of e(ar1)
+check eret list for the existence of e(ar1p)
+check eret list for the existence of e(ar2)
+check eret list for the existence of e(ar2p)
+check eret list for the existence of e(sarganp)
+check eret list for the existence of e(hansen)
+check eret list for the existence of e(hansenp)
+data2.xml
+dir : seeout
+
+. 
+end of do-file
+
+. save "C:\stata\final2\fincal2new123.dta", replace
+file C:\stata\final2\fincal2new123.dta saved
+
+. save "C:\stata\final2\fincal2new123.dta", replace
+file C:\stata\final2\fincal2new123.dta saved
+
+. exit, clear

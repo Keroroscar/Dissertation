@@ -1,0 +1,3370 @@
+-------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\stata\final data\mylog2.log
+  log type:  text
+ opened on:   8 Jan 2022, 17:30:32
+
+. *System GMM
+. *Arellano and Bond
+. 
+. *1.Assume fdi as independent variable*
+. *1.1 fdi invested*
+. local xx1  " L(0/1).(lso2 gov_a)  secgrp_a pgrp_a wage_a laborinsec_a  delivery  density_a laborval  i.year
+> "
+
+. local gmm1 " L.fdi_a L(0/1).(lso2 gov_a)  secgrp_a pgrp_a wage_a "
+
+. local iv1  "                                             laborinsec_a  delivery  density_a busval i.year"
+
+. xtabond2 fdi_a L.fdi_a `xx1', gmm(`gmm1') iv(`iv1') twostep robust
+Favoring space over speed. To switch, type or click on mata: mata set matafavor speed, perm.
+ivstyle(laborinsec_a delivery density_a busval i.year) invalid.
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "C:\stata\final data\STD02000000.tmp"
+
+. 
+. *1.Assume fdi as independent variable*
+. *1.1 fdi invested*
+. local xx1  " L(0/1).(lso2 gov_a)  secgrp_a pgrp_a wage_a laborinsec_a  delivery  density_a laborval  i.year
+> "
+
+. local gmm1 " L.fdi_a L(0/1).(lso2 gov_a)  secgrp_a pgrp_a wage_a "
+
+. local iv1  "                                             laborinsec_a  delivery  density_a laborval i.year"
+
+. xtabond2 fdi_a L.fdi_a `xx1', gmm(`gmm1') iv(`iv1') twostep robust
+Favoring space over speed. To switch, type or click on mata: mata set matafavor speed, perm.
+Warning: Two-step estimated covariance matrix of moments is singular.
+  Using a generalized inverse to calculate optimal weighting matrix for two-step estimation.
+  Difference-in-Sargan/Hansen statistics may be negative.
+
+Dynamic panel-data estimation, two-step system GMM
+------------------------------------------------------------------------------
+Group variable: id                              Number of obs      =      1441
+Time variable : year                            Number of groups   =       261
+Number of instruments = 238                     Obs per group: min =         1
+Wald chi2(20) =   2181.44                                      avg =      5.52
+Prob > chi2   =     0.000                                      max =         7
+------------------------------------------------------------------------------
+             |              Corrected
+       fdi_a |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       fdi_a |
+         L1. |   .7188422   .0323292    22.24   0.000     .6554781    .7822063
+             |
+        lso2 |
+         --. |    2279303    1021929     2.23   0.026     276358.9     4282247
+         L1. |  -221198.2   657596.1    -0.34   0.737     -1510063     1067666
+             |
+       gov_a |
+         --. |   198.4389   66.38823     2.99   0.003     68.32038    328.5575
+         L1. |   -166.702   61.41561    -2.71   0.007    -287.0743   -46.32958
+             |
+    secgrp_a |  -89008.85   72625.04    -1.23   0.220    -231351.3    53333.61
+      pgrp_a |   57.69608   17.27737     3.34   0.001     23.83306     91.5591
+      wage_a |  -.2864172   .0359996    -7.96   0.000     -.356975   -.2158593
+laborinsec_a |   87758.12   33978.08     2.58   0.010     21162.31    154353.9
+    delivery |   72.84707   37.06753     1.97   0.049     .1960523    145.4981
+   density_a |   25816.34   9077.191     2.84   0.004     8025.372    43607.31
+    laborval |  -519193.8   177038.2    -2.93   0.003    -866182.2   -172205.4
+             |
+        year |
+       2008  |          0  (empty)
+       2009  |  -2.48e+07    7894603    -3.15   0.002    -4.03e+07    -9358158
+       2010  |  -2.40e+07    7722865    -3.11   0.002    -3.92e+07    -8898084
+       2011  |  -1.78e+07    7116761    -2.50   0.012    -3.17e+07    -3835151
+       2012  |  -2.02e+07    7290233    -2.78   0.006    -3.45e+07    -5944777
+       2013  |  -1.46e+07    6815585    -2.14   0.032    -2.80e+07    -1246021
+       2014  |  -2.77e+07    7767865    -3.56   0.000    -4.29e+07   -1.24e+07
+       2015  |  -2.35e+07    7122947    -3.30   0.001    -3.75e+07    -9559207
+             |
+       _cons |          0  (omitted)
+------------------------------------------------------------------------------
+Instruments for first differences equation
+  Standard
+    D.(laborinsec_a delivery density_a laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year)
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    L(1/7).(L.fdi_a lso2 L.lso2 gov_a L.gov_a secgrp_a pgrp_a wage_a)
+Instruments for levels equation
+  Standard
+    laborinsec_a delivery density_a laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year
+    _cons
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    D.(L.fdi_a lso2 L.lso2 gov_a L.gov_a secgrp_a pgrp_a wage_a)
+------------------------------------------------------------------------------
+Arellano-Bond test for AR(1) in first differences: z =  -2.05  Pr > z =  0.040
+Arellano-Bond test for AR(2) in first differences: z =  -1.06  Pr > z =  0.290
+------------------------------------------------------------------------------
+Sargan test of overid. restrictions: chi2(217)  =1191.55  Prob > chi2 =  0.000
+  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2(217)  = 241.90  Prob > chi2 =  0.118
+  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  GMM instruments for levels
+    Hansen test excluding group:     chi2(165)  = 198.40  Prob > chi2 =  0.039
+    Difference (null H = exogenous): chi2(52)   =  43.50  Prob > chi2 =  0.793
+  iv(laborinsec_a delivery density_a laborval 1b.year 2.year 3.year 4.year 5.year 6.year 7.year 8.year)
+    Hansen test excluding group:     chi2(207)  = 228.29  Prob > chi2 =  0.148
+    Difference (null H = exogenous): chi2(10)   =  13.61  Prob > chi2 =  0.192
+
+
+. est store panel1a
+
+. outreg2 panela using data1,word replace ctitle ("SYS-GMM1.1") e(ar1 ar1p ar2 ar2p sargan sarganp hansen han
+> senp N)  noobs bdec(3) sdec(3) drop(i.year)
+data1.rtf
+dir : seeout
+
+. 
+. 
+. *1.2 HMT invested*
+. local xx1  " L(0/1).(lso2 gov_a)  secgrp_a pgrp_a wage_a laborinsec_a  delivery  density_a laborval i.year"
+
+. local gmm1 " L.HMT_a L(0/1).(lso2 gov_a)  secgrp_a pgrp_a wage_a "
+
+. local iv1  "                                             laborinsec_a  delivery  density_a laborval  i.year
+> "
+
+. xtabond2 HMT_a L.HMT_a `xx1', gmm(`gmm1') iv(`iv1') twostep robust
+Favoring space over speed. To switch, type or click on mata: mata set matafavor speed, perm.
+Warning: Two-step estimated covariance matrix of moments is singular.
+  Using a generalized inverse to calculate optimal weighting matrix for two-step estimation.
+  Difference-in-Sargan/Hansen statistics may be negative.
+
+Dynamic panel-data estimation, two-step system GMM
+------------------------------------------------------------------------------
+Group variable: id                              Number of obs      =      1409
+Time variable : year                            Number of groups   =       256
+Number of instruments = 238                     Obs per group: min =         1
+Wald chi2(20) =   2768.34                                      avg =      5.50
+Prob > chi2   =     0.000                                      max =         7
+------------------------------------------------------------------------------
+             |              Corrected
+       HMT_a |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       HMT_a |
+         L1. |    .505155     .04961    10.18   0.000     .4079212    .6023887
+             |
+        lso2 |
+         --. |  -587082.5   539213.8    -1.09   0.276     -1643922    469757.1
+         L1. |   271655.7   393422.7     0.69   0.490    -499438.6     1042750
+             |
+       gov_a |
+         --. |  -26.49024   12.97312    -2.04   0.041    -51.91709   -1.063394
+         L1. |   74.28688   25.23992     2.94   0.003     24.81754    123.7562
+             |
+    secgrp_a |  -38074.68   19940.53    -1.91   0.056     -77157.4    1008.048
+      pgrp_a |   9.222938   4.085626     2.26   0.024     1.215259    17.23062
+      wage_a |   .2572897    .045725     5.63   0.000     .1676704     .346909
+laborinsec_a |   57627.37   21631.23     2.66   0.008     15230.93    100023.8
+    delivery |   11.83856   5.391634     2.20   0.028     1.271147    22.40596
+   density_a |  -469.4733   4172.003    -0.11   0.910    -8646.449    7707.502
+    laborval |  -83716.32   53651.32    -1.56   0.119      -188871    21438.34
+             |
+        year |
+       2008  |          0  (empty)
+       2009  |    1773954    1063122     1.67   0.095    -309726.4     3857635
+       2010  |  -368801.7    1230469    -0.30   0.764     -2780476     2042873
+       2011  |   953214.2    1018413     0.94   0.349     -1042839     2949267
+       2012  |    2975486    1110123     2.68   0.007     799684.5     5151288
+       2013  |   -5477940    1780898    -3.08   0.002     -8968436    -1987444
+       2014  |    2402725    1307202     1.84   0.066    -159342.8     4964794
+       2015  |          0  (omitted)
+             |
+       _cons |    1721697    2972440     0.58   0.562     -4104178     7547571
+------------------------------------------------------------------------------
+Instruments for first differences equation
+  Standard
+    D.(laborinsec_a delivery density_a laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year)
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    L(1/7).(L.HMT_a lso2 L.lso2 gov_a L.gov_a secgrp_a pgrp_a wage_a)
+Instruments for levels equation
+  Standard
+    laborinsec_a delivery density_a laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year
+    _cons
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    D.(L.HMT_a lso2 L.lso2 gov_a L.gov_a secgrp_a pgrp_a wage_a)
+------------------------------------------------------------------------------
+Arellano-Bond test for AR(1) in first differences: z =  -3.82  Pr > z =  0.000
+Arellano-Bond test for AR(2) in first differences: z =  -1.25  Pr > z =  0.213
+------------------------------------------------------------------------------
+Sargan test of overid. restrictions: chi2(217)  = 809.90  Prob > chi2 =  0.000
+  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2(217)  = 237.97  Prob > chi2 =  0.157
+  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  GMM instruments for levels
+    Hansen test excluding group:     chi2(165)  = 203.99  Prob > chi2 =  0.021
+    Difference (null H = exogenous): chi2(52)   =  33.98  Prob > chi2 =  0.975
+  iv(laborinsec_a delivery density_a laborval 1b.year 2.year 3.year 4.year 5.year 6.year 7.year 8.year)
+    Hansen test excluding group:     chi2(207)  = 227.06  Prob > chi2 =  0.161
+    Difference (null H = exogenous): chi2(10)   =  10.91  Prob > chi2 =  0.365
+
+
+. est store panel1b
+
+. outreg2 panel1b using data1,word append ctitle ("SYS-GMM1.2") e(ar1 ar1p ar2 ar2p sargan sarganp hansen han
+> senp N)  noobs bdec(3) sdec(3) drop(i.year)
+data1.rtf
+dir : seeout
+
+. 
+. *1.3 domestic invested*
+. local xx1  " L(0/1).(lso2 gov_a)  secgrp_a pgrp_a wage_a laborinsec_a  delivery  density_a laborval i.year"
+
+. local gmm1 " L.domestic_a L(0/1).(lso2 gov_a)  secgrp_a pgrp_a wage_a "
+
+. local iv1  "                                             laborinsec_a  delivery  density_a laborval  i.year
+> "
+
+. xtabond2 domestic_a L.domestic_a `xx1', gmm(`gmm1') iv(`iv1') twostep robust
+Favoring space over speed. To switch, type or click on mata: mata set matafavor speed, perm.
+Warning: Two-step estimated covariance matrix of moments is singular.
+  Using a generalized inverse to calculate optimal weighting matrix for two-step estimation.
+  Difference-in-Sargan/Hansen statistics may be negative.
+
+Dynamic panel-data estimation, two-step system GMM
+------------------------------------------------------------------------------
+Group variable: id                              Number of obs      =      1441
+Time variable : year                            Number of groups   =       261
+Number of instruments = 238                     Obs per group: min =         1
+Wald chi2(20) =   3101.07                                      avg =      5.52
+Prob > chi2   =     0.000                                      max =         7
+------------------------------------------------------------------------------
+             |              Corrected
+  domestic_a |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+  domestic_a |
+         L1. |   .6807861   .0641439    10.61   0.000     .5550664    .8065059
+             |
+        lso2 |
+         --. |    5411936    1205048     4.49   0.000      3050086     7773787
+         L1. |  -334200.2    1294462    -0.26   0.796     -2871299     2202898
+             |
+       gov_a |
+         --. |   269.5725   59.49541     4.53   0.000     152.9636    386.1813
+         L1. |  -155.3856   45.33111    -3.43   0.001     -244.233   -66.53829
+             |
+    secgrp_a |  -233420.9   100438.9    -2.32   0.020    -430277.6   -36564.15
+      pgrp_a |   67.48611   20.13593     3.35   0.001     28.02041    106.9518
+      wage_a |  -.2645499   .0627191    -4.22   0.000     -.387477   -.1416228
+laborinsec_a |   251183.3   55761.32     4.50   0.000     141893.1    360473.4
+    delivery |    136.574   42.60972     3.21   0.001     53.06054    220.0876
+   density_a |    35708.9   16088.09     2.22   0.026     4176.835    67240.97
+    laborval |  -528185.8   241958.1    -2.18   0.029     -1002415   -53956.68
+             |
+        year |
+       2008  |          0  (empty)
+       2009  |  -5.50e+07   1.43e+07    -3.84   0.000    -8.31e+07   -2.69e+07
+       2010  |  -6.44e+07   1.40e+07    -4.58   0.000    -9.19e+07   -3.69e+07
+       2011  |  -4.28e+07   1.36e+07    -3.15   0.002    -6.94e+07   -1.61e+07
+       2012  |  -3.92e+07   1.37e+07    -2.86   0.004    -6.61e+07   -1.23e+07
+       2013  |  -5.98e+07   1.29e+07    -4.64   0.000    -8.50e+07   -3.45e+07
+       2014  |  -4.29e+07   1.34e+07    -3.21   0.001    -6.92e+07   -1.67e+07
+       2015  |  -5.27e+07   1.34e+07    -3.93   0.000    -7.90e+07   -2.64e+07
+             |
+       _cons |          0  (omitted)
+------------------------------------------------------------------------------
+Instruments for first differences equation
+  Standard
+    D.(laborinsec_a delivery density_a laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year)
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    L(1/7).(L.domestic_a lso2 L.lso2 gov_a L.gov_a secgrp_a pgrp_a wage_a)
+Instruments for levels equation
+  Standard
+    laborinsec_a delivery density_a laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year
+    _cons
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    D.(L.domestic_a lso2 L.lso2 gov_a L.gov_a secgrp_a pgrp_a wage_a)
+------------------------------------------------------------------------------
+Arellano-Bond test for AR(1) in first differences: z =  -5.07  Pr > z =  0.000
+Arellano-Bond test for AR(2) in first differences: z =   0.43  Pr > z =  0.664
+------------------------------------------------------------------------------
+Sargan test of overid. restrictions: chi2(217)  = 939.58  Prob > chi2 =  0.000
+  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2(217)  = 234.21  Prob > chi2 =  0.201
+  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  GMM instruments for levels
+    Hansen test excluding group:     chi2(165)  = 198.38  Prob > chi2 =  0.039
+    Difference (null H = exogenous): chi2(52)   =  35.84  Prob > chi2 =  0.957
+  iv(laborinsec_a delivery density_a laborval 1b.year 2.year 3.year 4.year 5.year 6.year 7.year 8.year)
+    Hansen test excluding group:     chi2(207)  = 229.31  Prob > chi2 =  0.137
+    Difference (null H = exogenous): chi2(10)   =   4.90  Prob > chi2 =  0.897
+
+
+. est store panelc
+
+. outreg2 panelc using data1,word append ctitle ("SYS-GMM1.3") e(ar1 ar1p ar2 ar2p sargan sarganp hansen hans
+> enp N)  noobs bdec(3) sdec(3) drop(i.year)
+data1.rtf
+dir : seeout
+
+. 
+. *1.4 fdi used*
+. local xx1  " L(0/2).(lso2 gov_a)  secgrp_a pgrp_a wage_a laborinsec_a  delivery  density_a laborval i.year"
+
+. local gmm1 " L.rfdi_a L(0/2).(lso2 gov_a)  secgrp_a pgrp_a wage_a "
+
+. local iv1  "                                             laborinsec_a  delivery  density_a laborval i.year"
+
+. xtabond2 rfdi_a L.rfdi_a `xx1', gmm(`gmm1') iv(`iv1') twostep robust
+Favoring space over speed. To switch, type or click on mata: mata set matafavor speed, perm.
+Warning: Two-step estimated covariance matrix of moments is singular.
+  Using a generalized inverse to calculate optimal weighting matrix for two-step estimation.
+  Difference-in-Sargan/Hansen statistics may be negative.
+
+Dynamic panel-data estimation, two-step system GMM
+------------------------------------------------------------------------------
+Group variable: id                              Number of obs      =      1121
+Time variable : year                            Number of groups   =       243
+Number of instruments = 228                     Obs per group: min =         1
+Wald chi2(22) =   7011.87                                      avg =      4.61
+Prob > chi2   =     0.000                                      max =         6
+------------------------------------------------------------------------------
+             |              Corrected
+      rfdi_a |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      rfdi_a |
+         L1. |   .9319823   .0726494    12.83   0.000      .789592    1.074373
+             |
+        lso2 |
+         --. |   10849.41    3923.38     2.77   0.006     3159.721    18539.09
+         L1. |   1130.391    4773.23     0.24   0.813    -8224.968    10485.75
+         L2. |   4665.971    3092.88     1.51   0.131    -1395.962     10727.9
+             |
+       gov_a |
+         --. |   .3833043   .2269006     1.69   0.091    -.0614127    .8280212
+         L1. |   .2419261   .3788753     0.64   0.523    -.5006559    .9845081
+         L2. |   4.692212    2.03096     2.31   0.021     .7116041    8.672819
+             |
+    secgrp_a |  -72.91472   273.0396    -0.27   0.789    -608.0625    462.2331
+      pgrp_a |   .1599183   .0671168     2.38   0.017     .0283719    .2914647
+      wage_a |   .0004309   .0001948     2.21   0.027     .0000491    .0008127
+laborinsec_a |  -288.9696   263.8287    -1.10   0.273    -806.0643    228.1251
+    delivery |   .2296314   .1414128     1.62   0.104    -.0475325    .5067954
+   density_a |  -75.49254   176.1649    -0.43   0.668    -420.7694    269.7843
+    laborval |   -2257.73   1476.209    -1.53   0.126    -5151.046    635.5865
+             |
+        year |
+       2008  |          0  (empty)
+       2009  |          0  (omitted)
+       2010  |  -152861.6   76449.38    -2.00   0.046    -302699.7   -3023.575
+       2011  |    -153776    68492.8    -2.25   0.025    -288019.4   -19532.61
+       2012  |    -152136   68841.36    -2.21   0.027    -287062.6    -17209.4
+       2013  |  -156632.3   66050.26    -2.37   0.018    -286088.4   -27176.14
+       2014  |  -160007.1   64899.75    -2.47   0.014    -287208.3   -32805.92
+       2015  |  -191048.9   70463.67    -2.71   0.007    -329155.2   -52942.69
+             |
+       _cons |          0  (omitted)
+------------------------------------------------------------------------------
+Instruments for first differences equation
+  Standard
+    D.(laborinsec_a delivery density_a laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year)
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    L(1/7).(L.rfdi_a lso2 L.lso2 L2.lso2 gov_a L.gov_a L2.gov_a secgrp_a
+    pgrp_a wage_a)
+Instruments for levels equation
+  Standard
+    laborinsec_a delivery density_a laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year
+    _cons
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    D.(L.rfdi_a lso2 L.lso2 L2.lso2 gov_a L.gov_a L2.gov_a secgrp_a pgrp_a
+    wage_a)
+------------------------------------------------------------------------------
+Arellano-Bond test for AR(1) in first differences: z =  -1.77  Pr > z =  0.077
+Arellano-Bond test for AR(2) in first differences: z =   1.86  Pr > z =  0.063
+------------------------------------------------------------------------------
+Sargan test of overid. restrictions: chi2(205)  = 593.04  Prob > chi2 =  0.000
+  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2(205)  = 216.13  Prob > chi2 =  0.283
+  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  GMM instruments for levels
+    Hansen test excluding group:     chi2(148)  = 172.29  Prob > chi2 =  0.084
+    Difference (null H = exogenous): chi2(57)   =  43.85  Prob > chi2 =  0.899
+  iv(laborinsec_a delivery density_a laborval 1b.year 2.year 3.year 4.year 5.year 6.year 7.year 8.year)
+    Hansen test excluding group:     chi2(196)  = 210.14  Prob > chi2 =  0.232
+    Difference (null H = exogenous): chi2(9)    =   6.00  Prob > chi2 =  0.740
+
+
+. est store paneld
+
+. outreg2 paneld using data1,word append ctitle ("SYS-GMM1.4") e(ar1 ar1p ar2 ar2p sargan sarganp hansen hans
+> enp N)  noobs bdec(3) sdec(3) drop(i.year)
+data1.rtf
+dir : seeout
+
+. 
+. *2.1 fdi invested*
+. local xx2  " L(0/1).(lso2 gov_b)  secgrp_b pgrp_b wage_b laborinsec_b  delivery  density_b laborval i.year"
+
+. local gmm2 " L.fdi_b L(0/1).(lso2 gov_b)  secgrp_b pgrp_b wage_b "
+
+. local iv2 "                                             laborinsec_b  delivery  density_b laborval i.year"
+
+. xtabond2 fdi_b L.fdi_b `xx2', gmm(`gmm2') iv(`iv2') twostep robust
+Favoring space over speed. To switch, type or click on mata: mata set matafavor speed, perm.
+Warning: Two-step estimated covariance matrix of moments is singular.
+  Using a generalized inverse to calculate optimal weighting matrix for two-step estimation.
+  Difference-in-Sargan/Hansen statistics may be negative.
+
+Dynamic panel-data estimation, two-step system GMM
+------------------------------------------------------------------------------
+Group variable: id                              Number of obs      =      1408
+Time variable : year                            Number of groups   =       257
+Number of instruments = 238                     Obs per group: min =         1
+Wald chi2(20) =   3143.05                                      avg =      5.48
+Prob > chi2   =     0.000                                      max =         7
+------------------------------------------------------------------------------
+             |              Corrected
+       fdi_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       fdi_b |
+         L1. |   .7833149   .0276086    28.37   0.000     .7292031    .8374268
+             |
+        lso2 |
+         --. |    2365527    1093733     2.16   0.031     221849.8     4509205
+         L1. |  -883619.5   977752.8    -0.90   0.366     -2799980     1032741
+             |
+       gov_b |
+         --. |  -.0828973   .0224587    -3.69   0.000    -.1269156   -.0388791
+         L1. |   .2860165   .0513977     5.56   0.000     .1852789    .3867541
+             |
+    secgrp_b |   6270.821   34593.85     0.18   0.856    -61531.88    74073.52
+      pgrp_b |   5.544722   3.637094     1.52   0.127    -1.583852     12.6733
+      wage_b |  -.2443592   .0341989    -7.15   0.000    -.3113877   -.1773306
+laborinsec_b |   7783.278   21597.94     0.36   0.719    -34547.91    50114.47
+    delivery |   63.73464   34.62831     1.84   0.066     -4.13561    131.6049
+   density_b |   5091.626   6600.843     0.77   0.440    -7845.789    18029.04
+    laborval |  -474063.7   169073.5    -2.80   0.005    -805441.6   -142685.7
+             |
+        year |
+       2008  |          0  (empty)
+       2009  |   -4370164    1041548    -4.20   0.000     -6411560    -2328768
+       2010  |          0  (omitted)
+       2011  |   -7390533    1995662    -3.70   0.000    -1.13e+07    -3479107
+       2012  |   -2645425   769764.5    -3.44   0.001     -4154135    -1136714
+       2013  |  -317590.3   733730.6    -0.43   0.665     -1755676     1120495
+       2014  |    2320676    1243104     1.87   0.062    -115762.5     4757115
+       2015  |   -1903688   860396.8    -2.21   0.027     -3590035   -217341.8
+             |
+       _cons |  -1.18e+07    5229990    -2.26   0.024    -2.21e+07    -1555046
+------------------------------------------------------------------------------
+Instruments for first differences equation
+  Standard
+    D.(laborinsec_b delivery density_b laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year)
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    L(1/7).(L.fdi_b lso2 L.lso2 gov_b L.gov_b secgrp_b pgrp_b wage_b)
+Instruments for levels equation
+  Standard
+    laborinsec_b delivery density_b laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year
+    _cons
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    D.(L.fdi_b lso2 L.lso2 gov_b L.gov_b secgrp_b pgrp_b wage_b)
+------------------------------------------------------------------------------
+Arellano-Bond test for AR(1) in first differences: z =  -3.45  Pr > z =  0.001
+Arellano-Bond test for AR(2) in first differences: z =  -0.35  Pr > z =  0.728
+------------------------------------------------------------------------------
+Sargan test of overid. restrictions: chi2(217)  =1169.97  Prob > chi2 =  0.000
+  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2(217)  = 243.19  Prob > chi2 =  0.107
+  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  GMM instruments for levels
+    Hansen test excluding group:     chi2(165)  = 203.72  Prob > chi2 =  0.022
+    Difference (null H = exogenous): chi2(52)   =  39.47  Prob > chi2 =  0.899
+  iv(laborinsec_b delivery density_b laborval 1b.year 2.year 3.year 4.year 5.year 6.year 7.year 8.year)
+    Hansen test excluding group:     chi2(207)  = 236.96  Prob > chi2 =  0.075
+    Difference (null H = exogenous): chi2(10)   =   6.23  Prob > chi2 =  0.796
+
+
+. est store panel2a
+
+. outreg2 panel2a using data2,word replace ctitle ("SYS-GMM2.1") e(ar1 ar1p ar2 ar2p sargan sarganp hansen ha
+> nsenp N)  noobs bdec(3) sdec(3) drop(i.year)
+data2.rtf
+dir : seeout
+
+. 
+. *2.2 HMT invested*
+. local xx2  " L(0/1).(lso2 gov_b)  secgrp_b pgrp_b wage_b laborinsec_b  delivery  density_b laborval  i.year
+> "
+
+. local gmm2 " L.HMT_b L(0/1).(lso2 gov_b)  secgrp_b pgrp_b wage_b "
+
+. local iv2 "                                             laborinsec_b  delivery  density_b laborval i.year"
+
+. xtabond2 HMT_b L.HMT_b `xx2', gmm(`gmm2') iv(`iv2') twostep robust
+Favoring space over speed. To switch, type or click on mata: mata set matafavor speed, perm.
+Warning: Two-step estimated covariance matrix of moments is singular.
+  Using a generalized inverse to calculate optimal weighting matrix for two-step estimation.
+  Difference-in-Sargan/Hansen statistics may be negative.
+
+Dynamic panel-data estimation, two-step system GMM
+------------------------------------------------------------------------------
+Group variable: id                              Number of obs      =      1373
+Time variable : year                            Number of groups   =       249
+Number of instruments = 238                     Obs per group: min =         1
+Wald chi2(20) =   2394.31                                      avg =      5.51
+Prob > chi2   =     0.000                                      max =         7
+------------------------------------------------------------------------------
+             |              Corrected
+       HMT_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       HMT_b |
+         L1. |    .573457   .0770467     7.44   0.000     .4224483    .7244657
+             |
+        lso2 |
+         --. |   -1081229   596228.1    -1.81   0.070     -2249815    87356.09
+         L1. |   372112.7   344367.8     1.08   0.280    -302835.8     1047061
+             |
+       gov_b |
+         --. |  -.1696179   .0205532    -8.25   0.000    -.2099014   -.1293344
+         L1. |   .1331372   .0259064     5.14   0.000     .0823616    .1839127
+             |
+    secgrp_b |  -40874.14      13396    -3.05   0.002    -67129.82   -14618.46
+      pgrp_b |   .2820773   .5512557     0.51   0.609     -.798364    1.362519
+      wage_b |   .2500674   .0521642     4.79   0.000     .1478273    .3523074
+laborinsec_b |   39012.85   10253.07     3.80   0.000      18917.2     59108.5
+    delivery |   13.02234   9.956111     1.31   0.191    -6.491282    32.53595
+   density_b |   -2712.58   4482.826    -0.61   0.545    -11498.76    6073.597
+    laborval |  -26929.41   39966.53    -0.67   0.500    -105262.4    51403.54
+             |
+        year |
+       2008  |          0  (empty)
+       2009  |          0  (omitted)
+       2010  |   -1465918     654811    -2.24   0.025     -2749324   -182512.3
+       2011  |   -2046848   771704.6    -2.65   0.008     -3559362   -534335.2
+       2012  |   456842.5   399574.5     1.14   0.253    -326309.2     1239994
+       2013  |   -3036933   949804.1    -3.20   0.001     -4898514    -1175351
+       2014  |  -992276.8   514416.1    -1.93   0.054     -2000514    15960.23
+       2015  |   545096.1   439845.9     1.24   0.215      -316986     1407178
+             |
+       _cons |    8386986    4146634     2.02   0.043     259732.1    1.65e+07
+------------------------------------------------------------------------------
+Instruments for first differences equation
+  Standard
+    D.(laborinsec_b delivery density_b laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year)
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    L(1/7).(L.HMT_b lso2 L.lso2 gov_b L.gov_b secgrp_b pgrp_b wage_b)
+Instruments for levels equation
+  Standard
+    laborinsec_b delivery density_b laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year
+    _cons
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    D.(L.HMT_b lso2 L.lso2 gov_b L.gov_b secgrp_b pgrp_b wage_b)
+------------------------------------------------------------------------------
+Arellano-Bond test for AR(1) in first differences: z =  -3.67  Pr > z =  0.000
+Arellano-Bond test for AR(2) in first differences: z =  -0.88  Pr > z =  0.377
+------------------------------------------------------------------------------
+Sargan test of overid. restrictions: chi2(217)  = 929.38  Prob > chi2 =  0.000
+  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2(217)  = 230.23  Prob > chi2 =  0.256
+  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  GMM instruments for levels
+    Hansen test excluding group:     chi2(165)  = 188.90  Prob > chi2 =  0.098
+    Difference (null H = exogenous): chi2(52)   =  41.33  Prob > chi2 =  0.856
+  iv(laborinsec_b delivery density_b laborval 1b.year 2.year 3.year 4.year 5.year 6.year 7.year 8.year)
+    Hansen test excluding group:     chi2(207)  = 222.91  Prob > chi2 =  0.213
+    Difference (null H = exogenous): chi2(10)   =   7.33  Prob > chi2 =  0.694
+
+
+. est store panel2b
+
+. outreg2 panel2b using data2,word append ctitle ("SYS-GMM2.2") e(ar1 ar1p ar2 ar2p sargan sarganp hansen han
+> senp N)  noobs bdec(3) sdec(3) drop(i.year)
+data2.rtf
+dir : seeout
+
+. 
+. *2.3 domestic invested*
+. local xx2  " L(0/1).(lso2 gov_b)  secgrp_b pgrp_b wage_b laborinsec_b  delivery  density_b laborval i.year"
+
+. local gmm2 " L.domestic_b L(0/3).(lso2 gov_b)  secgrp_b pgrp_b wage_b "
+
+. local iv2 "                                             laborinsec_b  delivery  density_b laborval  i.year"
+
+. xtabond2 domestic_b L.domestic_b `xx2', gmm(`gmm2') iv(`iv2') twostep robust
+Favoring space over speed. To switch, type or click on mata: mata set matafavor speed, perm.
+Warning: Number of instruments may be large relative to number of observations.
+Warning: Two-step estimated covariance matrix of moments is singular.
+  Using a generalized inverse to calculate optimal weighting matrix for two-step estimation.
+  Difference-in-Sargan/Hansen statistics may be negative.
+
+Dynamic panel-data estimation, two-step system GMM
+------------------------------------------------------------------------------
+Group variable: id                              Number of obs      =      1441
+Time variable : year                            Number of groups   =       261
+Number of instruments = 274                     Obs per group: min =         1
+Wald chi2(20) =   2410.22                                      avg =      5.52
+Prob > chi2   =     0.000                                      max =         7
+------------------------------------------------------------------------------
+             |              Corrected
+  domestic_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+  domestic_b |
+         L1. |   .8682414   .0965819     8.99   0.000     .6789444    1.057538
+             |
+        lso2 |
+         --. |    3073434   830334.7     3.70   0.000      1446008     4700860
+         L1. |  -762641.8   882571.2    -0.86   0.388     -2492450      967166
+             |
+       gov_b |
+         --. |   .2551197   .0612954     4.16   0.000     .1349829    .3752565
+         L1. |   .0232839   .0773016     0.30   0.763    -.1282245    .1747923
+             |
+    secgrp_b |  -24812.64   71312.81    -0.35   0.728    -164583.2    114957.9
+      pgrp_b |   6.632697   4.637904     1.43   0.153    -2.457427    15.72282
+      wage_b |  -.2991794   .0571776    -5.23   0.000    -.4112454   -.1871134
+laborinsec_b |   74551.93   41370.45     1.80   0.072    -6532.666    155636.5
+    delivery |   118.7241   45.49757     2.61   0.009     29.55053    207.8977
+   density_b |   19814.71   12704.46     1.56   0.119    -5085.581    44715.01
+    laborval |  -618652.3   183780.6    -3.37   0.001    -978855.7   -258448.9
+             |
+        year |
+       2008  |          0  (empty)
+       2009  |   -4721122    2024288    -2.33   0.020     -8688654   -753590.9
+       2010  |   -8437927    3190835    -2.64   0.008    -1.47e+07    -2184006
+       2011  |    4043829    1500763     2.69   0.007      1102388     6985270
+       2012  |  -816204.5   906658.5    -0.90   0.368     -2593223    960813.5
+       2013  |   -4256407    1024224    -4.16   0.000     -6263850    -2248965
+       2014  |   1.15e+07    1890567     6.06   0.000      7753975    1.52e+07
+       2015  |          0  (omitted)
+             |
+       _cons |  -2.26e+07    9578417    -2.36   0.019    -4.13e+07    -3785778
+------------------------------------------------------------------------------
+Instruments for first differences equation
+  Standard
+    D.(laborinsec_b delivery density_b laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year)
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    L(1/7).(L.domestic_b lso2 L.lso2 L2.lso2 L3.lso2 gov_b L.gov_b L2.gov_b
+    L3.gov_b secgrp_b pgrp_b wage_b)
+Instruments for levels equation
+  Standard
+    laborinsec_b delivery density_b laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year
+    _cons
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    D.(L.domestic_b lso2 L.lso2 L2.lso2 L3.lso2 gov_b L.gov_b L2.gov_b
+    L3.gov_b secgrp_b pgrp_b wage_b)
+------------------------------------------------------------------------------
+Arellano-Bond test for AR(1) in first differences: z =  -3.32  Pr > z =  0.001
+Arellano-Bond test for AR(2) in first differences: z =  -1.60  Pr > z =  0.109
+------------------------------------------------------------------------------
+Sargan test of overid. restrictions: chi2(253)  = 926.21  Prob > chi2 =  0.000
+  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2(253)  = 254.76  Prob > chi2 =  0.457
+  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  GMM instruments for levels
+    Hansen test excluding group:     chi2(183)  = 213.36  Prob > chi2 =  0.062
+    Difference (null H = exogenous): chi2(70)   =  41.39  Prob > chi2 =  0.997
+  iv(laborinsec_b delivery density_b laborval 1b.year 2.year 3.year 4.year 5.year 6.year 7.year 8.year)
+    Hansen test excluding group:     chi2(243)  = 243.01  Prob > chi2 =  0.488
+    Difference (null H = exogenous): chi2(10)   =  11.75  Prob > chi2 =  0.302
+
+
+. est store panel2c
+
+. outreg2 panel2c using data2,word append ctitle ("SYS-GMM2.3") e(ar1 ar1p ar2 ar2p sargan sarganp hansen han
+> senp N)  noobs bdec(3) sdec(3) drop(i.year)
+data2.rtf
+dir : seeout
+
+. 
+. *2.4 fdi used*
+. local xx2  " L(0/2).(lso2 gov_b)  secgrp_b pgrp_b wage_b laborinsec_b  delivery  density_b laborval  i.year
+> "
+
+. local gmm2 " L.rfdi_b L(0/2).(lso2 gov_b)  secgrp_b pgrp_b wage_b "
+
+. local iv2 "                                             laborinsec_b  delivery  density_b laborval  i.year"
+
+. xtabond2 rfdi_b L.rfdi_b `xx2', gmm(`gmm2') iv(`iv2') twostep robust
+Favoring space over speed. To switch, type or click on mata: mata set matafavor speed, perm.
+Warning: Two-step estimated covariance matrix of moments is singular.
+  Using a generalized inverse to calculate optimal weighting matrix for two-step estimation.
+  Difference-in-Sargan/Hansen statistics may be negative.
+
+Dynamic panel-data estimation, two-step system GMM
+------------------------------------------------------------------------------
+Group variable: id                              Number of obs      =      1121
+Time variable : year                            Number of groups   =       243
+Number of instruments = 227                     Obs per group: min =         1
+Wald chi2(22) =  14108.02                                      avg =      4.61
+Prob > chi2   =     0.000                                      max =         6
+------------------------------------------------------------------------------
+             |              Corrected
+      rfdi_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      rfdi_b |
+         L1. |   1.032789   .0503185    20.53   0.000     .9341669    1.131412
+             |
+        lso2 |
+         --. |   1686.156   3128.083     0.54   0.590    -4444.773    7817.085
+         L1. |  -3306.268   3517.262    -0.94   0.347    -10199.98     3587.44
+         L2. |   2205.967   2286.815     0.96   0.335    -2276.108    6688.042
+             |
+       gov_b |
+         --. |   .0006044   .0003643     1.66   0.097    -.0001097    .0013185
+         L1. |   .0002043   .0001122     1.82   0.069    -.0000156    .0004242
+         L2. |   .0004977   .0001692     2.94   0.003      .000166    .0008293
+             |
+    secgrp_b |   -154.727   278.8361    -0.55   0.579    -701.2357    391.7817
+      pgrp_b |   .0069061   .0041459     1.67   0.096    -.0012198     .015032
+      wage_b |    .000208    .000212     0.98   0.327    -.0002076    .0006236
+laborinsec_b |  -253.2195    115.524    -2.19   0.028    -479.6424   -26.79665
+    delivery |   .1728707   .1313721     1.32   0.188    -.0846139    .4303552
+   density_b |  -102.1704   172.7203    -0.59   0.554    -440.6958    236.3551
+    laborval |   60.83027   482.3079     0.13   0.900    -884.4758    1006.136
+             |
+        year |
+       2008  |          0  (empty)
+       2009  |          0  (omitted)
+       2010  |   1262.756   48757.83     0.03   0.979    -94300.83    96826.34
+       2011  |   12319.35   47758.89     0.26   0.796    -81286.36    105925.1
+       2012  |    4836.42   47406.38     0.10   0.919    -88078.37    97751.21
+       2013  |   10778.76   46934.12     0.23   0.818    -81210.42    102767.9
+       2014  |   11429.86      46786     0.24   0.807    -80269.02    103128.7
+       2015  |   7583.744   43663.56     0.17   0.862    -77995.27    93162.76
+             |
+       _cons |          0  (omitted)
+------------------------------------------------------------------------------
+Instruments for first differences equation
+  Standard
+    D.(laborinsec_b delivery density_b laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year)
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    L(1/7).(L.rfdi_b lso2 L.lso2 L2.lso2 gov_b L.gov_b L2.gov_b secgrp_b
+    pgrp_b wage_b)
+Instruments for levels equation
+  Standard
+    laborinsec_b delivery density_b laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year
+    _cons
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    D.(L.rfdi_b lso2 L.lso2 L2.lso2 gov_b L.gov_b L2.gov_b secgrp_b pgrp_b
+    wage_b)
+------------------------------------------------------------------------------
+Arellano-Bond test for AR(1) in first differences: z =  -1.44  Pr > z =  0.149
+Arellano-Bond test for AR(2) in first differences: z =  -0.13  Pr > z =  0.896
+------------------------------------------------------------------------------
+Sargan test of overid. restrictions: chi2(204)  = 812.46  Prob > chi2 =  0.000
+  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2(204)  = 205.54  Prob > chi2 =  0.457
+  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  GMM instruments for levels
+    Hansen test excluding group:     chi2(148)  = 161.57  Prob > chi2 =  0.211
+    Difference (null H = exogenous): chi2(56)   =  43.98  Prob > chi2 =  0.878
+  iv(laborinsec_b delivery density_b laborval 1b.year 2.year 3.year 4.year 5.year 6.year 7.year 8.year)
+    Hansen test excluding group:     chi2(195)  = 191.17  Prob > chi2 =  0.564
+    Difference (null H = exogenous): chi2(9)    =  14.38  Prob > chi2 =  0.110
+
+
+. est store panel2d
+
+. outreg2 panel2d using data2,word append ctitle ("SYS-GMM2.4") e(ar1 ar1p ar2 ar2p sargan sarganp hansen han
+> senp N)  noobs bdec(3) sdec(3) drop(i.year)
+data2.rtf
+dir : seeout
+
+. 
+. *3 SO2 as independent variable
+. *3.1 fdi
+. local xx3  " L(0/1).(fdi_a gov_a ) pgrp_a secgrp_a  wage_a laborinsec_a  delivery  density_a laborval  i.ye
+> ar"
+
+. local gmm3 " L.lso2    L(0/1).(fdi_a gov_a)   secgrp_a    pgrp_a laborinsec_a  "
+
+. local iv3  " L2.lso2                       delivery         wage_a  density_a   laborval         i.year"
+
+. xtabond2 lso2 L.lso2 L2.lso2 `xx3', gmm(`gmm3') iv(`iv3') twostep robust
+Favoring space over speed. To switch, type or click on mata: mata set matafavor speed, perm.
+Warning: Two-step estimated covariance matrix of moments is singular.
+  Using a generalized inverse to calculate optimal weighting matrix for two-step estimation.
+  Difference-in-Sargan/Hansen statistics may be negative.
+
+Dynamic panel-data estimation, two-step system GMM
+------------------------------------------------------------------------------
+Group variable: id                              Number of obs      =      1121
+Time variable : year                            Number of groups   =       243
+Number of instruments = 213                     Obs per group: min =         1
+Wald chi2(21) =  1.07e+06                                      avg =      4.61
+Prob > chi2   =     0.000                                      max =         6
+------------------------------------------------------------------------------
+             |              Corrected
+        lso2 |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        lso2 |
+         L1. |   .5291881   .0337252    15.69   0.000      .463088    .5952883
+         L2. |    .302348    .033037     9.15   0.000     .2375967    .3670993
+             |
+       fdi_a |
+         --. |   4.03e-09   2.12e-09     1.90   0.057    -1.28e-10    8.19e-09
+         L1. |  -7.55e-10   2.59e-09    -0.29   0.770    -5.82e-09    4.31e-09
+             |
+       gov_a |
+         --. |   2.74e-07   1.02e-06     0.27   0.787    -1.72e-06    2.27e-06
+         L1. |  -3.84e-07   8.58e-07    -0.45   0.654    -2.07e-06    1.30e-06
+             |
+      pgrp_a |   7.35e-08   3.21e-07     0.23   0.819    -5.55e-07    7.02e-07
+    secgrp_a |   .0054669   .0022617     2.42   0.016     .0010341    .0098997
+      wage_a |  -2.85e-09   1.94e-09    -1.47   0.142    -6.66e-09    9.57e-10
+laborinsec_a |   .0028731   .0024168     1.19   0.235    -.0018637    .0076099
+    delivery |  -1.22e-06   3.80e-06    -0.32   0.748    -8.66e-06    6.22e-06
+   density_a |  -.0003688    .001004    -0.37   0.713    -.0023366    .0015991
+    laborval |   .0091956   .0087368     1.05   0.293    -.0079283    .0263194
+             |
+        year |
+       2008  |          0  (empty)
+       2009  |          0  (omitted)
+       2010  |   1.431555   .3013969     4.75   0.000     .8408283    2.022282
+       2011  |   1.375705    .270194     5.09   0.000     .8461342    1.905275
+       2012  |   1.306967   .2561824     5.10   0.000      .804859    1.809076
+       2013  |   1.133584   .2690863     4.21   0.000     .6061849    1.660984
+       2014  |   1.425178   .2634765     5.41   0.000      .908774    1.941583
+       2015  |   1.296234   .2623433     4.94   0.000     .7820502    1.810417
+             |
+       _cons |          0  (omitted)
+------------------------------------------------------------------------------
+Instruments for first differences equation
+  Standard
+    D.(L2.lso2 delivery wage_a density_a laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year)
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    L(1/7).(L.lso2 fdi_a L.fdi_a gov_a L.gov_a secgrp_a pgrp_a laborinsec_a)
+Instruments for levels equation
+  Standard
+    L2.lso2 delivery wage_a density_a laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year
+    _cons
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    D.(L.lso2 fdi_a L.fdi_a gov_a L.gov_a secgrp_a pgrp_a laborinsec_a)
+------------------------------------------------------------------------------
+Arellano-Bond test for AR(1) in first differences: z =  -4.86  Pr > z =  0.000
+Arellano-Bond test for AR(2) in first differences: z =   0.05  Pr > z =  0.960
+------------------------------------------------------------------------------
+Sargan test of overid. restrictions: chi2(191)  = 407.19  Prob > chi2 =  0.000
+  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2(191)  = 209.91  Prob > chi2 =  0.166
+  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  GMM instruments for levels
+    Hansen test excluding group:     chi2(144)  = 168.23  Prob > chi2 =  0.082
+    Difference (null H = exogenous): chi2(47)   =  41.68  Prob > chi2 =  0.692
+  iv(L2.lso2 delivery wage_a density_a laborval 1b.year 2.year 3.year 4.year 5.year 6.year 7.year 8.year)
+    Hansen test excluding group:     chi2(181)  = 206.45  Prob > chi2 =  0.094
+    Difference (null H = exogenous): chi2(10)   =   3.46  Prob > chi2 =  0.968
+
+
+. est store panel3a
+
+. outreg2 panel3a using data7,word replace ctitle ("SYS-GMM3.1") e(ar1 ar1p ar2 ar2p sargan sarganp hansen ha
+> nsenp N)  noobs bdec(3) sdec(3) drop(i.year)
+data7.rtf
+dir : seeout
+
+. 
+. *3.2
+. local xx3  " L(0/1).(HMT_a gov_a ) pgrp_a secgrp_a  wage_a laborinsec_a  delivery  density_a laborval  i.ye
+> ar"
+
+. local gmm3 " L.lso2    L(0/1).(HMT_a gov_a )   secgrp_a    pgrp_a laborinsec_a  "
+
+. local iv3  " L2.lso2                 delivery         wage_a  density_a    laborval       i.year"
+
+. xtabond2 lso2 L.lso2 L2.lso2 `xx3', gmm(`gmm3') iv(`iv3') twostep robust
+Favoring space over speed. To switch, type or click on mata: mata set matafavor speed, perm.
+Warning: Two-step estimated covariance matrix of moments is singular.
+  Using a generalized inverse to calculate optimal weighting matrix for two-step estimation.
+  Difference-in-Sargan/Hansen statistics may be negative.
+
+Dynamic panel-data estimation, two-step system GMM
+------------------------------------------------------------------------------
+Group variable: id                              Number of obs      =      1104
+Time variable : year                            Number of groups   =       240
+Number of instruments = 213                     Obs per group: min =         1
+Wald chi2(21) =   2527.93                                      avg =      4.60
+Prob > chi2   =     0.000                                      max =         6
+------------------------------------------------------------------------------
+             |              Corrected
+        lso2 |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        lso2 |
+         L1. |   .5215723   .0341653    15.27   0.000     .4546095     .588535
+         L2. |   .3073107   .0340696     9.02   0.000     .2405356    .3740858
+             |
+       HMT_a |
+         --. |  -7.62e-09   5.38e-09    -1.42   0.156    -1.82e-08    2.92e-09
+         L1. |   7.64e-09   2.61e-09     2.92   0.003     2.52e-09    1.28e-08
+             |
+       gov_a |
+         --. |   8.22e-08   9.16e-07     0.09   0.929    -1.71e-06    1.88e-06
+         L1. |   3.31e-07   7.27e-07     0.45   0.649    -1.09e-06    1.76e-06
+             |
+      pgrp_a |   2.50e-07   2.90e-07     0.86   0.389    -3.18e-07    8.18e-07
+    secgrp_a |   .0042256   .0022725     1.86   0.063    -.0002284    .0086796
+      wage_a |  -1.91e-09   2.35e-09    -0.81   0.417    -6.51e-09    2.70e-09
+laborinsec_a |   .0054063   .0022338     2.42   0.016     .0010281    .0097845
+    delivery |  -1.78e-07   3.62e-06    -0.05   0.961    -7.27e-06    6.92e-06
+   density_a |  -.0001411   .0009941    -0.14   0.887    -.0020896    .0018074
+    laborval |   .0095885   .0093689     1.02   0.306    -.0087742    .0279512
+             |
+        year |
+       2008  |          0  (empty)
+       2009  |          0  (omitted)
+       2010  |          0  (omitted)
+       2011  |  -.0354645   .1196274    -0.30   0.767    -.2699299    .1990009
+       2012  |  -.0833974   .1128685    -0.74   0.460    -.3046155    .1378208
+       2013  |  -.3102802   .1169312    -2.65   0.008    -.5394612   -.0810992
+       2014  |    .001875   .1352307     0.01   0.989    -.2631723    .2669224
+       2015  |  -.1369117    .129534    -1.06   0.291    -.3907935    .1169702
+             |
+       _cons |   1.363214   .2935425     4.64   0.000     .7878811    1.938547
+------------------------------------------------------------------------------
+Instruments for first differences equation
+  Standard
+    D.(L2.lso2 delivery wage_a density_a laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year)
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    L(1/7).(L.lso2 HMT_a L.HMT_a gov_a L.gov_a secgrp_a pgrp_a laborinsec_a)
+Instruments for levels equation
+  Standard
+    L2.lso2 delivery wage_a density_a laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year
+    _cons
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    D.(L.lso2 HMT_a L.HMT_a gov_a L.gov_a secgrp_a pgrp_a laborinsec_a)
+------------------------------------------------------------------------------
+Arellano-Bond test for AR(1) in first differences: z =  -4.73  Pr > z =  0.000
+Arellano-Bond test for AR(2) in first differences: z =   0.36  Pr > z =  0.716
+------------------------------------------------------------------------------
+Sargan test of overid. restrictions: chi2(191)  = 403.67  Prob > chi2 =  0.000
+  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2(191)  = 208.08  Prob > chi2 =  0.189
+  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  GMM instruments for levels
+    Hansen test excluding group:     chi2(144)  = 162.92  Prob > chi2 =  0.134
+    Difference (null H = exogenous): chi2(47)   =  45.16  Prob > chi2 =  0.549
+  iv(L2.lso2 delivery wage_a density_a laborval 1b.year 2.year 3.year 4.year 5.year 6.year 7.year 8.year)
+    Hansen test excluding group:     chi2(180)  = 205.35  Prob > chi2 =  0.095
+    Difference (null H = exogenous): chi2(11)   =   2.73  Prob > chi2 =  0.994
+
+
+. est store panel3a
+
+. outreg2 panel3a using data7,word append ctitle ("SYS-GMM3.1") e(ar1 ar1p ar2 ar2p sargan sarganp hansen han
+> senp N)  noobs bdec(3) sdec(3) drop(i.year)
+data7.rtf
+dir : seeout
+
+. 
+. *3.3
+. local xx3  " L(0/1).(domestic_a gov_a ) pgrp_a secgrp_a  wage_a laborinsec_a  delivery  density_a laborval 
+> i.year"
+
+. local gmm3 " L.lso2    L(0/1).(domestic_a gov_a )   secgrp_a    pgrp_a laborinsec_a  "
+
+. local iv3  " L2.lso2                 delivery         wage_a  density_a    laborval       i.year"
+
+. xtabond2 lso2 L.lso2 L2.lso2 `xx3', gmm(`gmm3') iv(`iv3') twostep robust
+Favoring space over speed. To switch, type or click on mata: mata set matafavor speed, perm.
+Warning: Two-step estimated covariance matrix of moments is singular.
+  Using a generalized inverse to calculate optimal weighting matrix for two-step estimation.
+  Difference-in-Sargan/Hansen statistics may be negative.
+
+Dynamic panel-data estimation, two-step system GMM
+------------------------------------------------------------------------------
+Group variable: id                              Number of obs      =      1121
+Time variable : year                            Number of groups   =       243
+Number of instruments = 213                     Obs per group: min =         1
+Wald chi2(21) =   2812.81                                      avg =      4.61
+Prob > chi2   =     0.000                                      max =         6
+------------------------------------------------------------------------------
+             |              Corrected
+        lso2 |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        lso2 |
+         L1. |   .5165055   .0319705    16.16   0.000     .4538444    .5791665
+         L2. |    .310276   .0321601     9.65   0.000     .2472433    .3733087
+             |
+  domestic_a |
+         --. |   3.93e-09   1.66e-09     2.37   0.018     6.86e-10    7.18e-09
+         L1. |   1.01e-09   1.76e-09     0.57   0.566    -2.43e-09    4.45e-09
+             |
+       gov_a |
+         --. |  -3.95e-07   1.14e-06    -0.35   0.729    -2.63e-06    1.84e-06
+         L1. |  -1.27e-06   1.01e-06    -1.26   0.209    -3.24e-06    7.11e-07
+             |
+      pgrp_a |   3.58e-08   3.00e-07     0.12   0.905    -5.52e-07    6.23e-07
+    secgrp_a |   .0057519   .0022172     2.59   0.009     .0014063    .0100976
+      wage_a |  -3.44e-09   1.86e-09    -1.85   0.065    -7.09e-09    2.11e-10
+laborinsec_a |  -.0013019   .0022313    -0.58   0.560    -.0056752    .0030715
+    delivery |  -2.16e-06   3.03e-06    -0.71   0.475    -8.09e-06    3.77e-06
+   density_a |  -.0003432   .0009148    -0.38   0.708    -.0021361    .0014498
+    laborval |   .0071089   .0087736     0.81   0.418     -.010087    .0243049
+             |
+        year |
+       2008  |          0  (empty)
+       2009  |          0  (omitted)
+       2010  |          0  (omitted)
+       2011  |   -.081806   .1221704    -0.67   0.503    -.3212556    .1576436
+       2012  |  -.2098454   .1231843    -1.70   0.088    -.4512823    .0315914
+       2013  |  -.2801762   .1048304    -2.67   0.008    -.4856401   -.0747124
+       2014  |  -.0491139    .144889    -0.34   0.735    -.3330911    .2348633
+       2015  |  -.1659007   .1387578    -1.20   0.232     -.437861    .1060597
+             |
+       _cons |    1.66985   .3334886     5.01   0.000     1.016225    2.323476
+------------------------------------------------------------------------------
+Instruments for first differences equation
+  Standard
+    D.(L2.lso2 delivery wage_a density_a laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year)
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    L(1/7).(L.lso2 domestic_a L.domestic_a gov_a L.gov_a secgrp_a pgrp_a
+    laborinsec_a)
+Instruments for levels equation
+  Standard
+    L2.lso2 delivery wage_a density_a laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year
+    _cons
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    D.(L.lso2 domestic_a L.domestic_a gov_a L.gov_a secgrp_a pgrp_a
+    laborinsec_a)
+------------------------------------------------------------------------------
+Arellano-Bond test for AR(1) in first differences: z =  -5.01  Pr > z =  0.000
+Arellano-Bond test for AR(2) in first differences: z =  -0.09  Pr > z =  0.929
+------------------------------------------------------------------------------
+Sargan test of overid. restrictions: chi2(191)  = 389.53  Prob > chi2 =  0.000
+  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2(191)  = 206.24  Prob > chi2 =  0.214
+  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  GMM instruments for levels
+    Hansen test excluding group:     chi2(144)  = 173.16  Prob > chi2 =  0.049
+    Difference (null H = exogenous): chi2(47)   =  33.07  Prob > chi2 =  0.938
+  iv(L2.lso2 delivery wage_a density_a laborval 1b.year 2.year 3.year 4.year 5.year 6.year 7.year 8.year)
+    Hansen test excluding group:     chi2(181)  = 203.69  Prob > chi2 =  0.119
+    Difference (null H = exogenous): chi2(10)   =   2.54  Prob > chi2 =  0.990
+
+
+. est store panel3a
+
+. outreg2 panel3a using data7,word append ctitle ("SYS-GMM3.1") e(ar1 ar1p ar2 ar2p sargan sarganp hansen han
+> senp N)  noobs bdec(3) sdec(3) drop(i.year)
+data7.rtf
+dir : seeout
+
+. 
+. *3.4
+. local xx3  " L(0/1).(rfdi_a gov_a ) pgrp_a secgrp_a  wage_a laborinsec_a  delivery  density_a laborval  i.y
+> ear"
+
+. local gmm3 " L.lso2    L(0/1).(rfdi_a gov_a )   secgrp_a    pgrp_a laborinsec_a  "
+
+. local iv3  " L2.lso2                 delivery         wage_a  density_a     laborval       i.year"
+
+. xtabond2 lso2 L.lso2 L2.lso2 `xx3', gmm(`gmm3') iv(`iv3') twostep robust
+Favoring space over speed. To switch, type or click on mata: mata set matafavor speed, perm.
+Warning: Two-step estimated covariance matrix of moments is singular.
+  Using a generalized inverse to calculate optimal weighting matrix for two-step estimation.
+  Difference-in-Sargan/Hansen statistics may be negative.
+
+Dynamic panel-data estimation, two-step system GMM
+------------------------------------------------------------------------------
+Group variable: id                              Number of obs      =      1121
+Time variable : year                            Number of groups   =       243
+Number of instruments = 213                     Obs per group: min =         1
+Wald chi2(21) =  1.12e+06                                      avg =      4.61
+Prob > chi2   =     0.000                                      max =         6
+------------------------------------------------------------------------------
+             |              Corrected
+        lso2 |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        lso2 |
+         L1. |   .5201545   .0322657    16.12   0.000     .4569149    .5833941
+         L2. |   .2997585   .0333495     8.99   0.000     .2343948    .3651223
+             |
+      rfdi_a |
+         --. |   4.28e-07   2.05e-07     2.09   0.036     2.71e-08    8.30e-07
+         L1. |  -3.98e-08   2.04e-07    -0.20   0.845    -4.39e-07    3.60e-07
+             |
+       gov_a |
+         --. |   3.71e-08   8.84e-07     0.04   0.967    -1.70e-06    1.77e-06
+         L1. |  -9.49e-07   6.53e-07    -1.45   0.146    -2.23e-06    3.30e-07
+             |
+      pgrp_a |  -2.17e-09   2.56e-07    -0.01   0.993    -5.04e-07    4.99e-07
+    secgrp_a |   .0044804   .0021356     2.10   0.036     .0002947    .0086661
+      wage_a |  -4.42e-09   1.75e-09    -2.52   0.012    -7.86e-09   -9.85e-10
+laborinsec_a |    .004249   .0022824     1.86   0.063    -.0002244    .0087224
+    delivery |  -1.29e-06   3.92e-06    -0.33   0.742    -8.97e-06    6.39e-06
+   density_a |  -.0001694   .0010103    -0.17   0.867    -.0021494    .0018107
+    laborval |   .0114388   .0093506     1.22   0.221     -.006888    .0297655
+             |
+        year |
+       2008  |          0  (empty)
+       2009  |          0  (omitted)
+       2010  |   1.520787   .3232533     4.70   0.000      .887222    2.154351
+       2011  |    1.47269   .2844609     5.18   0.000     .9151567    2.030223
+       2012  |   1.395763   .2740199     5.09   0.000     .8586939    1.932832
+       2013  |   1.252439    .283964     4.41   0.000     .6958798    1.808998
+       2014  |   1.499469   .2907157     5.16   0.000      .929677    2.069262
+       2015  |    1.41476   .2865843     4.94   0.000     .8530647    1.976455
+             |
+       _cons |          0  (omitted)
+------------------------------------------------------------------------------
+Instruments for first differences equation
+  Standard
+    D.(L2.lso2 delivery wage_a density_a laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year)
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    L(1/7).(L.lso2 rfdi_a L.rfdi_a gov_a L.gov_a secgrp_a pgrp_a laborinsec_a)
+Instruments for levels equation
+  Standard
+    L2.lso2 delivery wage_a density_a laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year
+    _cons
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    D.(L.lso2 rfdi_a L.rfdi_a gov_a L.gov_a secgrp_a pgrp_a laborinsec_a)
+------------------------------------------------------------------------------
+Arellano-Bond test for AR(1) in first differences: z =  -4.95  Pr > z =  0.000
+Arellano-Bond test for AR(2) in first differences: z =   0.08  Pr > z =  0.940
+------------------------------------------------------------------------------
+Sargan test of overid. restrictions: chi2(191)  = 400.20  Prob > chi2 =  0.000
+  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2(191)  = 206.87  Prob > chi2 =  0.205
+  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  GMM instruments for levels
+    Hansen test excluding group:     chi2(144)  = 161.76  Prob > chi2 =  0.148
+    Difference (null H = exogenous): chi2(47)   =  45.11  Prob > chi2 =  0.551
+  iv(L2.lso2 delivery wage_a density_a laborval 1b.year 2.year 3.year 4.year 5.year 6.year 7.year 8.year)
+    Hansen test excluding group:     chi2(181)  = 203.18  Prob > chi2 =  0.124
+    Difference (null H = exogenous): chi2(10)   =   3.69  Prob > chi2 =  0.960
+
+
+. est store panel3a
+
+. outreg2 panel3a using data7,word append ctitle ("SYS-GMM3.1") e(ar1 ar1p ar2 ar2p sargan sarganp hansen han
+> senp N)  noobs bdec(3) sdec(3) drop(i.year)
+data7.rtf
+dir : seeout
+
+. 
+. *4.1 fdi
+. local xx4  " L(0/1).(fdi_b gov_b ) pgrp_b secgrp_b  wage_b laborinsec_b  delivery  density_b laborval  i.ye
+> ar"
+
+. local gmm4 " L.lso2    L(0/1).(fdi_b gov_b)   secgrp_b    pgrp_b laborinsec_b  "
+
+. local iv4  " L2.lso2                       delivery         wage_a  density_b   laborval         i.year"
+
+. xtabond2 lso2 L.lso2 L2.lso2 `xx4', gmm(`gmm4') iv(`iv4') twostep robust
+Favoring space over speed. To switch, type or click on mata: mata set matafavor speed, perm.
+Warning: Two-step estimated covariance matrix of moments is singular.
+  Using a generalized inverse to calculate optimal weighting matrix for two-step estimation.
+  Difference-in-Sargan/Hansen statistics may be negative.
+
+Dynamic panel-data estimation, two-step system GMM
+------------------------------------------------------------------------------
+Group variable: id                              Number of obs      =      1100
+Time variable : year                            Number of groups   =       242
+Number of instruments = 213                     Obs per group: min =         1
+Wald chi2(21) =   2239.47                                      avg =      4.55
+Prob > chi2   =     0.000                                      max =         6
+------------------------------------------------------------------------------
+             |              Corrected
+        lso2 |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        lso2 |
+         L1. |   .5448346   .0354642    15.36   0.000      .475326    .6143433
+         L2. |   .2984216   .0345541     8.64   0.000     .2306968    .3661463
+             |
+       fdi_b |
+         --. |   7.68e-09   2.68e-09     2.87   0.004     2.44e-09    1.29e-08
+         L1. |  -6.08e-09   2.38e-09    -2.56   0.011    -1.07e-08   -1.42e-09
+             |
+       gov_b |
+         --. |   4.45e-09   1.62e-09     2.74   0.006     1.27e-09    7.63e-09
+         L1. |  -2.67e-09   1.52e-09    -1.75   0.079    -5.66e-09    3.15e-10
+             |
+      pgrp_b |   4.36e-08   6.40e-08     0.68   0.495    -8.18e-08    1.69e-07
+    secgrp_b |   .0015277   .0019445     0.79   0.432    -.0022835    .0053389
+      wage_b |  -2.35e-09   1.68e-09    -1.40   0.162    -5.63e-09    9.41e-10
+laborinsec_b |   .0047239   .0021027     2.25   0.025     .0006026    .0088451
+    delivery |  -9.65e-07   4.44e-06    -0.22   0.828    -9.67e-06    7.74e-06
+   density_b |  -.0007447   .0012279    -0.61   0.544    -.0031513    .0016619
+    laborval |   .0104287   .0092066     1.13   0.257    -.0076159    .0284732
+             |
+        year |
+       2008  |          0  (empty)
+       2009  |          0  (omitted)
+       2010  |  -.1146204   .1371493    -0.84   0.403    -.3834281    .1541873
+       2011  |          0  (omitted)
+       2012  |  -.1256289    .068037    -1.85   0.065     -.258979    .0077212
+       2013  |  -.3575247   .0893323    -4.00   0.000    -.5326128   -.1824366
+       2014  |  -.0771988   .0886461    -0.87   0.384     -.250942    .0965443
+       2015  |  -.1592102   .0782852    -2.03   0.042    -.3126463    -.005774
+             |
+       _cons |   1.415892   .2973794     4.76   0.000     .8330395    1.998745
+------------------------------------------------------------------------------
+Instruments for first differences equation
+  Standard
+    D.(L2.lso2 delivery wage_a density_b laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year)
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    L(1/7).(L.lso2 fdi_b L.fdi_b gov_b L.gov_b secgrp_b pgrp_b laborinsec_b)
+Instruments for levels equation
+  Standard
+    L2.lso2 delivery wage_a density_b laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year
+    _cons
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    D.(L.lso2 fdi_b L.fdi_b gov_b L.gov_b secgrp_b pgrp_b laborinsec_b)
+------------------------------------------------------------------------------
+Arellano-Bond test for AR(1) in first differences: z =  -4.68  Pr > z =  0.000
+Arellano-Bond test for AR(2) in first differences: z =  -0.03  Pr > z =  0.974
+------------------------------------------------------------------------------
+Sargan test of overid. restrictions: chi2(191)  = 371.11  Prob > chi2 =  0.000
+  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2(191)  = 213.47  Prob > chi2 =  0.127
+  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  GMM instruments for levels
+    Hansen test excluding group:     chi2(144)  = 172.11  Prob > chi2 =  0.055
+    Difference (null H = exogenous): chi2(47)   =  41.36  Prob > chi2 =  0.705
+  iv(L2.lso2 delivery wage_a density_b laborval 1b.year 2.year 3.year 4.year 5.year 6.year 7.year 8.year)
+    Hansen test excluding group:     chi2(180)  = 201.64  Prob > chi2 =  0.129
+    Difference (null H = exogenous): chi2(11)   =  11.83  Prob > chi2 =  0.377
+
+
+. est store panel4b
+
+. outreg2 panel4b using datab,word replace ctitle ("SYS-GMM4.1") e(ar1 ar1p ar2 ar2p sargan sarganp hansen ha
+> nsenp N)  noobs bdec(3) sdec(3) drop(i.year)
+datab.rtf
+dir : seeout
+
+. 
+. *4.2
+. local xx4  " L(0/1).(HMT_b gov_b ) pgrp_b secgrp_b  wage_b laborinsec_b  delivery  density_b laborval i.yea
+> r"
+
+. local gmm4 " L.lso2    L(0/1).(HMT_b gov_b)   secgrp_b    pgrp_b laborinsec_b  "
+
+. local iv4  " L2.lso2                       delivery         wage_a  density_b  laborval         i.year"
+
+. xtabond2 lso2 L.lso2 L2.lso2 `xx4', gmm(`gmm4') iv(`iv4') twostep robust
+Favoring space over speed. To switch, type or click on mata: mata set matafavor speed, perm.
+Warning: Two-step estimated covariance matrix of moments is singular.
+  Using a generalized inverse to calculate optimal weighting matrix for two-step estimation.
+  Difference-in-Sargan/Hansen statistics may be negative.
+
+Dynamic panel-data estimation, two-step system GMM
+------------------------------------------------------------------------------
+Group variable: id                              Number of obs      =      1086
+Time variable : year                            Number of groups   =       239
+Number of instruments = 213                     Obs per group: min =         1
+Wald chi2(21) =   2572.82                                      avg =      4.54
+Prob > chi2   =     0.000                                      max =         6
+------------------------------------------------------------------------------
+             |              Corrected
+        lso2 |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        lso2 |
+         L1. |   .5454847   .0332642    16.40   0.000      .480288    .6106814
+         L2. |   .3014945   .0351098     8.59   0.000     .2326807    .3703084
+             |
+       HMT_b |
+         --. |  -1.45e-08   6.94e-09    -2.10   0.036    -2.82e-08   -9.40e-10
+         L1. |   1.35e-08   3.74e-09     3.61   0.000     6.16e-09    2.08e-08
+             |
+       gov_b |
+         --. |   1.47e-09   2.55e-09     0.58   0.564    -3.53e-09    6.47e-09
+         L1. |   1.89e-09   1.11e-09     1.70   0.089    -2.89e-10    4.06e-09
+             |
+      pgrp_b |   2.99e-08   6.92e-08     0.43   0.665    -1.06e-07    1.66e-07
+    secgrp_b |    .000629    .001941     0.32   0.746    -.0031753    .0044333
+      wage_b |  -1.23e-09   2.83e-09    -0.43   0.664    -6.78e-09    4.32e-09
+laborinsec_b |   .0055505   .0020026     2.77   0.006     .0016256    .0094755
+    delivery |  -3.55e-07   4.33e-06    -0.08   0.935    -8.83e-06    8.12e-06
+   density_b |  -.0001342   .0012489    -0.11   0.914     -.002582    .0023135
+    laborval |   .0093147   .0097402     0.96   0.339    -.0097758    .0284051
+             |
+        year |
+       2008  |          0  (empty)
+       2009  |          0  (omitted)
+       2010  |          0  (omitted)
+       2011  |    .043343   .1330565     0.33   0.745     -.217443     .304129
+       2012  |  -.0062568    .106056    -0.06   0.953    -.2141227     .201609
+       2013  |  -.2397885   .1193099    -2.01   0.044    -.4736316   -.0059454
+       2014  |   .0504972   .1088667     0.46   0.643    -.1628776     .263872
+       2015  |    -.02057   .1153277    -0.18   0.858    -.2466081    .2054682
+             |
+       _cons |   1.263048   .2957896     4.27   0.000     .6833106    1.842785
+------------------------------------------------------------------------------
+Instruments for first differences equation
+  Standard
+    D.(L2.lso2 delivery wage_a density_b laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year)
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    L(1/7).(L.lso2 HMT_b L.HMT_b gov_b L.gov_b secgrp_b pgrp_b laborinsec_b)
+Instruments for levels equation
+  Standard
+    L2.lso2 delivery wage_a density_b laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year
+    _cons
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    D.(L.lso2 HMT_b L.HMT_b gov_b L.gov_b secgrp_b pgrp_b laborinsec_b)
+------------------------------------------------------------------------------
+Arellano-Bond test for AR(1) in first differences: z =  -4.55  Pr > z =  0.000
+Arellano-Bond test for AR(2) in first differences: z =   0.80  Pr > z =  0.427
+------------------------------------------------------------------------------
+Sargan test of overid. restrictions: chi2(191)  = 378.18  Prob > chi2 =  0.000
+  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2(191)  = 208.98  Prob > chi2 =  0.177
+  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  GMM instruments for levels
+    Hansen test excluding group:     chi2(144)  = 163.50  Prob > chi2 =  0.127
+    Difference (null H = exogenous): chi2(47)   =  45.48  Prob > chi2 =  0.536
+  iv(L2.lso2 delivery wage_a density_b laborval 1b.year 2.year 3.year 4.year 5.year 6.year 7.year 8.year)
+    Hansen test excluding group:     chi2(180)  = 198.54  Prob > chi2 =  0.163
+    Difference (null H = exogenous): chi2(11)   =  10.44  Prob > chi2 =  0.492
+
+
+. est store panel4b
+
+. outreg2 panel4b using datab,word append ctitle ("SYS-GMM4.2") e(ar1 ar1p ar2 ar2p sargan sarganp hansen han
+> senp N)  noobs bdec(3) sdec(3) drop(i.year)
+datab.rtf
+dir : seeout
+
+. 
+. *4.3
+. local xx4  " L(0/1).(domestic_b gov_b ) pgrp_b secgrp_b  wage_b laborinsec_b  delivery  density_b laborval 
+> i.year"
+
+. local gmm4 " L.lso2    L(0/1).(domestic_b gov_b)   secgrp_b    pgrp_b laborinsec_b  "
+
+. local iv4  " L2.lso2                       delivery         wage_a  density_b  laborval         i.year"
+
+. xtabond2 lso2 L.lso2 L2.lso2 `xx4', gmm(`gmm4') iv(`iv4') twostep robust
+Favoring space over speed. To switch, type or click on mata: mata set matafavor speed, perm.
+Warning: Two-step estimated covariance matrix of moments is singular.
+  Using a generalized inverse to calculate optimal weighting matrix for two-step estimation.
+  Difference-in-Sargan/Hansen statistics may be negative.
+
+Dynamic panel-data estimation, two-step system GMM
+------------------------------------------------------------------------------
+Group variable: id                              Number of obs      =      1121
+Time variable : year                            Number of groups   =       243
+Number of instruments = 213                     Obs per group: min =         1
+Wald chi2(21) =   2880.49                                      avg =      4.61
+Prob > chi2   =     0.000                                      max =         6
+------------------------------------------------------------------------------
+             |              Corrected
+        lso2 |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        lso2 |
+         L1. |   .5255015   .0326748    16.08   0.000     .4614601    .5895429
+         L2. |   .3158416   .0336449     9.39   0.000     .2498988    .3817845
+             |
+  domestic_b |
+         --. |   3.65e-09   1.78e-09     2.05   0.040     1.69e-10    7.14e-09
+         L1. |  -1.74e-09   1.72e-09    -1.01   0.311    -5.10e-09    1.63e-09
+             |
+       gov_b |
+         --. |   2.98e-09   1.55e-09     1.93   0.054    -5.23e-11    6.02e-09
+         L1. |  -6.28e-10   9.98e-10    -0.63   0.529    -2.58e-09    1.33e-09
+             |
+      pgrp_b |   4.16e-08   5.50e-08     0.76   0.450    -6.62e-08    1.49e-07
+    secgrp_b |   .0004201   .0017429     0.24   0.810    -.0029959     .003836
+      wage_b |  -3.35e-09   2.11e-09    -1.59   0.112    -7.49e-09    7.86e-10
+laborinsec_b |   .0033285   .0018009     1.85   0.065    -.0002012    .0068582
+    delivery |  -9.85e-07   3.97e-06    -0.25   0.804    -8.77e-06    6.80e-06
+   density_b |  -.0007618   .0012793    -0.60   0.552    -.0032693    .0017456
+    laborval |   .0086299    .009521     0.91   0.365    -.0100309    .0272907
+             |
+        year |
+       2008  |          0  (empty)
+       2009  |          0  (omitted)
+       2010  |          0  (omitted)
+       2011  |   .0096224   .1346505     0.07   0.943    -.2542877    .2735325
+       2012  |  -.0820101   .1060985    -0.77   0.440    -.2899594    .1259391
+       2013  |  -.2767702   .1146836    -2.41   0.016    -.5015459   -.0519944
+       2014  |  -.0303788   .1090829    -0.28   0.781    -.2441774    .1834197
+       2015  |  -.1082224   .1144279    -0.95   0.344    -.3324969    .1160522
+             |
+       _cons |   1.503611   .3614448     4.16   0.000     .7951922     2.21203
+------------------------------------------------------------------------------
+Instruments for first differences equation
+  Standard
+    D.(L2.lso2 delivery wage_a density_b laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year)
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    L(1/7).(L.lso2 domestic_b L.domestic_b gov_b L.gov_b secgrp_b pgrp_b
+    laborinsec_b)
+Instruments for levels equation
+  Standard
+    L2.lso2 delivery wage_a density_b laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year
+    _cons
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    D.(L.lso2 domestic_b L.domestic_b gov_b L.gov_b secgrp_b pgrp_b
+    laborinsec_b)
+------------------------------------------------------------------------------
+Arellano-Bond test for AR(1) in first differences: z =  -4.93  Pr > z =  0.000
+Arellano-Bond test for AR(2) in first differences: z =  -0.07  Pr > z =  0.947
+------------------------------------------------------------------------------
+Sargan test of overid. restrictions: chi2(191)  = 381.96  Prob > chi2 =  0.000
+  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2(191)  = 215.31  Prob > chi2 =  0.110
+  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  GMM instruments for levels
+    Hansen test excluding group:     chi2(144)  = 159.53  Prob > chi2 =  0.178
+    Difference (null H = exogenous): chi2(47)   =  55.78  Prob > chi2 =  0.178
+  iv(L2.lso2 delivery wage_a density_b laborval 1b.year 2.year 3.year 4.year 5.year 6.year 7.year 8.year)
+    Hansen test excluding group:     chi2(180)  = 200.56  Prob > chi2 =  0.140
+    Difference (null H = exogenous): chi2(11)   =  14.76  Prob > chi2 =  0.194
+
+
+. est store panel4b
+
+. outreg2 panel4b using datab,word append ctitle ("SYS-GMM4.3") e(ar1 ar1p ar2 ar2p sargan sarganp hansen han
+> senp N)  noobs bdec(3) sdec(3) drop(i.year)
+datab.rtf
+dir : seeout
+
+. 
+. *4.4
+. local xx4  " L(0/1).(rfdi_b gov_b ) pgrp_b secgrp_b  wage_b laborinsec_b  delivery  density_b laborval i.ye
+> ar"
+
+. local gmm4 " L.lso2    L(0/1).(rfdi_b gov_b)   secgrp_b    pgrp_b laborinsec_b  "
+
+. local iv4  " L2.lso2                       delivery         wage_a  density_b  laborval         i.year"
+
+. xtabond2 lso2 L.lso2 L2.lso2 `xx4', gmm(`gmm4') iv(`iv4') twostep robust
+Favoring space over speed. To switch, type or click on mata: mata set matafavor speed, perm.
+Warning: Two-step estimated covariance matrix of moments is singular.
+  Using a generalized inverse to calculate optimal weighting matrix for two-step estimation.
+  Difference-in-Sargan/Hansen statistics may be negative.
+
+Dynamic panel-data estimation, two-step system GMM
+------------------------------------------------------------------------------
+Group variable: id                              Number of obs      =      1121
+Time variable : year                            Number of groups   =       243
+Number of instruments = 213                     Obs per group: min =         1
+Wald chi2(21) =  1.12e+06                                      avg =      4.61
+Prob > chi2   =     0.000                                      max =         6
+------------------------------------------------------------------------------
+             |              Corrected
+        lso2 |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        lso2 |
+         L1. |   .5237703   .0324898    16.12   0.000     .4600915    .5874491
+         L2. |   .3139344   .0338382     9.28   0.000     .2476128     .380256
+             |
+      rfdi_b |
+         --. |   2.10e-07   3.07e-07     0.68   0.494    -3.91e-07    8.11e-07
+         L1. |   1.11e-07   3.04e-07     0.36   0.715    -4.85e-07    7.07e-07
+             |
+       gov_b |
+         --. |   4.11e-09   1.75e-09     2.35   0.019     6.81e-10    7.54e-09
+         L1. |  -1.02e-09   1.18e-09    -0.86   0.387    -3.34e-09    1.30e-09
+             |
+      pgrp_b |   3.53e-08   5.45e-08     0.65   0.517    -7.15e-08    1.42e-07
+    secgrp_b |   .0007405   .0019135     0.39   0.699      -.00301    .0044909
+      wage_b |  -5.21e-09   2.34e-09    -2.22   0.026    -9.80e-09   -6.14e-10
+laborinsec_b |   .0040911   .0019159     2.14   0.033      .000336    .0078462
+    delivery |  -4.93e-07   3.86e-06    -0.13   0.898    -8.05e-06    7.06e-06
+   density_b |  -.0003975   .0013342    -0.30   0.766    -.0030125    .0022176
+    laborval |     .00991   .0103286     0.96   0.337    -.0103338    .0301537
+             |
+        year |
+       2008  |          0  (empty)
+       2009  |          0  (omitted)
+       2010  |   1.445856   .3269479     4.42   0.000     .8050499    2.086662
+       2011  |   1.509106   .3046415     4.95   0.000     .9120193    2.106192
+       2012  |   1.405245   .3062464     4.59   0.000     .8050133    2.005477
+       2013  |   1.213642   .3034834     4.00   0.000     .6188254    1.808458
+       2014  |   1.471749   .3133485     4.70   0.000     .8575974    2.085901
+       2015  |   1.372248   .3097963     4.43   0.000     .7650586    1.979438
+             |
+       _cons |          0  (omitted)
+------------------------------------------------------------------------------
+Instruments for first differences equation
+  Standard
+    D.(L2.lso2 delivery wage_a density_b laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year)
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    L(1/7).(L.lso2 rfdi_b L.rfdi_b gov_b L.gov_b secgrp_b pgrp_b laborinsec_b)
+Instruments for levels equation
+  Standard
+    L2.lso2 delivery wage_a density_b laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year
+    _cons
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    D.(L.lso2 rfdi_b L.rfdi_b gov_b L.gov_b secgrp_b pgrp_b laborinsec_b)
+------------------------------------------------------------------------------
+Arellano-Bond test for AR(1) in first differences: z =  -4.84  Pr > z =  0.000
+Arellano-Bond test for AR(2) in first differences: z =  -0.13  Pr > z =  0.894
+------------------------------------------------------------------------------
+Sargan test of overid. restrictions: chi2(191)  = 375.01  Prob > chi2 =  0.000
+  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2(191)  = 204.07  Prob > chi2 =  0.246
+  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  GMM instruments for levels
+    Hansen test excluding group:     chi2(144)  = 148.25  Prob > chi2 =  0.387
+    Difference (null H = exogenous): chi2(47)   =  55.82  Prob > chi2 =  0.177
+  iv(L2.lso2 delivery wage_a density_b laborval 1b.year 2.year 3.year 4.year 5.year 6.year 7.year 8.year)
+    Hansen test excluding group:     chi2(180)  = 189.03  Prob > chi2 =  0.307
+    Difference (null H = exogenous): chi2(11)   =  15.04  Prob > chi2 =  0.181
+
+
+. est store panel4b
+
+. outreg2 panel4b using datab,word append ctitle ("SYS-GMM4.4") e(ar1 ar1p ar2 ar2p sargan sarganp hansen han
+> senp N)  noobs bdec(3) sdec(3) drop(i.year)
+datab.rtf
+dir : seeout
+
+. 
+. *5.1
+. local xx5  " L(0/1).(fdi_a lso2 ) pgrp_a secgrp_a  wage_a laborinsec_a  delivery  density_a laborval i.year
+> "
+
+. local gmm5 " L.gov_a    L(0/1).(fdi_a lso2)   secgrp_a    pgrp_a laborinsec_a  "
+
+. local iv5  "                       delivery         wage_a  density_a b  laborval         i.year"
+
+. xtabond2 gov_a L.gov_a  `xx5', gmm(`gmm5') iv(`iv5') twostep robust
+Favoring space over speed. To switch, type or click on mata: mata set matafavor speed, perm.
+ivstyle(delivery wage_a density_a b laborval i.year) invalid.
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "C:\stata\final data\STD02000000.tmp"
+
+. 
+. *5.1
+. local xx5  " L(0/1).(fdi_a lso2 ) pgrp_a secgrp_a  wage_a laborinsec_a  delivery  density_a laborval i.year
+> "
+
+. local gmm5 " L.gov_a    L(0/1).(fdi_a lso2)   secgrp_a    pgrp_a laborinsec_a  "
+
+. local iv5  "                       delivery         wage_a  density_a   laborval         i.year"
+
+. xtabond2 gov_a L.gov_a  `xx5', gmm(`gmm5') iv(`iv5') twostep robust
+Favoring space over speed. To switch, type or click on mata: mata set matafavor speed, perm.
+Warning: Two-step estimated covariance matrix of moments is singular.
+  Using a generalized inverse to calculate optimal weighting matrix for two-step estimation.
+  Difference-in-Sargan/Hansen statistics may be negative.
+
+Dynamic panel-data estimation, two-step system GMM
+------------------------------------------------------------------------------
+Group variable: id                              Number of obs      =      1441
+Time variable : year                            Number of groups   =       261
+Number of instruments = 238                     Obs per group: min =         1
+Wald chi2(20) =  19776.18                                      avg =      5.52
+Prob > chi2   =     0.000                                      max =         7
+------------------------------------------------------------------------------
+             |              Corrected
+       gov_a |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       gov_a |
+         L1. |   .9329233   .0185677    50.24   0.000     .8965313    .9693152
+             |
+       fdi_a |
+         --. |   .0007073   .0002049     3.45   0.001     .0003057    .0011088
+         L1. |  -.0004932   .0001665    -2.96   0.003    -.0008195   -.0001668
+             |
+        lso2 |
+         --. |   712.1498   774.7535     0.92   0.358    -806.3391    2230.639
+         L1. |   1264.488   1750.316     0.72   0.470    -2166.068    4695.044
+             |
+      pgrp_a |   .0080199   .0100772     0.80   0.426     -.011731    .0277709
+    secgrp_a |     300.31   88.00164     3.41   0.001     127.8299      472.79
+      wage_a |   .0001716    .000055     3.12   0.002     .0000639    .0002793
+laborinsec_a |  -465.5546   158.8282    -2.93   0.003    -776.8521   -154.2571
+    delivery |   .0487583    .027968     1.74   0.081     -.006058    .1035747
+   density_a |   5.168894   12.57325     0.41   0.681    -19.47423    29.81201
+    laborval |   -243.785     218.39    -1.12   0.264    -671.8215    184.2515
+             |
+        year |
+       2008  |          0  (empty)
+       2009  |  -15336.73   17907.33    -0.86   0.392    -50434.45    19760.99
+       2010  |  -17105.97   17765.08    -0.96   0.336     -51924.9    17712.95
+       2011  |  -20618.86    17239.6    -1.20   0.232    -54407.87    13170.14
+       2012  |  -16596.59   17056.11    -0.97   0.331    -50025.95    16832.78
+       2013  |  -16363.41   16379.17    -1.00   0.318    -48465.99    15739.17
+       2014  |   39522.57   15251.18     2.59   0.010     9630.799    69414.34
+       2015  |  -8434.352   15751.25    -0.54   0.592    -39306.23    22437.52
+             |
+       _cons |          0  (omitted)
+------------------------------------------------------------------------------
+Instruments for first differences equation
+  Standard
+    D.(delivery wage_a density_a laborval 1b.year 2.year 3.year 4.year 5.year
+    6.year 7.year 8.year)
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    L(1/7).(L.gov_a fdi_a L.fdi_a lso2 L.lso2 secgrp_a pgrp_a laborinsec_a)
+Instruments for levels equation
+  Standard
+    delivery wage_a density_a laborval 1b.year 2.year 3.year 4.year 5.year
+    6.year 7.year 8.year
+    _cons
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    D.(L.gov_a fdi_a L.fdi_a lso2 L.lso2 secgrp_a pgrp_a laborinsec_a)
+------------------------------------------------------------------------------
+Arellano-Bond test for AR(1) in first differences: z =  -1.80  Pr > z =  0.073
+Arellano-Bond test for AR(2) in first differences: z =   1.20  Pr > z =  0.230
+------------------------------------------------------------------------------
+Sargan test of overid. restrictions: chi2(217)  =1202.80  Prob > chi2 =  0.000
+  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2(217)  = 226.68  Prob > chi2 =  0.312
+  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  GMM instruments for levels
+    Hansen test excluding group:     chi2(165)  = 192.54  Prob > chi2 =  0.070
+    Difference (null H = exogenous): chi2(52)   =  34.14  Prob > chi2 =  0.974
+  iv(delivery wage_a density_a laborval 1b.year 2.year 3.year 4.year 5.year 6.year 7.year 8.year)
+    Hansen test excluding group:     chi2(207)  = 223.07  Prob > chi2 =  0.211
+    Difference (null H = exogenous): chi2(10)   =   3.62  Prob > chi2 =  0.963
+
+
+. est store panel5a
+
+. outreg2 panel5a using data9,word replace ctitle ("SYS-GMM5.1") e(ar1 ar1p ar2 ar2p sargan sarganp hansen ha
+> nsenp N)  noobs bdec(3) sdec(3) drop(i.year)
+data9.rtf
+dir : seeout
+
+. 
+. *5.2
+. local xx5  " L(0/1).(HMT_a lso2) pgrp_a secgrp_a  wage_a laborinsec_a  delivery  density_a laborval i.year"
+
+. local gmm5 " L.gov_a   L(0/1).(HMT_a lso2)   secgrp_a  density_a laborinsec_a  "
+
+. local iv5  "                    delivery         wage_a    laborval    pgrp_a       i.year"
+
+. xtabond2 gov_a L.gov_a  `xx5', gmm(`gmm5') iv(`iv5') twostep robust
+Favoring space over speed. To switch, type or click on mata: mata set matafavor speed, perm.
+Warning: Two-step estimated covariance matrix of moments is singular.
+  Using a generalized inverse to calculate optimal weighting matrix for two-step estimation.
+  Difference-in-Sargan/Hansen statistics may be negative.
+
+Dynamic panel-data estimation, two-step system GMM
+------------------------------------------------------------------------------
+Group variable: id                              Number of obs      =      1409
+Time variable : year                            Number of groups   =       256
+Number of instruments = 238                     Obs per group: min =         1
+Wald chi2(20) =  17487.86                                      avg =      5.50
+Prob > chi2   =     0.000                                      max =         7
+------------------------------------------------------------------------------
+             |              Corrected
+       gov_a |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       gov_a |
+         L1. |   .8830705   .0169902    51.98   0.000     .8497703    .9163707
+             |
+       HMT_a |
+         --. |  -.0001376   .0001704    -0.81   0.419    -.0004716    .0001964
+         L1. |   .0009757   .0002709     3.60   0.000     .0004447    .0015067
+             |
+        lso2 |
+         --. |   1342.265   801.4236     1.67   0.094    -228.4963    2913.026
+         L1. |   2374.581   1841.863     1.29   0.197    -1235.403    5984.566
+             |
+      pgrp_a |  -.0096122   .0127123    -0.76   0.450    -.0345278    .0153034
+    secgrp_a |   343.8263   81.60599     4.21   0.000     183.8815    503.7711
+      wage_a |  -.0000628   .0000389    -1.62   0.106     -.000139    .0000134
+laborinsec_a |  -498.5389   166.8109    -2.99   0.003    -825.4822   -171.5956
+    delivery |   .0348163   .0282031     1.23   0.217    -.0204607    .0900933
+   density_a |   2.729696   14.18533     0.19   0.847    -25.07303    30.53243
+    laborval |  -181.9697   239.1853    -0.76   0.447    -650.7644     286.825
+             |
+        year |
+       2008  |          0  (empty)
+       2009  |  -34773.26   18032.91    -1.93   0.054    -70117.11    570.5845
+       2010  |  -35529.79   17755.57    -2.00   0.045    -70330.08   -729.5092
+       2011  |  -39492.12   17394.44    -2.27   0.023    -73584.59   -5399.645
+       2012  |  -35181.34    17104.9    -2.06   0.040    -68706.34    -1656.35
+       2013  |  -30461.31    16417.1    -1.86   0.064    -62638.23    1715.618
+       2014  |   21057.66   15638.54     1.35   0.178     -9593.32    51708.64
+       2015  |  -26024.84   16265.66    -1.60   0.110    -57904.94     5855.27
+             |
+       _cons |          0  (omitted)
+------------------------------------------------------------------------------
+Instruments for first differences equation
+  Standard
+    D.(delivery wage_a laborval pgrp_a 1b.year 2.year 3.year 4.year 5.year
+    6.year 7.year 8.year)
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    L(1/7).(L.gov_a HMT_a L.HMT_a lso2 L.lso2 secgrp_a density_a laborinsec_a)
+Instruments for levels equation
+  Standard
+    delivery wage_a laborval pgrp_a 1b.year 2.year 3.year 4.year 5.year 6.year
+    7.year 8.year
+    _cons
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    D.(L.gov_a HMT_a L.HMT_a lso2 L.lso2 secgrp_a density_a laborinsec_a)
+------------------------------------------------------------------------------
+Arellano-Bond test for AR(1) in first differences: z =  -1.80  Pr > z =  0.072
+Arellano-Bond test for AR(2) in first differences: z =   0.77  Pr > z =  0.443
+------------------------------------------------------------------------------
+Sargan test of overid. restrictions: chi2(217)  =1208.67  Prob > chi2 =  0.000
+  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2(217)  = 230.80  Prob > chi2 =  0.248
+  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  GMM instruments for levels
+    Hansen test excluding group:     chi2(165)  = 201.33  Prob > chi2 =  0.028
+    Difference (null H = exogenous): chi2(52)   =  29.47  Prob > chi2 =  0.995
+  iv(delivery wage_a laborval pgrp_a 1b.year 2.year 3.year 4.year 5.year 6.year 7.year 8.year)
+    Hansen test excluding group:     chi2(207)  = 226.66  Prob > chi2 =  0.166
+    Difference (null H = exogenous): chi2(10)   =   4.14  Prob > chi2 =  0.941
+
+
+. est store panel5a
+
+. outreg2 panel5a using data9,word replace ctitle ("SYS-GMM5.1") e(ar1 ar1p ar2 ar2p sargan sarganp hansen ha
+> nsenp N)  noobs bdec(3) sdec(3) drop(i.year)
+data9.rtf
+dir : seeout
+
+. 
+. *5.3
+. local xx5  " L(0/1).(domestic_a lso2) pgrp_a secgrp_a  wage_a laborinsec_a  delivery  density_a laborval i.
+> year"
+
+. local gmm5 " L.gov_a   L(0/1).(domestic_a lso2)   secgrp_a  density_a laborinsec_a  "
+
+. local iv5  "                      delivery         wage_a    laborval    pgrp_a       i.year"
+
+. xtabond2 gov_a L.gov_a  `xx5', gmm(`gmm5') iv(`iv5') twostep robust
+Favoring space over speed. To switch, type or click on mata: mata set matafavor speed, perm.
+Warning: Two-step estimated covariance matrix of moments is singular.
+  Using a generalized inverse to calculate optimal weighting matrix for two-step estimation.
+  Difference-in-Sargan/Hansen statistics may be negative.
+
+Dynamic panel-data estimation, two-step system GMM
+------------------------------------------------------------------------------
+Group variable: id                              Number of obs      =      1441
+Time variable : year                            Number of groups   =       261
+Number of instruments = 238                     Obs per group: min =         1
+Wald chi2(20) =  14481.33                                      avg =      5.52
+Prob > chi2   =     0.000                                      max =         7
+------------------------------------------------------------------------------
+             |              Corrected
+       gov_a |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       gov_a |
+         L1. |   .8914967   .0180909    49.28   0.000     .8560392    .9269542
+             |
+  domestic_a |
+         --. |   .0003915   .0000957     4.09   0.000     .0002039    .0005791
+         L1. |  -.0001868   .0000754    -2.48   0.013    -.0003345   -.0000391
+             |
+        lso2 |
+         --. |   355.8954   959.6447     0.37   0.711    -1524.974    2236.764
+         L1. |   1258.267   1887.387     0.67   0.505    -2440.944    4957.478
+             |
+      pgrp_a |   .0213673   .0087907     2.43   0.015     .0041378    .0385968
+    secgrp_a |   425.2915    90.8519     4.68   0.000     247.2251     603.358
+      wage_a |   .0000449   .0000404     1.11   0.266    -.0000342     .000124
+laborinsec_a |   -674.005   223.9503    -3.01   0.003     -1112.94   -235.0705
+    delivery |   .0277061   .0366988     0.75   0.450    -.0442223    .0996345
+   density_a |   6.248201   15.14654     0.41   0.680    -23.43847    35.93488
+    laborval |  -492.7716   315.2581    -1.56   0.118    -1110.666     125.123
+             |
+        year |
+       2008  |          0  (empty)
+       2009  |  -10321.51   14127.59    -0.73   0.465    -38011.09    17368.06
+       2010  |  -7649.008   13666.65    -0.56   0.576    -34435.16    19137.14
+       2011  |  -15120.17   13684.62    -1.10   0.269    -41941.52    11701.19
+       2012  |   -14908.5   13605.68    -1.10   0.273    -41575.15    11758.14
+       2013  |  -1302.185   12535.28    -0.10   0.917    -25870.88     23266.5
+       2014  |   42323.51   12660.97     3.34   0.001     17508.47    67138.55
+       2015  |  -3060.234   12177.39    -0.25   0.802    -26927.48    20807.01
+             |
+       _cons |          0  (omitted)
+------------------------------------------------------------------------------
+Instruments for first differences equation
+  Standard
+    D.(delivery wage_a laborval pgrp_a 1b.year 2.year 3.year 4.year 5.year
+    6.year 7.year 8.year)
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    L(1/7).(L.gov_a domestic_a L.domestic_a lso2 L.lso2 secgrp_a density_a
+    laborinsec_a)
+Instruments for levels equation
+  Standard
+    delivery wage_a laborval pgrp_a 1b.year 2.year 3.year 4.year 5.year 6.year
+    7.year 8.year
+    _cons
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    D.(L.gov_a domestic_a L.domestic_a lso2 L.lso2 secgrp_a density_a
+    laborinsec_a)
+------------------------------------------------------------------------------
+Arellano-Bond test for AR(1) in first differences: z =  -1.64  Pr > z =  0.100
+Arellano-Bond test for AR(2) in first differences: z =  -1.56  Pr > z =  0.119
+------------------------------------------------------------------------------
+Sargan test of overid. restrictions: chi2(217)  =1276.75  Prob > chi2 =  0.000
+  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2(217)  = 239.60  Prob > chi2 =  0.140
+  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  GMM instruments for levels
+    Hansen test excluding group:     chi2(165)  = 205.71  Prob > chi2 =  0.017
+    Difference (null H = exogenous): chi2(52)   =  33.89  Prob > chi2 =  0.976
+  iv(delivery wage_a laborval pgrp_a 1b.year 2.year 3.year 4.year 5.year 6.year 7.year 8.year)
+    Hansen test excluding group:     chi2(207)  = 234.17  Prob > chi2 =  0.095
+    Difference (null H = exogenous): chi2(10)   =   5.43  Prob > chi2 =  0.861
+
+
+. est store panel5c
+
+. outreg2 panel5c using data9,word replace ctitle ("SYS-GMM5.3") e(ar1 ar1p ar2 ar2p sargan sarganp hansen ha
+> nsenp N)  noobs bdec(3) sdec(3) drop(i.year)
+data9.rtf
+dir : seeout
+
+. 
+. 
+. *5.4
+. local xx5  " L(0/1).(rfdi_a lso2) pgrp_a secgrp_a  wage_a laborinsec_a  delivery  density_a laborval i.year
+> "
+
+. local gmm5 " L.gov_a   L(0/1).(rfdi_a lso2)   secgrp_a  density_a laborinsec_a  "
+
+. local iv5  "                      delivery         wage_a    laborval    pgrp_a       i.year"
+
+. xtabond2 gov_a L.gov_a  `xx5', gmm(`gmm5') iv(`iv5') twostep robust
+Favoring space over speed. To switch, type or click on mata: mata set matafavor speed, perm.
+Warning: Two-step estimated covariance matrix of moments is singular.
+  Using a generalized inverse to calculate optimal weighting matrix for two-step estimation.
+  Difference-in-Sargan/Hansen statistics may be negative.
+
+Dynamic panel-data estimation, two-step system GMM
+------------------------------------------------------------------------------
+Group variable: id                              Number of obs      =      1441
+Time variable : year                            Number of groups   =       261
+Number of instruments = 238                     Obs per group: min =         1
+Wald chi2(20) =  15211.96                                      avg =      5.52
+Prob > chi2   =     0.000                                      max =         7
+------------------------------------------------------------------------------
+             |              Corrected
+       gov_a |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       gov_a |
+         L1. |   .8276772   .0274107    30.20   0.000     .7739532    .8814011
+             |
+      rfdi_a |
+         --. |   .0225822   .0078884     2.86   0.004     .0071212    .0380432
+         L1. |   .0247919   .0110975     2.23   0.025     .0030411    .0465426
+             |
+        lso2 |
+         --. |   -6.80935   675.3343    -0.01   0.992     -1330.44    1316.822
+         L1. |   56.21699   1844.276     0.03   0.976    -3558.498    3670.932
+             |
+      pgrp_a |   .0119722   .0097345     1.23   0.219     -.007107    .0310514
+    secgrp_a |   382.7833   89.39407     4.28   0.000     207.5742    557.9925
+      wage_a |  -.0001516   .0000417    -3.63   0.000    -.0002333   -.0000698
+laborinsec_a |  -390.8216   130.7493    -2.99   0.003    -647.0854   -134.5577
+    delivery |    .048912   .0279501     1.75   0.080    -.0058693    .1036933
+   density_a |   6.162137   10.94774     0.56   0.574    -15.29504    27.61931
+    laborval |   149.5638   237.7957     0.63   0.529    -316.5071    615.6348
+             |
+        year |
+       2008  |          0  (empty)
+       2009  |  -5149.268   17454.55    -0.30   0.768    -39359.56    29061.03
+       2010  |  -5959.651   17258.39    -0.35   0.730    -39785.48    27866.17
+       2011  |  -9847.137    16239.1    -0.61   0.544    -41675.19    21980.91
+       2012  |   -8053.87   16324.81    -0.49   0.622    -40049.92    23942.18
+       2013  |  -1475.766   16237.52    -0.09   0.928    -33300.72    30349.19
+       2014  |   49160.85   15841.47     3.10   0.002     18112.13    80209.57
+       2015  |   3031.953   16107.38     0.19   0.851    -28537.93    34601.83
+             |
+       _cons |          0  (omitted)
+------------------------------------------------------------------------------
+Instruments for first differences equation
+  Standard
+    D.(delivery wage_a laborval pgrp_a 1b.year 2.year 3.year 4.year 5.year
+    6.year 7.year 8.year)
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    L(1/7).(L.gov_a rfdi_a L.rfdi_a lso2 L.lso2 secgrp_a density_a
+    laborinsec_a)
+Instruments for levels equation
+  Standard
+    delivery wage_a laborval pgrp_a 1b.year 2.year 3.year 4.year 5.year 6.year
+    7.year 8.year
+    _cons
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    D.(L.gov_a rfdi_a L.rfdi_a lso2 L.lso2 secgrp_a density_a laborinsec_a)
+------------------------------------------------------------------------------
+Arellano-Bond test for AR(1) in first differences: z =  -1.47  Pr > z =  0.141
+Arellano-Bond test for AR(2) in first differences: z =  -3.09  Pr > z =  0.002
+------------------------------------------------------------------------------
+Sargan test of overid. restrictions: chi2(217)  =1315.83  Prob > chi2 =  0.000
+  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2(217)  = 231.05  Prob > chi2 =  0.244
+  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  GMM instruments for levels
+    Hansen test excluding group:     chi2(165)  = 194.40  Prob > chi2 =  0.059
+    Difference (null H = exogenous): chi2(52)   =  36.66  Prob > chi2 =  0.947
+  iv(delivery wage_a laborval pgrp_a 1b.year 2.year 3.year 4.year 5.year 6.year 7.year 8.year)
+    Hansen test excluding group:     chi2(207)  = 224.89  Prob > chi2 =  0.187
+    Difference (null H = exogenous): chi2(10)   =   6.16  Prob > chi2 =  0.802
+
+
+. est store panel5d
+
+. outreg2 panel5d using data9,word replace ctitle ("SYS-GMM5.4") e(ar1 ar1p ar2 ar2p sargan sarganp hansen ha
+> nsenp N)  noobs bdec(3) sdec(3) drop(i.year)
+data9.rtf
+dir : seeout
+
+. 
+. 
+. 
+. *6.1 fdi
+. local xx6  " L(0/1).(fdi_b lso2 ) pgrp_b secgrp_b  wage_b laborinsec_b  delivery  density_b laborval i.year
+> "
+
+. local gmm6 " L.lso2    L(0/1).(fdi_b lso2)   secgrp_b    pgrp_b laborinsec_b  "
+
+. local iv6  "                       delivery         wage_a  density_b  laborval         i.year"
+
+. xtabond2 gov_b L.gov_b `xx6', gmm(`gmm6') iv(`iv6') twostep robust
+Favoring space over speed. To switch, type or click on mata: mata set matafavor speed, perm.
+Warning: Two-step estimated covariance matrix of moments is singular.
+  Using a generalized inverse to calculate optimal weighting matrix for two-step estimation.
+  Difference-in-Sargan/Hansen statistics may be negative.
+
+Dynamic panel-data estimation, two-step system GMM
+------------------------------------------------------------------------------
+Group variable: id                              Number of obs      =      1408
+Time variable : year                            Number of groups   =       257
+Number of instruments = 211                     Obs per group: min =         1
+Wald chi2(20) =    863.24                                      avg =      5.48
+Prob > chi2   =     0.000                                      max =         7
+------------------------------------------------------------------------------
+             |              Corrected
+       gov_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       gov_b |
+         L1. |    .084836   .0384187     2.21   0.027     .0095367    .1601353
+             |
+       fdi_b |
+         --. |  -.3410008   .0692606    -4.92   0.000    -.4767491   -.2052525
+         L1. |   .5317549   .0984459     5.40   0.000     .3388046    .7247053
+             |
+        lso2 |
+         --. |    5266801    2014692     2.61   0.009      1318078     9215525
+         L1. |   698075.5   988215.8     0.71   0.480     -1238792     2634943
+             |
+      pgrp_b |   4.125939   3.256844     1.27   0.205    -2.257359    10.50924
+    secgrp_b |  -36889.76   37810.58    -0.98   0.329    -110997.1    37217.61
+      wage_b |   .1148493   .0685943     1.67   0.094    -.0195931    .2492916
+laborinsec_b |    27845.5   46979.63     0.59   0.553    -64232.89    119923.9
+    delivery |  -142.3926    92.3269    -1.54   0.123      -323.35    38.56481
+   density_b |   -12379.1   33141.63    -0.37   0.709     -77335.5    52577.31
+    laborval |  -50837.02     156825    -0.32   0.746    -358208.4    256534.3
+             |
+        year |
+       2008  |          0  (empty)
+       2009  |  -2.22e+07    2588048    -8.58   0.000    -2.73e+07   -1.71e+07
+       2010  |          0  (omitted)
+       2011  |  -2.48e+07    3928066    -6.32   0.000    -3.25e+07   -1.71e+07
+       2012  |  -2.39e+07    3538811    -6.76   0.000    -3.09e+07   -1.70e+07
+       2013  |  -2.61e+07    3191880    -8.17   0.000    -3.23e+07   -1.98e+07
+       2014  |  -2.10e+07    3022800    -6.96   0.000    -2.70e+07   -1.51e+07
+       2015  |  -2.33e+07    3504370    -6.66   0.000    -3.02e+07   -1.65e+07
+             |
+       _cons |  -3.85e+07   1.79e+07    -2.15   0.032    -7.36e+07    -3383582
+------------------------------------------------------------------------------
+Instruments for first differences equation
+  Standard
+    D.(delivery wage_a density_b laborval 1b.year 2.year 3.year 4.year 5.year
+    6.year 7.year 8.year)
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    L(1/7).(L.lso2 fdi_b L.fdi_b lso2 L.lso2 secgrp_b pgrp_b laborinsec_b)
+Instruments for levels equation
+  Standard
+    delivery wage_a density_b laborval 1b.year 2.year 3.year 4.year 5.year
+    6.year 7.year 8.year
+    _cons
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    D.(L.lso2 fdi_b L.fdi_b lso2 L.lso2 secgrp_b pgrp_b laborinsec_b)
+------------------------------------------------------------------------------
+Arellano-Bond test for AR(1) in first differences: z =  -3.16  Pr > z =  0.002
+Arellano-Bond test for AR(2) in first differences: z =   1.95  Pr > z =  0.051
+------------------------------------------------------------------------------
+Sargan test of overid. restrictions: chi2(190)  =1047.32  Prob > chi2 =  0.000
+  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2(190)  = 210.75  Prob > chi2 =  0.144
+  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  GMM instruments for levels
+    Hansen test excluding group:     chi2(144)  = 176.20  Prob > chi2 =  0.035
+    Difference (null H = exogenous): chi2(46)   =  34.55  Prob > chi2 =  0.892
+  iv(delivery wage_a density_b laborval 1b.year 2.year 3.year 4.year 5.year 6.year 7.year 8.year)
+    Hansen test excluding group:     chi2(180)  = 191.21  Prob > chi2 =  0.270
+    Difference (null H = exogenous): chi2(10)   =  19.54  Prob > chi2 =  0.034
+
+
+. est store panel6a
+
+. outreg2 panel6a using datab,word replace ctitle ("SYS-GMM6.1") e(ar1 ar1p ar2 ar2p sargan sarganp hansen ha
+> nsenp N)  noobs bdec(3) sdec(3) drop(i.year)
+datab.rtf
+dir : seeout
+
+. 
+. *6.2
+. local xx6  " L(0/1).(HMT_b lso2 ) pgrp_b secgrp_b  wage_b laborinsec_b  delivery  density_b laborval i.year
+> "
+
+. local gmm6 " L.lso2    L(0/1).(HMT_b lso2)   secgrp_b   pgrp_b     laborinsec_b  "
+
+. local iv6  "                       delivery      wage_a  density_b   laborval         i.year"
+
+. xtabond2 gov_b L.gov_b `xx6', gmm(`gmm6') iv(`iv6') twostep robust
+Favoring space over speed. To switch, type or click on mata: mata set matafavor speed, perm.
+Warning: Two-step estimated covariance matrix of moments is singular.
+  Using a generalized inverse to calculate optimal weighting matrix for two-step estimation.
+  Difference-in-Sargan/Hansen statistics may be negative.
+
+Dynamic panel-data estimation, two-step system GMM
+------------------------------------------------------------------------------
+Group variable: id                              Number of obs      =      1373
+Time variable : year                            Number of groups   =       249
+Number of instruments = 211                     Obs per group: min =         1
+Wald chi2(20) =   1422.81                                      avg =      5.51
+Prob > chi2   =     0.000                                      max =         7
+------------------------------------------------------------------------------
+             |              Corrected
+       gov_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       gov_b |
+         L1. |   .2253075   .0646732     3.48   0.000     .0985504    .3520646
+             |
+       HMT_b |
+         --. |  -1.504842   .3150767    -4.78   0.000    -2.122381   -.8873033
+         L1. |   .9340545   .1224228     7.63   0.000     .6941102    1.173999
+             |
+        lso2 |
+         --. |    1512158    1214257     1.25   0.213    -867741.5     3892058
+         L1. |    1354520   842529.9     1.61   0.108    -296808.2     3005848
+             |
+      pgrp_b |   1.884205   2.241442     0.84   0.401    -2.508941    6.277351
+    secgrp_b |  -114172.7   42722.71    -2.67   0.008    -197907.7   -30437.77
+      wage_b |   .5933005   .1633607     3.63   0.000     .2731195    .9134816
+laborinsec_b |   106312.2      44025     2.41   0.016     20024.82    192599.6
+    delivery |  -109.3691   68.96136    -1.59   0.113    -244.5308    25.79273
+   density_b |  -19589.69   28976.44    -0.68   0.499    -76382.47    37203.09
+    laborval |   50096.19   144546.1     0.35   0.729      -233209    333401.4
+             |
+        year |
+       2008  |          0  (empty)
+       2009  |  -1.31e+07    3020964    -4.35   0.000    -1.91e+07    -7216884
+       2010  |          0  (omitted)
+       2011  |  -1.91e+07    4339862    -4.39   0.000    -2.76e+07   -1.06e+07
+       2012  |  -1.44e+07    4728200    -3.04   0.002    -2.36e+07    -5083059
+       2013  |  -2.31e+07    3512845    -6.58   0.000    -3.00e+07   -1.62e+07
+       2014  |  -1.67e+07    4998703    -3.33   0.001    -2.64e+07    -6854805
+       2015  |  -1.41e+07    5117414    -2.75   0.006    -2.41e+07    -4047074
+             |
+       _cons |  -1.34e+07   1.46e+07    -0.92   0.359    -4.21e+07    1.53e+07
+------------------------------------------------------------------------------
+Instruments for first differences equation
+  Standard
+    D.(delivery wage_a density_b laborval 1b.year 2.year 3.year 4.year 5.year
+    6.year 7.year 8.year)
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    L(1/7).(L.lso2 HMT_b L.HMT_b lso2 L.lso2 secgrp_b pgrp_b laborinsec_b)
+Instruments for levels equation
+  Standard
+    delivery wage_a density_b laborval 1b.year 2.year 3.year 4.year 5.year
+    6.year 7.year 8.year
+    _cons
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    D.(L.lso2 HMT_b L.HMT_b lso2 L.lso2 secgrp_b pgrp_b laborinsec_b)
+------------------------------------------------------------------------------
+Arellano-Bond test for AR(1) in first differences: z =  -2.73  Pr > z =  0.006
+Arellano-Bond test for AR(2) in first differences: z =   1.94  Pr > z =  0.052
+------------------------------------------------------------------------------
+Sargan test of overid. restrictions: chi2(190)  = 874.78  Prob > chi2 =  0.000
+  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2(190)  = 218.24  Prob > chi2 =  0.078
+  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  GMM instruments for levels
+    Hansen test excluding group:     chi2(144)  = 172.03  Prob > chi2 =  0.055
+    Difference (null H = exogenous): chi2(46)   =  46.21  Prob > chi2 =  0.464
+  iv(delivery wage_a density_b laborval 1b.year 2.year 3.year 4.year 5.year 6.year 7.year 8.year)
+    Hansen test excluding group:     chi2(180)  = 212.65  Prob > chi2 =  0.048
+    Difference (null H = exogenous): chi2(10)   =   5.59  Prob > chi2 =  0.848
+
+
+. est store panel6b
+
+. outreg2 panel6b using datab,word replace ctitle ("SYS-GMM6.2") e(ar1 ar1p ar2 ar2p sargan sarganp hansen ha
+> nsenp N)  noobs bdec(3) sdec(3) drop(i.year)
+datab.rtf
+dir : seeout
+
+. 
+. *6.3
+. local xx6  " L(0/1).(domestic_b lso2 ) pgrp_b secgrp_b  wage_b laborinsec_b  delivery  density_b laborval i
+> .year"
+
+. local gmm6 " L.lso2    L(0/1).(domestic_b lso2)   secgrp_b   laborinsec_b  "
+
+. local iv6  "                       delivery        pgrp_b   wage_a  density_b   laborval         i.year"
+
+. xtabond2 gov_b L.gov_b `xx6', gmm(`gmm6') iv(`iv6') twostep robust
+Favoring space over speed. To switch, type or click on mata: mata set matafavor speed, perm.
+Warning: Two-step estimated covariance matrix of moments is singular.
+  Using a generalized inverse to calculate optimal weighting matrix for two-step estimation.
+  Difference-in-Sargan/Hansen statistics may be negative.
+
+Dynamic panel-data estimation, two-step system GMM
+------------------------------------------------------------------------------
+Group variable: id                              Number of obs      =      1441
+Time variable : year                            Number of groups   =       261
+Number of instruments = 178                     Obs per group: min =         1
+Wald chi2(20) =    890.20                                      avg =      5.52
+Prob > chi2   =     0.000                                      max =         7
+------------------------------------------------------------------------------
+             |              Corrected
+       gov_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       gov_b |
+         L1. |  -.0660134   .0341497    -1.93   0.053    -.1329456    .0009187
+             |
+  domestic_b |
+         --. |   .3236616    .111568     2.90   0.004     .1049923    .5423308
+         L1. |  -.2523822   .0936607    -2.69   0.007    -.4359537   -.0688107
+             |
+        lso2 |
+         --. |    2097589   997900.6     2.10   0.036     141739.7     4053438
+         L1. |   612380.6   705943.8     0.87   0.386    -771243.8     1996005
+             |
+      pgrp_b |  -.2656783   .6617354    -0.40   0.688    -1.562656    1.031299
+    secgrp_b |  -59531.16   37860.23    -1.57   0.116    -133735.9    14673.52
+      wage_b |   .3502891   .0526404     6.65   0.000     .2471158    .4534624
+laborinsec_b |  -37000.79   47624.81    -0.78   0.437    -130343.7    56342.11
+    delivery |   -168.486   91.92266    -1.83   0.067    -348.6511    11.67914
+   density_b |  -35155.52   27480.04    -1.28   0.201     -89015.4    18704.36
+    laborval |   264825.4   130958.2     2.02   0.043     8152.179    521498.7
+             |
+        year |
+       2008  |          0  (empty)
+       2009  |  -2.04e+07   1.67e+07    -1.23   0.220    -5.31e+07    1.22e+07
+       2010  |   -2777178   1.57e+07    -0.18   0.860    -3.35e+07    2.80e+07
+       2011  |  -2.48e+07   1.65e+07    -1.50   0.133    -5.71e+07     7539205
+       2012  |  -2.44e+07   1.66e+07    -1.47   0.142    -5.69e+07     8121551
+       2013  |  -2.71e+07   1.59e+07    -1.71   0.088    -5.82e+07     4014940
+       2014  |  -2.79e+07   1.63e+07    -1.71   0.088    -5.99e+07     4121934
+       2015  |  -2.47e+07   1.63e+07    -1.51   0.130    -5.67e+07     7285114
+             |
+       _cons |          0  (omitted)
+------------------------------------------------------------------------------
+Instruments for first differences equation
+  Standard
+    D.(delivery pgrp_b wage_a density_b laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year)
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    L(1/7).(L.lso2 domestic_b L.domestic_b lso2 L.lso2 secgrp_b laborinsec_b)
+Instruments for levels equation
+  Standard
+    delivery pgrp_b wage_a density_b laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year
+    _cons
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    D.(L.lso2 domestic_b L.domestic_b lso2 L.lso2 secgrp_b laborinsec_b)
+------------------------------------------------------------------------------
+Arellano-Bond test for AR(1) in first differences: z =  -3.64  Pr > z =  0.000
+Arellano-Bond test for AR(2) in first differences: z =   1.05  Pr > z =  0.292
+------------------------------------------------------------------------------
+Sargan test of overid. restrictions: chi2(157)  =1383.96  Prob > chi2 =  0.000
+  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2(157)  = 173.01  Prob > chi2 =  0.181
+  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  GMM instruments for levels
+    Hansen test excluding group:     chi2(118)  = 142.14  Prob > chi2 =  0.064
+    Difference (null H = exogenous): chi2(39)   =  30.87  Prob > chi2 =  0.820
+  iv(delivery pgrp_b wage_a density_b laborval 1b.year 2.year 3.year 4.year 5.year 6.year 7.year 8.year)
+    Hansen test excluding group:     chi2(146)  = 155.93  Prob > chi2 =  0.272
+    Difference (null H = exogenous): chi2(11)   =  17.08  Prob > chi2 =  0.106
+
+
+. est store panel6c
+
+. outreg2 panel6c using datab,word append ctitle ("SYS-GMM6.3") e(ar1 ar1p ar2 ar2p sargan sarganp hansen han
+> senp N)  noobs bdec(3) sdec(3) drop(i.year)
+datab.rtf
+dir : seeout
+
+. 
+. *6.4
+. local xx6  " L(0/1).(rfdi_b lso2 ) pgrp_b secgrp_b  wage_b laborinsec_b  delivery  density_b laborval  i.ye
+> ar"
+
+. local gmm6 " L.lso2    L(0/1).(rfdi_b lso2)   secgrp_b    laborinsec_b  "
+
+. local iv6  "                       delivery       pgrp_b   wage_a  density_b   laborval         i.year"
+
+. xtabond2 gov_b L.gov_b `xx6', gmm(`gmm6') iv(`iv6') twostep robust
+Favoring space over speed. To switch, type or click on mata: mata set matafavor speed, perm.
+Warning: Two-step estimated covariance matrix of moments is singular.
+  Using a generalized inverse to calculate optimal weighting matrix for two-step estimation.
+  Difference-in-Sargan/Hansen statistics may be negative.
+
+Dynamic panel-data estimation, two-step system GMM
+------------------------------------------------------------------------------
+Group variable: id                              Number of obs      =      1441
+Time variable : year                            Number of groups   =       261
+Number of instruments = 178                     Obs per group: min =         1
+Wald chi2(20) =    933.60                                      avg =      5.52
+Prob > chi2   =     0.000                                      max =         7
+------------------------------------------------------------------------------
+             |              Corrected
+       gov_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       gov_b |
+         L1. |  -.0768082   .0125531    -6.12   0.000    -.1014119   -.0522046
+             |
+      rfdi_b |
+         --. |   24.88229   12.61794     1.97   0.049     .1515722    49.61301
+         L1. |   -25.1097    14.5565    -1.72   0.085    -53.63991    3.420515
+             |
+        lso2 |
+         --. |    3189116    1261455     2.53   0.011     716708.9     5661523
+         L1. |   468355.1   639120.1     0.73   0.464    -784297.2     1721007
+             |
+      pgrp_b |   .9860514   1.118982     0.88   0.378    -1.207113    3.179216
+    secgrp_b |  -79261.34   37397.71    -2.12   0.034    -152559.5   -5963.169
+      wage_b |   .2891552   .0469916     6.15   0.000     .1970534    .3812571
+laborinsec_b |   53866.23   38734.84     1.39   0.164    -22052.65    129785.1
+    delivery |  -100.5477   80.27091    -1.25   0.210    -257.8758    56.78045
+   density_b |  -21713.04   25639.36    -0.85   0.397    -71965.26    28539.19
+    laborval |   123416.2   133076.8     0.93   0.354    -137409.4    384241.9
+             |
+        year |
+       2008  |          0  (empty)
+       2009  |  -1.89e+07    1841891   -10.27   0.000    -2.25e+07   -1.53e+07
+       2010  |          0  (omitted)
+       2011  |  -1.96e+07    2783860    -7.04   0.000    -2.50e+07   -1.41e+07
+       2012  |  -2.12e+07    2825781    -7.52   0.000    -2.68e+07   -1.57e+07
+       2013  |  -2.58e+07    2873377    -8.99   0.000    -3.15e+07   -2.02e+07
+       2014  |  -2.15e+07    2785699    -7.73   0.000    -2.70e+07   -1.61e+07
+       2015  |  -2.10e+07    2757514    -7.63   0.000    -2.64e+07   -1.56e+07
+             |
+       _cons |  -1.63e+07   1.54e+07    -1.06   0.290    -4.65e+07    1.39e+07
+------------------------------------------------------------------------------
+Instruments for first differences equation
+  Standard
+    D.(delivery pgrp_b wage_a density_b laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year)
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    L(1/7).(L.lso2 rfdi_b L.rfdi_b lso2 L.lso2 secgrp_b laborinsec_b)
+Instruments for levels equation
+  Standard
+    delivery pgrp_b wage_a density_b laborval 1b.year 2.year 3.year 4.year
+    5.year 6.year 7.year 8.year
+    _cons
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    D.(L.lso2 rfdi_b L.rfdi_b lso2 L.lso2 secgrp_b laborinsec_b)
+------------------------------------------------------------------------------
+Arellano-Bond test for AR(1) in first differences: z =  -2.89  Pr > z =  0.004
+Arellano-Bond test for AR(2) in first differences: z =   1.51  Pr > z =  0.131
+------------------------------------------------------------------------------
+Sargan test of overid. restrictions: chi2(157)  = 977.91  Prob > chi2 =  0.000
+  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2(157)  = 179.30  Prob > chi2 =  0.107
+  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  GMM instruments for levels
+    Hansen test excluding group:     chi2(118)  = 132.85  Prob > chi2 =  0.166
+    Difference (null H = exogenous): chi2(39)   =  46.45  Prob > chi2 =  0.192
+  iv(delivery pgrp_b wage_a density_b laborval 1b.year 2.year 3.year 4.year 5.year 6.year 7.year 8.year)
+    Hansen test excluding group:     chi2(146)  = 162.65  Prob > chi2 =  0.164
+    Difference (null H = exogenous): chi2(11)   =  16.64  Prob > chi2 =  0.119
+
+
+. est store panel6d
+
+. outreg2 panel6d using datab,word replace ctitle ("SYS-GMM6.4") e(ar1 ar1p ar2 ar2p sargan sarganp hansen ha
+> nsenp N)  noobs bdec(3) sdec(3) drop(i.year)
+datab.rtf
+dir : seeout
+
+. 
+. 
+. 
+. *comparison with different model
+. *Fixed effect modej
+. local xx  "lso2 L.lso2 gov_a L.gov_a  secgrp_a pgrp_a wage_a laborinsec_a  delivery  density_a laborval  i.
+> year"
+
+. xtreg fdi_a L.fdi_a `xx',fe cluster(id)
+
+Fixed-effects (within) regression               Number of obs     =      1,441
+Group variable: id                              Number of groups  =        261
+
+R-sq:                                           Obs per group:
+     within  = 0.6688                                         min =          1
+     between = 0.5637                                         avg =        5.5
+     overall = 0.0062                                         max =          7
+
+                                                F(18,260)         =      41.56
+corr(u_i, Xb)  = -0.4653                        Prob > F          =     0.0000
+
+                                   (Std. Err. adjusted for 261 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+       fdi_a |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       fdi_a |
+         L1. |  -.0673577   .0365096    -1.84   0.066    -.1392499    .0045346
+             |
+        lso2 |
+         --. |  -186197.2   494227.9    -0.38   0.707     -1159396    787001.7
+         L1. |  -704088.5   448944.1    -1.57   0.118     -1588118    179940.8
+             |
+       gov_a |
+         --. |   29.97498   9.139889     3.28   0.001     11.97735    47.97261
+         L1. |  -8.212515   9.535255    -0.86   0.390    -26.98867    10.56364
+             |
+    secgrp_a |  -22431.71   19015.94    -1.18   0.239    -59876.56    15013.15
+      pgrp_a |   6.509157   5.743559     1.13   0.258    -4.800656    17.81897
+      wage_a |  -.2957728   .0398756    -7.42   0.000    -.3742931   -.2172525
+laborinsec_a |   42452.07   30042.55     1.41   0.159    -16705.61    101609.8
+    delivery |   31.67016   28.19885     1.12   0.262    -23.85705    87.19736
+   density_a |   13971.83   5302.132     2.64   0.009     3531.244    24412.42
+    laborval |  -268449.2     110950    -2.42   0.016    -486924.3   -49974.12
+             |
+        year |
+       2010  |   532152.4   455804.6     1.17   0.244    -365386.2     1429691
+       2011  |    1971954   684919.8     2.88   0.004     623257.9     3320650
+       2012  |    3541466   834261.8     4.25   0.000      1898696     5184236
+       2013  |    9915423    1800485     5.51   0.000      6370034    1.35e+07
+       2014  |    1859488   935608.9     1.99   0.048     17152.39     3701823
+       2015  |    2837598   927252.8     3.06   0.002      1011717     4663479
+             |
+       _cons |   1.19e+07    8038306     1.48   0.140     -3933581    2.77e+07
+-------------+----------------------------------------------------------------
+     sigma_u |   13693003
+     sigma_e |  4957041.7
+         rho |  .88413168   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+
+. est store fe1a
+
+. outreg2 using data3,word append ctitle ("Fixed effect1.1") drop(i.year)
+data3.rtf
+dir : seeout
+
+. 
+. *Fixed effect model 1.2
+. local xx  "lso2 L.lso2 gov_a L.gov_a secgrp_a pgrp_a wage_a laborinsec_a  delivery  density_a laborval i.ye
+> ar"
+
+. xtreg HMT_a L.HMT_a `xx',fe cluster(id)
+
+Fixed-effects (within) regression               Number of obs     =      1,409
+Group variable: id                              Number of groups  =        256
+
+R-sq:                                           Obs per group:
+     within  = 0.5637                                         min =          1
+     between = 0.5240                                         avg =        5.5
+     overall = 0.3748                                         max =          7
+
+                                                F(18,255)         =      17.60
+corr(u_i, Xb)  = 0.2834                         Prob > F          =     0.0000
+
+                                   (Std. Err. adjusted for 256 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+       HMT_a |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       HMT_a |
+         L1. |  -.0684618   .0828416    -0.83   0.409    -.2316026    .0946789
+             |
+        lso2 |
+         --. |  -659697.7     539971    -1.22   0.223     -1723068      403673
+         L1. |  -221954.3   236287.6    -0.94   0.348      -687278    243369.3
+             |
+       gov_a |
+         --. |   12.69669   6.775874     1.87   0.062    -.6471096    26.04049
+         L1. |   9.798773   12.91737     0.76   0.449    -15.63953    35.23708
+             |
+    secgrp_a |   18273.22   14552.94     1.26   0.210    -10386.05    46932.49
+      pgrp_a |  -6.902404   4.299805    -1.61   0.110    -15.37006    1.565248
+      wage_a |   .1867547   .0402148     4.64   0.000     .1075593    .2659501
+laborinsec_a |   36063.69   30725.11     1.17   0.242    -24443.59    96570.98
+    delivery |   17.36091   6.783944     2.56   0.011     4.001214     30.7206
+   density_a |   14372.72   6632.126     2.17   0.031     1312.007    27433.44
+    laborval |  -196551.4   67945.74    -2.89   0.004    -330357.7   -62745.17
+             |
+        year |
+       2010  |   -1204662   545749.5    -2.21   0.028     -2279412   -129911.9
+       2011  |    1865553   808137.2     2.31   0.022     274079.5     3457026
+       2012  |    2947670   794594.8     3.71   0.000      1382866     4512474
+       2013  |   -1634868    1459383    -1.12   0.264     -4508846     1239110
+       2014  |    3502595    1089445     3.22   0.001      1357139     5648051
+       2015  |    3242726    1144411     2.83   0.005     989025.7     5496426
+             |
+       _cons |    8458780    5749553     1.47   0.142     -2863875    1.98e+07
+-------------+----------------------------------------------------------------
+     sigma_u |  7838803.2
+     sigma_e |  3686156.4
+         rho |  .81891351   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+
+. est store fe1b
+
+. outreg2 using data3,word append ctitle ("Fixed effect1.2") drop(i.year)
+data3.rtf
+dir : seeout
+
+. *Fixed effect model 1.3
+. local xx  "lso2 L.lso2 gov_a L.gov_a  secgrp_a pgrp_a wage_a laborinsec_a  delivery laborval density_a  i.y
+> ear"
+
+. xtreg domestic_a L.domestic_a `xx',fe cluster(id)
+
+Fixed-effects (within) regression               Number of obs     =      1,441
+Group variable: id                              Number of groups  =        261
+
+R-sq:                                           Obs per group:
+     within  = 0.6688                                         min =          1
+     between = 0.0231                                         avg =        5.5
+     overall = 0.3253                                         max =          7
+
+                                                F(18,260)         =      59.15
+corr(u_i, Xb)  = -0.0177                        Prob > F          =     0.0000
+
+                                   (Std. Err. adjusted for 261 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+  domestic_a |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+  domestic_a |
+         L1. |   .0942434   .0450367     2.09   0.037     .0055602    .1829265
+             |
+        lso2 |
+         --. |   859620.3   954663.8     0.90   0.369     -1020237     2739477
+         L1. |   -1473632     930605    -1.58   0.115     -3306115    358849.8
+             |
+       gov_a |
+         --. |    133.605   52.85053     2.53   0.012     29.53539    237.6745
+         L1. |  -4.915962   50.84147    -0.10   0.923    -105.0294    95.19749
+             |
+    secgrp_a |  -191922.3   107487.7    -1.79   0.075    -403579.5    19734.92
+      pgrp_a |  -1.178758   7.869267    -0.15   0.881    -16.67437    14.31685
+      wage_a |  -.3110425   .0622256    -5.00   0.000    -.4335727   -.1885123
+laborinsec_a |   260965.3   87303.79     2.99   0.003      89052.8    432877.8
+    delivery |   98.63588   43.34358     2.28   0.024     13.28674     183.985
+    laborval |  -163048.6   309269.2    -0.53   0.599    -772039.8    445942.6
+   density_a |   24284.99   15974.75     1.52   0.130     -7171.36    55741.35
+             |
+        year |
+       2010  |   -8788727    1087073    -8.08   0.000    -1.09e+07    -6648139
+       2011  |    3073276    2008828     1.53   0.127    -882366.4     7028919
+       2012  |   1.47e+07    1970215     7.46   0.000     1.08e+07    1.86e+07
+       2013  |    1641028    2706363     0.61   0.545     -3688153     6970208
+       2014  |   1.21e+07    3674970     3.29   0.001      4853332    1.93e+07
+       2015  |   1.24e+07    4047738     3.05   0.003      4385662    2.03e+07
+             |
+       _cons |   1.51e+07   1.49e+07     1.01   0.312    -1.43e+07    4.46e+07
+-------------+----------------------------------------------------------------
+     sigma_u |   18417486
+     sigma_e |   11123261
+         rho |  .73273123   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+
+. est store fe1c
+
+. outreg2 using data3,word append ctitle ("Fixed effect1.3") drop(i.year)
+data3.rtf
+dir : seeout
+
+. *Fixed 1.4
+. local xx  "lso2 L.lso2 gov_a L.gov_a  secgrp_a pgrp_a wage_a laborinsec_a  delivery  density_a laborval i.y
+> ear"
+
+. xtreg rfdi_a L.rfdi_a `xx',fe cluster(id)
+
+Fixed-effects (within) regression               Number of obs     =      1,441
+Group variable: id                              Number of groups  =        261
+
+R-sq:                                           Obs per group:
+     within  = 0.2775                                         min =          1
+     between = 0.9207                                         avg =        5.5
+     overall = 0.7969                                         max =          7
+
+                                                F(18,260)         =      10.17
+corr(u_i, Xb)  = 0.8330                         Prob > F          =     0.0000
+
+                                   (Std. Err. adjusted for 261 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+      rfdi_a |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      rfdi_a |
+         L1. |   .3060859   .1043563     2.93   0.004     .1005947    .5115771
+             |
+        lso2 |
+         --. |  -9.394986   3337.424    -0.00   0.998    -6581.218    6562.428
+         L1. |   422.5692   3965.059     0.11   0.915    -7385.147    8230.286
+             |
+       gov_a |
+         --. |   .6663903   .2362012     2.82   0.005     .2012794    1.131501
+         L1. |   .3511221   .3347105     1.05   0.295    -.3079663    1.010211
+             |
+    secgrp_a |   215.3055   246.0595     0.88   0.382    -269.2176    699.8287
+      pgrp_a |   .0504351   .0453154     1.11   0.267    -.0387968     .139667
+      wage_a |    .000173   .0001544     1.12   0.264     -.000131    .0004769
+laborinsec_a |  -318.4285   539.8415    -0.59   0.556    -1381.446    744.5896
+    delivery |   .4474492   .2759637     1.62   0.106    -.0959592    .9908576
+   density_a |   202.2445   102.6782     1.97   0.050      .057902    404.4312
+    laborval |   -1938.62   1006.318    -1.93   0.055    -3920.192    42.95139
+             |
+        year |
+       2010  |  -2910.728    6268.42    -0.46   0.643    -15254.06    9432.606
+       2011  |    36937.8   16105.77     2.29   0.023     5223.451    68652.16
+       2012  |   46324.21   16848.85     2.75   0.006     13146.64    79501.78
+       2013  |   48266.82   14591.31     3.31   0.001     19534.63    76999.02
+       2014  |   27948.59   19471.68     1.44   0.152    -10393.68    66290.86
+       2015  |  -7373.053   16668.29    -0.44   0.659    -40195.08    25448.97
+             |
+       _cons |   27120.45   63793.55     0.43   0.671    -98497.35    152738.3
+-------------+----------------------------------------------------------------
+     sigma_u |  133699.42
+     sigma_e |  61398.738
+         rho |  .82583756   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+
+. est store fe1a
+
+. outreg2 using data3,word append ctitle ("Fixed effect1.4") drop(i.year)
+data3.rtf
+dir : seeout
+
+. 
+. *Fixed effect model 2.1
+. local xx  "lso2 L2.lso2 gov_b L.gov_b secgrp_b pgrp_b wage_b laborinsec_b  delivery  density_b laborval i.y
+> ear"
+
+. xtreg fdi_b L.fdi_b `xx',fe cluster(id)
+
+Fixed-effects (within) regression               Number of obs     =      1,100
+Group variable: id                              Number of groups  =        242
+
+R-sq:                                           Obs per group:
+     within  = 0.7706                                         min =          1
+     between = 0.7186                                         avg =        4.5
+     overall = 0.0119                                         max =          6
+
+                                                F(17,241)         =      52.09
+corr(u_i, Xb)  = -0.6058                        Prob > F          =     0.0000
+
+                                   (Std. Err. adjusted for 242 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+       fdi_b |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       fdi_b |
+         L1. |  -.1934175     .02599    -7.44   0.000    -.2446141   -.1422209
+             |
+        lso2 |
+         --. |   321553.6   391660.8     0.82   0.412    -449961.9     1093069
+         L2. |  -300184.6   233695.6    -1.28   0.200    -760531.3      160162
+             |
+       gov_b |
+         --. |  -.1097024   .0323605    -3.39   0.001     -.173448   -.0459568
+         L1. |   -.036766   .0083415    -4.41   0.000    -.0531976   -.0203344
+             |
+    secgrp_b |   1567.178   9597.121     0.16   0.870    -17337.77    20472.13
+      pgrp_b |   .2925199   .6608006     0.44   0.658    -1.009162    1.594202
+      wage_b |   -.275774   .0449129    -6.14   0.000    -.3642459   -.1873021
+laborinsec_b |    26752.2   21392.64     1.25   0.212    -15388.23    68892.62
+    delivery |  -7.940641   8.567745    -0.93   0.355    -24.81787    8.936584
+   density_b |   1562.133    15044.4     0.10   0.917    -28073.17    31197.43
+    laborval |   -40709.6   64688.97    -0.63   0.530    -168137.6    86718.36
+             |
+        year |
+       2011  |   -4062218    1210871    -3.35   0.001     -6447459    -1676977
+       2012  |   -4292454    1238842    -3.46   0.001     -6732794    -1852113
+       2013  |   -2471479    1093027    -2.26   0.025     -4624586   -318372.3
+       2014  |   -4604370    1215862    -3.79   0.000     -6999442    -2209297
+       2015  |   -3984595    1250733    -3.19   0.002     -6448358    -1520831
+             |
+       _cons |    8394011    4459396     1.88   0.061    -390358.6    1.72e+07
+-------------+----------------------------------------------------------------
+     sigma_u |   15038624
+     sigma_e |  3541772.9
+         rho |  .94744899   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+
+. est store fe2a 
+
+. outreg2 using data4,word append ctitle ("Fixed effect2.1") drop(i.year)
+data4.rtf
+dir : seeout
+
+. 
+. *Fixed effect model 2.2
+. local xx  "lso2 L.lso2 gov_b L.gov_b secgrp_b pgrp_b wage_b laborinsec_b  delivery  density_b laborval i.ye
+> ar"
+
+. xtreg HMT_b L.HMT_b `xx',fe cluster(id)
+
+Fixed-effects (within) regression               Number of obs     =      1,373
+Group variable: id                              Number of groups  =        249
+
+R-sq:                                           Obs per group:
+     within  = 0.6969                                         min =          1
+     between = 0.0002                                         avg =        5.5
+     overall = 0.2242                                         max =          7
+
+                                                F(18,248)         =      35.79
+corr(u_i, Xb)  = -0.0360                        Prob > F          =     0.0000
+
+                                   (Std. Err. adjusted for 249 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+       HMT_b |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       HMT_b |
+         L1. |  -.0350364   .0436784    -0.80   0.423    -.1210642    .0509914
+             |
+        lso2 |
+         --. |  -597482.8   466747.6    -1.28   0.202     -1516778    321811.9
+         L1. |  -27055.73     132421    -0.20   0.838    -287868.9    233757.4
+             |
+       gov_b |
+         --. |  -.2390401   .0287789    -8.31   0.000    -.2957224   -.1823579
+         L1. |  -.0223504   .0080119    -2.79   0.006    -.0381304   -.0065703
+             |
+    secgrp_b |   7323.886   8037.193     0.91   0.363    -8505.973    23153.75
+      pgrp_b |  -1.124205   .7458519    -1.51   0.133    -2.593217    .3448066
+      wage_b |   .1940925   .0445176     4.36   0.000     .1064118    .2817732
+laborinsec_b |      33090   22383.23     1.48   0.141    -10995.47    77175.46
+    delivery |   16.83737   9.281646     1.81   0.071    -1.443531    35.11828
+   density_b |   12915.76   6818.965     1.89   0.059    -514.7067    26346.23
+    laborval |  -113328.8   59984.87    -1.89   0.060    -231473.5    4815.949
+             |
+        year |
+       2010  |    1302599   673690.9     1.93   0.054    -24285.98     2629484
+       2011  |    2254029   740814.7     3.04   0.003     794938.7     3713120
+       2012  |    1762573   618952.1     2.85   0.005     543500.2     2981646
+       2013  |  -22520.45    1140563    -0.02   0.984     -2268946     2223905
+       2014  |    2517334   770440.2     3.27   0.001     999893.7     4034774
+       2015  |    2849499   855069.8     3.33   0.001      1165374     4533623
+             |
+       _cons |    5684070    4709611     1.21   0.229     -3591866    1.50e+07
+-------------+----------------------------------------------------------------
+     sigma_u |  6751689.7
+     sigma_e |  2924746.1
+         rho |  .84199805   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+
+. est store fe2b
+
+. outreg2 using data4,word append ctitle ("Fixed effect2.2") drop(i.year)
+data4.rtf
+dir : seeout
+
+. *Fixed effect model 2.3
+. local xx  "lso2 L.lso2 gov_b L.gov_b secgrp_b pgrp_b wage_b laborinsec_b  delivery  density_b laborval i.ye
+> ar"
+
+. xtreg domestic_b L.domestic_b `xx',fe cluster(id)
+
+Fixed-effects (within) regression               Number of obs     =      1,441
+Group variable: id                              Number of groups  =        261
+
+R-sq:                                           Obs per group:
+     within  = 0.5283                                         min =          1
+     between = 0.2793                                         avg =        5.5
+     overall = 0.0200                                         max =          7
+
+                                                F(18,260)         =      44.12
+corr(u_i, Xb)  = -0.2826                        Prob > F          =     0.0000
+
+                                   (Std. Err. adjusted for 261 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+  domestic_b |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+  domestic_b |
+         L1. |    .019886    .054893     0.36   0.717    -.0882055    .1279775
+             |
+        lso2 |
+         --. |  -5492.153   510357.5    -0.01   0.991     -1010452    999468.2
+         L1. |  -746004.6   533399.9    -1.40   0.163     -1796338    304329.2
+             |
+       gov_b |
+         --. |   .1246895   .0821443     1.52   0.130    -.0370633    .2864422
+         L1. |   -.077524   .0229379    -3.38   0.001    -.1226918   -.0323562
+             |
+    secgrp_b |  -28327.62    63637.7    -0.45   0.657    -153638.5    96983.29
+      pgrp_b |  -2.459456   1.053474    -2.33   0.020    -4.533883   -.3850288
+      wage_b |  -.3506507   .0508304    -6.90   0.000    -.4507423    -.250559
+laborinsec_b |   146150.2   34469.35     4.24   0.000     78275.56    214024.8
+    delivery |   88.02552   45.50148     1.93   0.054    -1.572811    177.6239
+   density_b |   26199.92   16959.84     1.54   0.124    -7196.202    59596.04
+    laborval |  -349615.9   151211.6    -2.31   0.022    -647371.1   -51860.62
+             |
+        year |
+       2010  |   674997.4    1982592     0.34   0.734     -3228984     4578978
+       2011  |    8706427    1761293     4.94   0.000      5238212    1.22e+07
+       2012  |    7199444    1566836     4.59   0.000      4114141    1.03e+07
+       2013  |    4279602    1615970     2.65   0.009      1097546     7461658
+       2014  |   1.08e+07    1814495     5.95   0.000      7226617    1.44e+07
+       2015  |   1.17e+07    1811742     6.43   0.000      8088945    1.52e+07
+             |
+       _cons |    8784844    6591205     1.33   0.184     -4194096    2.18e+07
+-------------+----------------------------------------------------------------
+     sigma_u |   18109622
+     sigma_e |  7394600.9
+         rho |  .85709719   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+
+. est store fe2c
+
+. outreg2 using data4,word append ctitle ("Fixed effect2.3") drop(i.year)
+data4.rtf
+dir : seeout
+
+. 
+. local xx  "lso2 L2.lso2 gov_b L.gov_b secgrp_b pgrp_b wage_b laborinsec_b  delivery  density_b laborval i.y
+> ear"
+
+. xtreg rfdi_b L.rfdi_b `xx',fe cluster(id)
+
+Fixed-effects (within) regression               Number of obs     =      1,121
+Group variable: id                              Number of groups  =        243
+
+R-sq:                                           Obs per group:
+     within  = 0.2872                                         min =          1
+     between = 0.9702                                         avg =        4.6
+     overall = 0.8649                                         max =          6
+
+                                                F(17,242)         =      12.82
+corr(u_i, Xb)  = 0.8940                         Prob > F          =     0.0000
+
+                                   (Std. Err. adjusted for 243 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+      rfdi_b |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      rfdi_b |
+         L1. |   .3443775   .1759906     1.96   0.052    -.0022914    .6910464
+             |
+        lso2 |
+         --. |    82.4994    3129.83     0.03   0.979    -6082.687    6247.685
+         L2. |   3221.732   2073.132     1.55   0.121    -861.9536    7305.418
+             |
+       gov_b |
+         --. |  -.0003473   .0002339    -1.48   0.139    -.0008082    .0001135
+         L1. |  -.0007451   .0001676    -4.44   0.000    -.0010754   -.0004149
+             |
+    secgrp_b |   .9280243   80.91479     0.01   0.991    -158.4592    160.3152
+      pgrp_b |   .0010066   .0047054     0.21   0.831    -.0082623    .0102754
+      wage_b |  -.0000797   .0001368    -0.58   0.561    -.0003492    .0001899
+laborinsec_b |  -108.7352   241.5259    -0.45   0.653    -584.4965     367.026
+    delivery |   .0646667   .1050486     0.62   0.539    -.1422596    .2715929
+   density_b |   81.28105   89.51413     0.91   0.365    -95.04525    257.6073
+    laborval |  -299.8185   640.2394    -0.47   0.640    -1560.972    961.3347
+             |
+        year |
+       2011  |   20149.13   7850.444     2.57   0.011     4685.209    35613.06
+       2012  |   6256.933   5710.598     1.10   0.274     -4991.89    17505.76
+       2013  |   11617.96    5950.22     1.95   0.052    -102.8697     23338.8
+       2014  |   11623.52   7077.966     1.64   0.102    -2318.764     25565.8
+       2015  |   9256.064   7743.883     1.20   0.233    -5997.954    24510.08
+             |
+       _cons |    14161.2   47841.02     0.30   0.767    -80076.77    108399.2
+-------------+----------------------------------------------------------------
+     sigma_u |  134222.24
+     sigma_e |   41229.11
+         rho |  .91378134   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+
+. est store fe2a 
+
+. outreg2 using data4,word append ctitle ("Fixed effect2.4") drop(i.year)
+data4.rtf
+dir : seeout
+
+. 
+. 
+. *Random effect model
+. *comparison with different model
+. *Random effect model 1.1
+. local xx  "lso2 L.lso2  gov_a L.gov_a secgrp_a pgrp_a wage_a laborinsec_a  delivery  density_a laborval  i.
+> year"
+
+. xtreg fdi_a L.fdi_a `xx',re cluster(id)
+
+Random-effects GLS regression                   Number of obs     =      1,441
+Group variable: id                              Number of groups  =        261
+
+R-sq:                                           Obs per group:
+     within  = 0.2838                                         min =          1
+     between = 0.8628                                         avg =        5.5
+     overall = 0.5867                                         max =          7
+
+                                                Wald chi2(18)     =    2270.21
+corr(u_i, X)   = 0 (assumed)                    Prob > chi2       =     0.0000
+
+                                   (Std. Err. adjusted for 261 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+       fdi_a |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       fdi_a |
+         L1. |   .7400723   .0334805    22.10   0.000     .6744518    .8056928
+             |
+        lso2 |
+         --. |    1537829   881267.2     1.75   0.081    -189422.4     3265081
+         L1. |  -869083.7   668262.1    -1.30   0.193     -2178853      440686
+             |
+       gov_a |
+         --. |    208.685   68.18939     3.06   0.002     75.03623    342.3337
+         L1. |  -173.6704   63.64928    -2.73   0.006    -298.4207    -48.9201
+             |
+    secgrp_a |  -50524.18   35761.84    -1.41   0.158    -120616.1    19567.75
+      pgrp_a |   50.21185   15.07092     3.33   0.001     20.67339    79.75031
+      wage_a |  -.2794553   .0363583    -7.69   0.000    -.3507162   -.2081945
+laborinsec_a |   94285.45   26470.14     3.56   0.000     42404.93      146166
+    delivery |   62.19685   31.74777     1.96   0.050    -.0276384    124.4213
+   density_a |    17995.6    6075.06     2.96   0.003     6088.702     29902.5
+    laborval |  -382839.2   122701.9    -3.12   0.002    -623330.6   -142347.9
+             |
+        year |
+       2010  |   539109.9   498570.6     1.08   0.280    -438070.5     1516290
+       2011  |    6219403    1448440     4.29   0.000      3380511     9058294
+       2012  |    3563950   926800.6     3.85   0.000      1747454     5380446
+       2013  |    8470342    1791013     4.73   0.000      4960022    1.20e+07
+       2014  |   -4374981    2994317    -1.46   0.144    -1.02e+07     1493773
+       2015  |  -217255.9   905137.4    -0.24   0.810     -1991293     1556781
+             |
+       _cons |  -1.14e+07    4127033    -2.77   0.006    -1.95e+07    -3330144
+-------------+----------------------------------------------------------------
+     sigma_u |          0
+     sigma_e |  4957041.7
+         rho |          0   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+
+. est store re1a 
+
+. outreg2 using data5,word append ctitle ("Random effect1.1") drop(i.year)
+data5.rtf
+dir : seeout
+
+. 
+. *Random effect model 1.2
+. local xx  "lso2 L.lso2  gov_a L.gov_a secgrp_a pgrp_a wage_a laborinsec_a  delivery  density_a laborval i.y
+> ear"
+
+. xtreg HMT_a L.HMT_a `xx',re cluster(id)
+
+Random-effects GLS regression                   Number of obs     =      1,409
+Group variable: id                              Number of groups  =        256
+
+R-sq:                                           Obs per group:
+     within  = 0.3768                                         min =          1
+     between = 0.9678                                         avg =        5.5
+     overall = 0.7962                                         max =          7
+
+                                                Wald chi2(18)     =    3387.03
+corr(u_i, X)   = 0 (assumed)                    Prob > chi2       =     0.0000
+
+                                   (Std. Err. adjusted for 256 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+       HMT_a |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       HMT_a |
+         L1. |   .5436561   .0537169    10.12   0.000     .4383729    .6489393
+             |
+        lso2 |
+         --. |  -598738.8   484068.6    -1.24   0.216     -1547496    350018.2
+         L1. |   343836.2   415989.7     0.83   0.408    -471488.7     1159161
+             |
+       gov_a |
+         --. |  -35.40015   13.41887    -2.64   0.008    -61.70066   -9.099638
+         L1. |   77.87465    24.8874     3.13   0.002     29.09624    126.6531
+             |
+    secgrp_a |  -32421.65   11580.14    -2.80   0.005    -55118.31    -9724.99
+      pgrp_a |   9.709635   4.393513     2.21   0.027     1.098507    18.32076
+      wage_a |   .2525718   .0462146     5.47   0.000      .161993    .3431507
+laborinsec_a |   41831.69   14706.91     2.84   0.004     13006.69     70656.7
+    delivery |    5.01864   4.202538     1.19   0.232    -3.218183    13.25546
+   density_a |  -764.1045   3414.107    -0.22   0.823    -7455.631    5927.422
+    laborval |  -70563.04   34324.55    -2.06   0.040    -137837.9   -3288.158
+             |
+        year |
+       2010  |   -2178864   559968.3    -3.89   0.000     -3276382    -1081346
+       2011  |   -1072026   429300.9    -2.50   0.013     -1913441   -230611.9
+       2012  |    1086745   493930.7     2.20   0.028     118658.7     2054832
+       2013  |   -7173863    1287708    -5.57   0.000     -9697724    -4650003
+       2014  |   944060.9   924986.3     1.02   0.307    -868878.9     2757001
+       2015  |   -1630849   962311.1    -1.69   0.090     -3516944    255246.5
+             |
+       _cons |    3330243    1872087     1.78   0.075    -338979.7     6999466
+-------------+----------------------------------------------------------------
+     sigma_u |          0
+     sigma_e |  3686156.4
+         rho |          0   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+
+. est store re1b
+
+. outreg2 using data5,word append ctitle ("Random effect1.2") drop(i.year)
+data5.rtf
+dir : seeout
+
+. *Random effect model 1.3
+. local xx  "lso2 L.lso2  gov_a L.gov_a  secgrp_a pgrp_a wage_a laborinsec_a  delivery laborval density_a  i.
+> year"
+
+. xtreg domestic_a L.domestic_a `xx',re cluster(id)
+
+Random-effects GLS regression                   Number of obs     =      1,441
+Group variable: id                              Number of groups  =        261
+
+R-sq:                                           Obs per group:
+     within  = 0.5300                                         min =          1
+     between = 0.8588                                         avg =        5.5
+     overall = 0.6997                                         max =          7
+
+                                                Wald chi2(18)     =    2188.82
+corr(u_i, X)   = 0 (assumed)                    Prob > chi2       =     0.0000
+
+                                   (Std. Err. adjusted for 261 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+  domestic_a |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+  domestic_a |
+         L1. |   .7229622   .0627238    11.53   0.000     .6000257    .8458986
+             |
+        lso2 |
+         --. |    3500778    1062735     3.29   0.001      1417857     5583700
+         L1. |   -1768498    1109965    -1.59   0.111     -3943990    406993.7
+             |
+       gov_a |
+         --. |   285.2784   63.13872     4.52   0.000     161.5287     409.028
+         L1. |  -168.2783   48.18596    -3.49   0.000     -262.721   -73.83551
+             |
+    secgrp_a |  -135042.7      59387    -2.27   0.023    -251439.1   -18646.35
+      pgrp_a |   59.17822   17.46388     3.39   0.001     24.94965    93.40679
+      wage_a |  -.2581745   .0622577    -4.15   0.000    -.3801973   -.1361517
+laborinsec_a |     254536   44011.72     5.78   0.000     168274.6    340797.4
+    delivery |   118.2417   45.77678     2.58   0.010     28.52082    207.9625
+    laborval |  -240164.2   199611.8    -1.20   0.229    -631396.2    151067.8
+   density_a |   24681.03   10744.93     2.30   0.022     3621.359     45740.7
+             |
+        year |
+       2010  |  -1.01e+07    1013087   -10.01   0.000    -1.21e+07    -8152691
+       2011  |   1.13e+07    1930879     5.83   0.000      7469760    1.50e+07
+       2012  |   1.43e+07    1569705     9.11   0.000     1.12e+07    1.74e+07
+       2013  |   -8529435    2336613    -3.65   0.000    -1.31e+07    -3949757
+       2014  |   1.04e+07    3409254     3.05   0.002      3724888    1.71e+07
+       2015  |   -1222618    2874386    -0.43   0.671     -6856311     4411075
+             |
+       _cons |  -2.39e+07    6404769    -3.73   0.000    -3.65e+07   -1.13e+07
+-------------+----------------------------------------------------------------
+     sigma_u |          0
+     sigma_e |   11123261
+         rho |          0   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+
+. est store re1c
+
+. outreg2 using data5,word append ctitle ("Random effect1.3") drop(i.year)
+data5.rtf
+dir : seeout
+
+. 
+. *Random effect model 1.4
+. local xx  "lso2 L.lso2  gov_a L.gov_a secgrp_a pgrp_a wage_a laborinsec_a  delivery  density_a laborval  i.
+> year"
+
+. xtreg rfdi_a L.rfdi_a `xx',re cluster(id)
+
+Random-effects GLS regression                   Number of obs     =      1,441
+Group variable: id                              Number of groups  =        261
+
+R-sq:                                           Obs per group:
+     within  = 0.2167                                         min =          1
+     between = 0.9737                                         avg =        5.5
+     overall = 0.8647                                         max =          7
+
+                                                Wald chi2(18)     =    4073.72
+corr(u_i, X)   = 0 (assumed)                    Prob > chi2       =     0.0000
+
+                                   (Std. Err. adjusted for 261 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+      rfdi_a |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      rfdi_a |
+         L1. |   .9345402     .06255    14.94   0.000     .8119444    1.057136
+             |
+        lso2 |
+         --. |   7355.949   3230.278     2.28   0.023     1024.721    13687.18
+         L1. |  -1045.048   3546.845    -0.29   0.768    -7996.736     5906.64
+             |
+       gov_a |
+         --. |   .4365588   .2084884     2.09   0.036      .027929    .8451885
+         L1. |   .2575886   .3470347     0.74   0.458    -.4225869    .9377641
+             |
+    secgrp_a |  -236.7973   174.5947    -1.36   0.175    -578.9967    105.4021
+      pgrp_a |   .1287545   .0562984     2.29   0.022     .0184117    .2390974
+      wage_a |   .0005047    .000194     2.60   0.009     .0001244     .000885
+laborinsec_a |   38.33128   156.9882     0.24   0.807    -269.3599    346.0224
+    delivery |   .0790003   .0938609     0.84   0.400    -.1049636    .2629642
+   density_a |  -103.9002   84.39373    -1.23   0.218    -269.3089    61.50844
+    laborval |  -1390.392   810.3379    -1.72   0.086    -2978.626    197.8407
+             |
+        year |
+       2010  |  -13535.55   9690.144    -1.40   0.162    -32527.88    5456.786
+       2011  |  -7943.487   12476.48    -0.64   0.524    -32396.93    16509.96
+       2012  |   -7928.98   13344.83    -0.59   0.552    -34084.36     18226.4
+       2013  |  -25762.01   11323.34    -2.28   0.023    -47955.34    -3568.67
+       2014  |  -34752.81   15828.38    -2.20   0.028    -65775.86   -3729.758
+       2015  |  -64675.81   17392.53    -3.72   0.000    -98764.55   -30587.08
+             |
+       _cons |  -31780.59   22627.75    -1.40   0.160    -76130.17       12569
+-------------+----------------------------------------------------------------
+     sigma_u |          0
+     sigma_e |  61398.738
+         rho |          0   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+
+. est store re1a 
+
+. outreg2 using data5,word append ctitle ("Random effect1.4") drop(i.year)
+data5.rtf
+dir : seeout
+
+. 
+. *Random effect model 2.1
+. local xx  "lso2 L.lso2 gov_b L.gov_b  secgrp_b pgrp_b wage_b laborinsec_b  delivery  density_b laborval  i.
+> year"
+
+. xtreg fdi_b L.fdi_b `xx',re cluster(id)
+
+Random-effects GLS regression                   Number of obs     =      1,408
+Group variable: id                              Number of groups  =        257
+
+R-sq:                                           Obs per group:
+     within  = 0.2641                                         min =          1
+     between = 0.8904                                         avg =        5.5
+     overall = 0.5872                                         max =          7
+
+                                                Wald chi2(18)     =    3680.73
+corr(u_i, X)   = 0 (assumed)                    Prob > chi2       =     0.0000
+
+                                   (Std. Err. adjusted for 257 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+       fdi_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       fdi_b |
+         L1. |   .7575465   .0303181    24.99   0.000      .698124    .8169689
+             |
+        lso2 |
+         --. |    1856198    1099957     1.69   0.092    -299677.5     4012074
+         L1. |   -1366172   963901.7    -1.42   0.156     -3255385    523040.5
+             |
+       gov_b |
+         --. |  -.0804305    .022975    -3.50   0.000    -.1254606   -.0354004
+         L1. |   .2857055   .0503559     5.67   0.000     .1870098    .3844012
+             |
+    secgrp_b |   2259.381   21773.69     0.10   0.917    -40416.27    44935.03
+      pgrp_b |   5.090138   3.271899     1.56   0.120    -1.322666    11.50294
+      wage_b |  -.2412404   .0342167    -7.05   0.000    -.3083039   -.1741769
+laborinsec_b |   16358.19   18504.51     0.88   0.377    -19909.97    52626.36
+    delivery |     51.969   31.94677     1.63   0.104    -10.64552    114.5835
+   density_b |   3106.898   4348.615     0.71   0.475    -5416.231    11630.03
+    laborval |  -364731.6   125524.2    -2.91   0.004    -610754.4   -118708.7
+             |
+        year |
+       2010  |    4067161    1026906     3.96   0.000      2054463     6079860
+       2011  |   -3473535    1183598    -2.93   0.003     -5793345    -1153725
+       2012  |    1348637   509655.2     2.65   0.008       349731     2347543
+       2013  |    3251222    1185145     2.74   0.006     928380.1     5574064
+       2014  |    5779466    1385772     4.17   0.000      3063403     8495530
+       2015  |    1744110   688136.7     2.53   0.011     395386.7     3092833
+             |
+       _cons |   -5585161    2869853    -1.95   0.052    -1.12e+07    39647.15
+-------------+----------------------------------------------------------------
+     sigma_u |  642901.39
+     sigma_e |  3686556.5
+         rho |  .02951454   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+
+. est store re2a 
+
+. outreg2 using data6,word append ctitle ("Random effect2.1") drop(i.year)
+data6.rtf
+dir : seeout
+
+. 
+. *Random effect model 2.2
+. local xx  "lso2 L.lso2 gov_b L.gov_b  secgrp_b pgrp_b wage_b laborinsec_b  delivery  density_b laborval i.y
+> ear"
+
+. xtreg HMT_b L.HMT_b `xx',re cluster(id)
+
+Random-effects GLS regression                   Number of obs     =      1,373
+Group variable: id                              Number of groups  =        249
+
+R-sq:                                           Obs per group:
+     within  = 0.5076                                         min =          1
+     between = 0.9552                                         avg =        5.5
+     overall = 0.7723                                         max =          7
+
+                                                Wald chi2(18)     =    2501.52
+corr(u_i, X)   = 0 (assumed)                    Prob > chi2       =     0.0000
+
+                                   (Std. Err. adjusted for 249 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+       HMT_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       HMT_b |
+         L1. |   .5816947   .0826026     7.04   0.000     .4197966    .7435928
+             |
+        lso2 |
+         --. |  -880660.7   526071.7    -1.67   0.094     -1911742    150420.9
+         L1. |     629079   408197.1     1.54   0.123    -170972.6     1429131
+             |
+       gov_b |
+         --. |  -.1732043   .0210984    -8.21   0.000    -.2145564   -.1318522
+         L1. |   .1313298   .0254722     5.16   0.000     .0814052    .1812544
+             |
+    secgrp_b |  -27621.95   8101.684    -3.41   0.001    -43500.96   -11742.94
+      pgrp_b |   .3098137    .630199     0.49   0.623    -.9253536    1.544981
+      wage_b |   .2484376   .0528104     4.70   0.000     .1449311    .3519442
+laborinsec_b |   26791.94   7450.342     3.60   0.000     12189.54    41394.34
+    delivery |   6.049253   5.261596     1.15   0.250    -4.263286    16.36179
+   density_b |  -1274.951   2981.924    -0.43   0.669    -7119.414    4569.512
+    laborval |  -37390.99   27306.11    -1.37   0.171    -90909.98    16128.01
+             |
+        year |
+       2010  |   -1352037   644416.4    -2.10   0.036     -2615070   -89003.92
+       2011  |   -1974308   706776.9    -2.79   0.005     -3359565   -589050.7
+       2012  |   526966.9   327702.7     1.61   0.108    -115318.6     1169252
+       2013  |   -2807035   864868.5    -3.25   0.001     -4502146    -1111924
+       2014  |  -708436.1   420686.6    -1.68   0.092     -1532967    116094.4
+       2015  |   764315.4   345331.5     2.21   0.027     87478.07     1441153
+             |
+       _cons |    3418066    2176605     1.57   0.116    -848001.2     7684133
+-------------+----------------------------------------------------------------
+     sigma_u |          0
+     sigma_e |  2924746.1
+         rho |          0   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+
+. est store re2b
+
+. outreg2 using data6,word append ctitle ("Random effect2.2") drop(i.year)
+data6.rtf
+dir : seeout
+
+. *Random effect model 2.3
+. local xx  "lso2 L.lso2 gov_b L.gov_b secgrp_b pgrp_b wage_b laborinsec_b  delivery  density_b laborval  i.y
+> ear"
+
+. xtreg domestic_b L.domestic_b `xx',re cluster(id)
+
+Random-effects GLS regression                   Number of obs     =      1,441
+Group variable: id                              Number of groups  =        261
+
+R-sq:                                           Obs per group:
+     within  = 0.2186                                         min =          1
+     between = 0.9231                                         avg =        5.5
+     overall = 0.6652                                         max =          7
+
+                                                Wald chi2(18)     =    2804.93
+corr(u_i, X)   = 0 (assumed)                    Prob > chi2       =     0.0000
+
+                                   (Std. Err. adjusted for 261 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+  domestic_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+  domestic_b |
+         L1. |   .8821974   .0925336     9.53   0.000     .7008348     1.06356
+             |
+        lso2 |
+         --. |    2181418   706159.9     3.09   0.002     797369.9     3565466
+         L1. |   -1461531   741611.2    -1.97   0.049     -2915062    -7999.19
+             |
+       gov_b |
+         --. |   .2625041   .0635133     4.13   0.000     .1380203     .386988
+         L1. |   .0368037    .078856     0.47   0.641    -.1177511    .1913586
+             |
+    secgrp_b |  -21192.41   44674.14    -0.47   0.635    -108752.1     66367.3
+      pgrp_b |   6.398993   4.356838     1.47   0.142    -2.140253    14.93824
+      wage_b |  -.2943045   .0575204    -5.12   0.000    -.4070424   -.1815666
+laborinsec_b |   72610.42   31526.27     2.30   0.021     10820.07    134400.8
+    delivery |   96.52853   40.29792     2.40   0.017     17.54607     175.511
+   density_b |   15308.09   7205.573     2.12   0.034     1185.427    29430.76
+    laborval |  -435386.7     135719    -3.21   0.001    -701391.1   -169382.3
+             |
+        year |
+       2010  |   -4176016    1757644    -2.38   0.018     -7620935   -731095.8
+       2011  |    7727831    2140659     3.61   0.000      3532217    1.19e+07
+       2012  |    3181608    1099023     2.89   0.004      1027562     5335654
+       2013  |   -1044114    1374332    -0.76   0.447     -3737755     1649526
+       2014  |   1.50e+07    1757334     8.56   0.000     1.16e+07    1.85e+07
+       2015  |    3246635    1456042     2.23   0.026     392845.3     6100425
+             |
+       _cons |  -1.03e+07    5282696    -1.95   0.052    -2.06e+07    70520.23
+-------------+----------------------------------------------------------------
+     sigma_u |          0
+     sigma_e |  7394600.9
+         rho |          0   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+
+. est store re2c
+
+. outreg2 using data6,word append ctitle ("Random effect2.3") drop(i.year)
+data6.rtf
+dir : seeout
+
+. 
+. *Random effect model 2.4*
+. local xx  "lso2 L.lso2 gov_b L.gov_b  secgrp_b pgrp_b wage_b laborinsec_b  delivery  density_b laborval i.y
+> ear"
+
+. xtreg rfdi_b L.rfdi_b `xx',re cluster(id)
+
+Random-effects GLS regression                   Number of obs     =      1,441
+Group variable: id                              Number of groups  =        261
+
+R-sq:                                           Obs per group:
+     within  = 0.2564                                         min =          1
+     between = 0.9853                                         avg =        5.5
+     overall = 0.9031                                         max =          7
+
+                                                Wald chi2(18)     =    6907.11
+corr(u_i, X)   = 0 (assumed)                    Prob > chi2       =     0.0000
+
+                                   (Std. Err. adjusted for 261 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+      rfdi_b |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      rfdi_b |
+         L1. |   1.016399   .0523369    19.42   0.000     .9138202    1.118977
+             |
+        lso2 |
+         --. |   3544.406   2839.705     1.25   0.212    -2021.313    9110.125
+         L1. |  -1481.011   2907.293    -0.51   0.610    -7179.201     4217.18
+             |
+       gov_b |
+         --. |   .0004336   .0002977     1.46   0.145    -.0001499     .001017
+         L1. |   .0002739   .0001084     2.53   0.011     .0000615    .0004863
+             |
+    secgrp_b |  -96.54287   139.4953    -0.69   0.489    -369.9487     176.863
+      pgrp_b |   .0095592   .0060537     1.58   0.114    -.0023058    .0214242
+      wage_b |   .0003006   .0001862     1.61   0.107    -.0000645    .0006656
+laborinsec_b |   -83.5599   88.39549    -0.95   0.345    -256.8119    89.69207
+    delivery |   .0914037   .0870913     1.05   0.294    -.0792922    .2620995
+   density_b |  -49.38863   109.6176    -0.45   0.652    -264.2352    165.4579
+    laborval |  -297.7856   430.7266    -0.69   0.489    -1141.994     546.423
+             |
+        year |
+       2010  |  -17929.15   9499.156    -1.89   0.059    -36547.16    688.8495
+       2011  |  -6973.417   9626.159    -0.72   0.469    -25840.34    11893.51
+       2012  |   1497.574   10158.45     0.15   0.883    -18412.62    21407.76
+       2013  |  -6109.854   10198.54    -0.60   0.549    -26098.63    13878.93
+       2014  |  -4952.804   10035.55    -0.49   0.622    -24622.11     14716.5
+       2015  |  -10431.57   11476.81    -0.91   0.363    -32925.71    12062.56
+             |
+       _cons |  -6116.001   16855.12    -0.36   0.717    -39151.43    26919.43
+-------------+----------------------------------------------------------------
+     sigma_u |          0
+     sigma_e |   49069.27
+         rho |          0   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+
+. est store re2a 
+
+. outreg2 using data6,word append ctitle ("Random effect2.4") drop(i.year)
+data6.rtf
+dir : seeout
+
+. 
+. log close
+      name:  <unnamed>
+       log:  C:\stata\final data\mylog2.log
+  log type:  text
+ closed on:   8 May 2017, 17:36:00
+-------------------------------------------------------------------------------------------------------------

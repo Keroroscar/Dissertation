@@ -1,0 +1,7 @@
+*panel summary statistics (within and between variation)
+xtsum id year *_b
+estpost tabstat *_b , listwise statistics(mean min p25 p50 p75 max) columns(statistics)
+esttab using xtsum2.xls, cells("mean min p25 p50 p75 max") replace
+xtsum id year *_c
+estpost tabstat *_c , listwise statistics(mean min p25 p50 p75 max) columns(statistics)
+esttab using xtsum2.xls, cells("mean min p25 p50 p75 max") append

@@ -1,0 +1,46 @@
+	(1)
+VARIABLES	rfdi_b
+	
+L.rfdi_b	1.016***
+	(0.0523)
+lso2	3,544
+	(2,840)
+L.lso2	-1,481
+	(2,907)
+gov_b	0.000434
+	(0.000298)
+L.gov_b	0.000274**
+	(0.000108)
+secgrp_b	-96.54
+	(139.5)
+pgrp_b	0.00956
+	(0.00605)
+wage_b	0.000301
+	(0.000186)
+laborinsec_b	-83.56
+	(88.40)
+delivery	0.0914
+	(0.0871)
+density_b	-49.39
+	(109.6)
+laborval	-297.8
+	(430.7)
+3.year	-17,929*
+	(9,499)
+4.year	-6,973
+	(9,626)
+5.year	1,498
+	(10,158)
+6.year	-6,110
+	(10,199)
+7.year	-4,953
+	(10,036)
+8.year	-10,432
+	(11,477)
+Constant	-6,116
+	(16,855)
+	
+Observations	1,441
+Number of id	261
+Robust standard errors in parentheses	
+*** p<0.01, ** p<0.05, * p<0.1	

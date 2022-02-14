@@ -1,0 +1,995 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\stata\personal\data.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}25 Apr 2017, 10:17:12
+
+{com}. do "C:\stata\personal\do2.do"
+{txt}
+{com}. *set the working directory
+. cd "C:\stata\personal"
+{res}C:\stata\personal
+{txt}
+{com}. 
+. *input data
+. use panel1,clear
+{txt}
+{com}. 
+. *data summary
+. summarize
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 10}id {c |}{res}      1,620        91.5    53.44792          1        186
+{txt}{space 8}year {c |}{res}      1,620        2010    2.582786       2006       2014
+{txt}{space 4}province {c |}{res}          0
+{txt}{space 3}variables {c |}{res}          0
+{txt}{space 6}region {c |}{res}          0
+{txt}{hline 13}{c +}{hline 57}
+{space 8}rank {c |}{res}      1,440    16.44167    8.916768          1         31
+{txt}{space 9}gdp {c |}{res}      1,620    15036.68    12833.98      648.5   67809.85
+{txt}{space 5}pollctl {c |}{res}      1,620    193567.4    178525.8       3563    1416464
+{txt}{space 8}popu {c |}{res}      1,620    2224.852    1416.766        215       7292
+{txt}{space 9}SO2 {c |}{res}      1,620    755799.3    445391.4      22000    1962000
+{txt}{hline 13}{c +}{hline 57}
+{space 8}wage {c |}{res}      1,620       36798    15038.38      15370     102268
+{txt}{space 9}fdi {c |}{res}      1,620    421.1545    465.7404    2.35487   2257.322
+{txt}{space 7}north {c |}{res}      1,620    .1666667    .3727931          0          1
+{txt}northeastern {c |}{res}      1,620          .1    .3000926          0          1
+{txt}{space 8}east {c |}{res}      1,620          .2    .4001235          0          1
+{txt}{hline 13}{c +}{hline 57}
+{space 6}center {c |}{res}      1,620    .1333333    .3400396          0          1
+{txt}{space 7}south {c |}{res}      1,620          .1    .3000926          0          1
+{txt}southwestern {c |}{res}      1,620    .1333333    .3400396          0          1
+{txt}northwestern {c |}{res}      1,620    .1666667    .3727931          0          1
+{txt}{space 4}govcrime {c |}{res}      1,620    1128.244    643.4353        126       3305
+{txt}{hline 13}{c +}{hline 57}
+{space 5}fdilag1 {c |}{res}      1,620    387.8959    446.8103   1.802747   2257.322
+{txt}{space 7}rank1 {c |}{res}      1,260    16.40635    8.903505          1         31
+{txt}{space 7}rank2 {c |}{res}      1,259    16.39793    8.933406          1         31
+{txt}{space 7}rank3 {c |}{res}      1,258    16.39428     8.92488          1         31
+{txt}{space 7}rank4 {c |}{res}      1,257    16.37072    8.910348          1         31
+{txt}{hline 13}{c +}{hline 57}
+{space 8}lfdi {c |}{res}      1,620    5.196448    1.604885   .8564854   7.721934
+{txt}{space 8}lSO2 {c |}{res}      1,620    13.27299    .8727308   9.998797   14.48948
+{txt}{space 7}lwage {c |}{res}      1,620    10.43642    .3905462   9.640173   11.53535
+{txt}{space 3}lgovcrime {c |}{res}      1,620    6.814667     .731013   4.836282   8.103191
+{txt}{space 8}fdig {c |}{res}      1,620    .0253071    .0196234   .0006826   .0819141
+{txt}{hline 13}{c +}{hline 57}
+{space 8}fdip {c |}{res}      1,620    .1693575     .161395   .0029733   .9286437
+{txt}{space 7}lpopu {c |}{res}      1,620    7.476741    .7493427   5.370638   8.894533
+{txt}{space 5}_est_re {c |}{res}      1,620    .8888889    .3143667          0          1
+{txt}{space 4}rankpoll {c |}{res}      1,440     2690062     2330871      54730   1.60e+07
+{txt}{space 6}lrankp {c |}{res}      1,440    14.36741    1.090482   10.91017   16.58881
+{txt}{hline 13}{c +}{hline 57}
+{space 4}lpollctl {c |}{res}      1,620    11.79007    .9659494   8.178358   14.16367
+{txt}{space 3}region_01 {c |}{res}          0
+{txt}{space 7}year2 {c |}{res}      1,620    .1111111    .3143667          0          1
+{txt}{space 7}year3 {c |}{res}      1,620    .1111111    .3143667          0          1
+{txt}{space 7}year4 {c |}{res}      1,620    .1111111    .3143667          0          1
+{txt}{hline 13}{c +}{hline 57}
+{space 7}year5 {c |}{res}      1,620    .1111111    .3143667          0          1
+{txt}{space 7}year6 {c |}{res}      1,620    .1111111    .3143667          0          1
+{txt}{space 7}year7 {c |}{res}      1,620    .1111111    .3143667          0          1
+{txt}{space 7}year8 {c |}{res}      1,620    .1111111    .3143667          0          1
+{txt}{space 7}year9 {c |}{res}      1,620    .1111111    .3143667          0          1
+{txt}{hline 13}{c +}{hline 57}
+{space 6}year10 {c |}{res}      1,620    .1111111    .3143667          0          1
+{txt}{space 1}_est_fe_dum {c |}{res}      1,620           1           0          1          1
+{txt}{space 1}_est_fe_cid {c |}{res}      1,620    .8888889    .3143667          0          1
+{txt}_est_fe_cr~n {c |}{res}      1,620    .8888889    .3143667          0          1
+{txt}{space 2}_est_fe_rb {c |}{res}      1,620    .8888889    .3143667          0          1
+{txt}{hline 13}{c +}{hline 57}
+_est_re_iv~n {c |}{res}      1,620    .8888889    .3143667          0          1
+{txt}{space 2}_est_fe_01 {c |}{res}      1,620    .8888889    .3143667          0          1
+{txt}_est_fe_iv~k {c |}{res}      1,620    .8888889    .3143667          0          1
+{txt}_est_fe_iv~n {c |}{res}      1,620    .8888889    .3143667          0          1
+{txt}{space 5}_est_fe {c |}{res}      1,620    .8888889    .3143667          0          1
+{txt}{hline 13}{c +}{hline 57}
+{space 6}sogove {c |}{res}      1,620    1.04e+09    1.02e+09    3855460   4.91e+09
+{txt}{space 8}lsog {c |}{res}      1,620    20.08766    1.506399     15.165   22.31474
+{txt}{space 8}lgdp {c |}{res}      1,620    9.253282    .9280997   6.474662   11.12446
+{txt}{space 7}lfdig {c |}{res}      1,620   -4.056834    .9944911  -7.289573  -2.502084
+{txt}{space 7}lfdip {c |}{res}      1,620   -2.280293    1.137932  -5.818076  -.0740301
+{txt}
+{com}. *declare individual identifier and time indentifier
+. xtset id year
+{res}{txt}{col 8}panel variable:  {res}id (strongly balanced)
+{txt}{col 9}time variable:  {res}{col 25}year, 2006 to 2014
+{txt}{col 17}delta:  {res}1 unit
+{txt}
+{com}. 
+. *panel description of dataset
+. xtdescribe
+
+      {txt}id:  {res}1{txt}, {res}2{txt}, ..., {res}186                                    {txt}n ={res}        180
+    {txt}year:  {res}2006, 2007, ..., 2014                             {txt}T ={res}          9
+           {txt}Delta(year) = {res}1 unit
+           {txt}Span(year)  = {res}9 periods
+           {txt}(id*year uniquely identifies each observation)
+
+Distribution of T_i:   min      5%     25%       50%       75%     95%     max
+                    {res}     9       9       9         9         9       9       9
+
+{txt}{col 6}Freq.  Percent    Cum. {c |}  Pattern
+ {hline 27}{c +}{c -}{c -}{hline 9}
+{res}      180    100.00  100.00{txt} {c |}  {res}111111111
+{txt} {hline 27}{c +}{c -}{c -}{hline 9}
+{res}      180    100.00        {txt} {c |}  {res}XXXXXXXXX
+{txt}
+{com}. 
+. *panel summary statistics (within and between variation)
+. xtsum id year fdi SO2 govcrime gdp popu wage pollctl
+
+{txt}Variable         {c |}      Mean   Std. Dev.       Min        Max {c |}    Observations
+{hline 17}{c +}{hline 44}{c +}{hline 16}
+id{col 10}overall {c |} {res}     91.5   53.44792          1        186{txt} {c |}{col 69}N =    1620
+{col 10}between {c |}{col 31}{res} 53.58046          1        186{txt} {c |}{col 69}n =     180
+{col 10}within  {c |}{col 31}{res}        0       91.5       91.5{txt} {c |}     T =       9
+{col 18}{c |}{col 63}{c |}
+year{col 10}overall {c |} {res}     2010   2.582786       2006       2014{txt} {c |}{col 69}N =    1620
+{col 10}between {c |}{col 31}{res}        0       2010       2010{txt} {c |}{col 69}n =     180
+{col 10}within  {c |}{col 31}{res} 2.582786       2006       2014{txt} {c |}     T =       9
+{col 18}{c |}{col 63}{c |}
+fdi{col 10}overall {c |} {res} 421.1545   465.7404    2.35487   2257.322{txt} {c |}{col 69}N =    1620
+{col 10}between {c |}{col 31}{res} 440.5481   6.390463   1842.332{txt} {c |}{col 69}n =     180
+{col 10}within  {c |}{col 31}{res} 154.2417  -346.6941   974.6535{txt} {c |}     T =       9
+{col 18}{c |}{col 63}{c |}
+SO2{col 10}overall {c |} {res} 755799.3   445391.4      22000    1962000{txt} {c |}{col 69}N =    1620
+{col 10}between {c |}{col 31}{res} 434898.3   28236.47    1712853{txt} {c |}{col 69}n =     180
+{col 10}within  {c |}{col 31}{res} 100854.1   483400.7    1058802{txt} {c |}     T =       9
+{col 18}{c |}{col 63}{c |}
+govcrime{col 10}overall {c |} {res} 1128.244   643.4353        126       3305{txt} {c |}{col 69}N =    1620
+{col 10}between {c |}{col 31}{res} 626.8099   146.4444   2937.556{txt} {c |}{col 69}n =     180
+{col 10}within  {c |}{col 31}{res} 151.8542   563.0222   1719.467{txt} {c |}     T =       9
+{col 18}{c |}{col 63}{c |}
+gdp{col 10}overall {c |} {res} 15036.68   12833.98      648.5   67809.85{txt} {c |}{col 69}N =    1620
+{col 10}between {c |}{col 31}{res} 11313.65   1431.726   46802.22{txt} {c |}{col 69}n =     180
+{col 10}within  {c |}{col 31}{res}  6111.05  -5736.325   37609.94{txt} {c |}     T =       9
+{col 18}{c |}{col 63}{c |}
+popu{col 10}overall {c |} {res} 2224.852   1416.766        215       7292{txt} {c |}{col 69}N =    1620
+{col 10}between {c |}{col 31}{res} 1401.838   250.3333   6697.778{txt} {c |}{col 69}n =     180
+{col 10}within  {c |}{col 31}{res} 227.5678   1476.074   2821.074{txt} {c |}     T =       9
+{col 18}{c |}{col 63}{c |}
+wage{col 10}overall {c |} {res}    36798   15038.38      15370     102268{txt} {c |}{col 69}N =    1620
+{col 10}between {c |}{col 31}{res} 9522.579   29024.11   68865.11{txt} {c |}{col 69}n =     180
+{col 10}within  {c |}{col 31}{res} 11658.53   7210.004   70200.89{txt} {c |}     T =       9
+{col 18}{c |}{col 63}{c |}
+pollctl{col 10}overall {c |} {res} 193567.4   178525.8       3563    1416464{txt} {c |}{col 69}N =    1620
+{col 10}between {c |}{col 31}{res} 142403.8   22669.78   737985.4{txt} {c |}{col 69}n =     180
+{col 10}within  {c |}{col 31}{res} 108133.4  -87659.06   872045.9{txt} {c |}     T =       9
+
+{com}. xtsum id year lfdi lSO2 lgovcrime lgdp lpopu lwage lpollctl
+
+{txt}Variable         {c |}      Mean   Std. Dev.       Min        Max {c |}    Observations
+{hline 17}{c +}{hline 44}{c +}{hline 16}
+id{col 10}overall {c |} {res}     91.5   53.44792          1        186{txt} {c |}{col 69}N =    1620
+{col 10}between {c |}{col 31}{res} 53.58046          1        186{txt} {c |}{col 69}n =     180
+{col 10}within  {c |}{col 31}{res}        0       91.5       91.5{txt} {c |}     T =       9
+{col 18}{c |}{col 63}{c |}
+year{col 10}overall {c |} {res}     2010   2.582786       2006       2014{txt} {c |}{col 69}N =    1620
+{col 10}between {c |}{col 31}{res}        0       2010       2010{txt} {c |}{col 69}n =     180
+{col 10}within  {c |}{col 31}{res} 2.582786       2006       2014{txt} {c |}     T =       9
+{col 18}{c |}{col 63}{c |}
+lfdi{col 10}overall {c |} {res} 5.196448   1.604885   .8564854   7.721934{txt} {c |}{col 69}N =    1620
+{col 10}between {c |}{col 31}{res} 1.550797   1.759061   7.509499{txt} {c |}{col 69}n =     180
+{col 10}within  {c |}{col 31}{res} .4272804   3.714566   6.220756{txt} {c |}     T =       9
+{col 18}{c |}{col 63}{c |}
+lSO2{col 10}overall {c |} {res} 13.27299   .8727308   9.998797   14.48948{txt} {c |}{col 69}N =    1620
+{col 10}between {c |}{col 31}{res} .8628523   10.23448    14.3508{txt} {c |}{col 69}n =     180
+{col 10}within  {c |}{col 31}{res} .1443046   12.74552   13.73877{txt} {c |}     T =       9
+{col 18}{c |}{col 63}{c |}
+lgovcr~e{col 10}overall {c |} {res} 6.814667    .731013   4.836282   8.103191{txt} {c |}{col 69}N =    1620
+{col 10}between {c |}{col 31}{res} .7172193   4.979506   7.983479{txt} {c |}{col 69}n =     180
+{col 10}within  {c |}{col 31}{res}  .150061    5.97524   7.337765{txt} {c |}     T =       9
+{col 18}{c |}{col 63}{c |}
+lgdp{col 10}overall {c |} {res} 9.253282   .9280997   6.474662   11.12446{txt} {c |}{col 69}N =    1620
+{col 10}between {c |}{col 31}{res} .8485956   7.182836   10.70991{txt} {c |}{col 69}n =     180
+{col 10}within  {c |}{col 31}{res} .3805429   8.466333   9.918357{txt} {c |}     T =       9
+{col 18}{c |}{col 63}{c |}
+lpopu{col 10}overall {c |} {res} 7.476741   .7493427   5.370638   8.894533{txt} {c |}{col 69}N =    1620
+{col 10}between {c |}{col 31}{res} .7452727   5.517413   8.806863{txt} {c |}{col 69}n =     180
+{col 10}within  {c |}{col 31}{res} .0939561   7.252698   7.680035{txt} {c |}     T =       9
+{col 18}{c |}{col 63}{c |}
+lwage{col 10}overall {c |} {res} 10.43642   .3905462   9.640173   11.53535{txt} {c |}{col 69}N =    1620
+{col 10}between {c |}{col 31}{res} .2136482   10.22205   11.09503{txt} {c |}{col 69}n =     180
+{col 10}within  {c |}{col 31}{res} .3272711   9.784741   10.97543{txt} {c |}     T =       9
+{col 18}{c |}{col 63}{c |}
+lpollctl{col 10}overall {c |} {res} 11.79007   .9659494   8.178358   14.16367{txt} {c |}{col 69}N =    1620
+{col 10}between {c |}{col 31}{res}  .827867   9.493241   13.45782{txt} {c |}{col 69}n =     180
+{col 10}within  {c |}{col 31}{res} .5010799   10.42229   13.23265{txt} {c |}     T =       9
+
+{com}. 
+. 
+. *test for unitroot*
+. *Harris-Tzavalis test*
+. local xx "lfdi lSO2 lgovcrime lwage lpopu lgdp lpollctl"
+{txt}
+{com}. local replace replace
+{txt}
+{com}. foreach v of local xx {c -(}
+{txt}  2{com}.     xtunitroot ht `v'
+{txt}  3{com}. {c )-}
+
+{txt}Harris-Tzavalis unit-root test for {res}lfdi
+{txt}{hline 39}
+Ho: Panels contain unit roots{col 45}Number of panels{col 63}={col 64}{res}    180
+{txt}Ha: Panels are stationary{col 45}Number of periods{col 63}={col 64}{res}      9
+
+{txt}AR parameter: {res}Common{txt}{col 45}Asymptotics: {res}N -> Infinity
+{txt}Panel means:  {res}Included{col 58}T Fixed
+{txt}Time trend:   {res}Not included
+{txt}{hline 78}
+{col 21}Statistic{col 39}z{col 49}p-value
+{hline 78}
+{col 2}rho{res}{col 21}  0.7426{col 35}  1.8931{col 50}0.9708
+{txt}{hline 78}
+
+Harris-Tzavalis unit-root test for {res}lSO2
+{txt}{hline 39}
+Ho: Panels contain unit roots{col 45}Number of panels{col 63}={col 64}{res}    180
+{txt}Ha: Panels are stationary{col 45}Number of periods{col 63}={col 64}{res}      9
+
+{txt}AR parameter: {res}Common{txt}{col 45}Asymptotics: {res}N -> Infinity
+{txt}Panel means:  {res}Included{col 58}T Fixed
+{txt}Time trend:   {res}Not included
+{txt}{hline 78}
+{col 21}Statistic{col 39}z{col 49}p-value
+{hline 78}
+{col 2}rho{res}{col 21}  0.8623{col 35}  7.2167{col 50}1.0000
+{txt}{hline 78}
+
+Harris-Tzavalis unit-root test for {res}lgovcrime
+{txt}{hline 44}
+Ho: Panels contain unit roots{col 45}Number of panels{col 63}={col 64}{res}    180
+{txt}Ha: Panels are stationary{col 45}Number of periods{col 63}={col 64}{res}      9
+
+{txt}AR parameter: {res}Common{txt}{col 45}Asymptotics: {res}N -> Infinity
+{txt}Panel means:  {res}Included{col 58}T Fixed
+{txt}Time trend:   {res}Not included
+{txt}{hline 78}
+{col 21}Statistic{col 39}z{col 49}p-value
+{hline 78}
+{col 2}rho{res}{col 21}  0.1834{col 35}-22.9695{col 50}0.0000
+{txt}{hline 78}
+
+Harris-Tzavalis unit-root test for {res}lwage
+{txt}{hline 40}
+Ho: Panels contain unit roots{col 45}Number of panels{col 63}={col 64}{res}    180
+{txt}Ha: Panels are stationary{col 45}Number of periods{col 63}={col 64}{res}      9
+
+{txt}AR parameter: {res}Common{txt}{col 45}Asymptotics: {res}N -> Infinity
+{txt}Panel means:  {res}Included{col 58}T Fixed
+{txt}Time trend:   {res}Not included
+{txt}{hline 78}
+{col 21}Statistic{col 39}z{col 49}p-value
+{hline 78}
+{col 2}rho{res}{col 21}  0.9158{col 35}  9.5957{col 50}1.0000
+{txt}{hline 78}
+
+Harris-Tzavalis unit-root test for {res}lpopu
+{txt}{hline 40}
+Ho: Panels contain unit roots{col 45}Number of panels{col 63}={col 64}{res}    180
+{txt}Ha: Panels are stationary{col 45}Number of periods{col 63}={col 64}{res}      9
+
+{txt}AR parameter: {res}Common{txt}{col 45}Asymptotics: {res}N -> Infinity
+{txt}Panel means:  {res}Included{col 58}T Fixed
+{txt}Time trend:   {res}Not included
+{txt}{hline 78}
+{col 21}Statistic{col 39}z{col 49}p-value
+{hline 78}
+{col 2}rho{res}{col 21}  0.9593{col 35} 11.5275{col 50}1.0000
+{txt}{hline 78}
+
+Harris-Tzavalis unit-root test for {res}lgdp
+{txt}{hline 39}
+Ho: Panels contain unit roots{col 45}Number of panels{col 63}={col 64}{res}    180
+{txt}Ha: Panels are stationary{col 45}Number of periods{col 63}={col 64}{res}      9
+
+{txt}AR parameter: {res}Common{txt}{col 45}Asymptotics: {res}N -> Infinity
+{txt}Panel means:  {res}Included{col 58}T Fixed
+{txt}Time trend:   {res}Not included
+{txt}{hline 78}
+{col 21}Statistic{col 39}z{col 49}p-value
+{hline 78}
+{col 2}rho{res}{col 21}  0.9064{col 35}  9.1770{col 50}1.0000
+{txt}{hline 78}
+
+Harris-Tzavalis unit-root test for {res}lpollctl
+{txt}{hline 43}
+Ho: Panels contain unit roots{col 45}Number of panels{col 63}={col 64}{res}    180
+{txt}Ha: Panels are stationary{col 45}Number of periods{col 63}={col 64}{res}      9
+
+{txt}AR parameter: {res}Common{txt}{col 45}Asymptotics: {res}N -> Infinity
+{txt}Panel means:  {res}Included{col 58}T Fixed
+{txt}Time trend:   {res}Not included
+{txt}{hline 78}
+{col 21}Statistic{col 39}z{col 49}p-value
+{hline 78}
+{col 2}rho{res}{col 21}  0.5153{col 35} -8.2119{col 50}0.0000
+{txt}{hline 78}
+
+{com}. 
+. *Levin-Lin-Chu test*
+. local xx "lfdi lSO2 lgovcrime lwage lpopu lgdp lpollctl"
+{txt}
+{com}. local replace replace
+{txt}
+{com}. foreach v of local xx {c -(}
+{txt}  2{com}.     xtunitroot llc `v'
+{txt}  3{com}. {c )-}
+
+{txt}Levin-Lin-Chu unit-root test for {res}lfdi
+{txt}{hline 37}
+Ho: Panels contain unit roots{col 45}Number of panels{col 63}={col 64}{res}    180
+{txt}Ha: Panels are stationary{col 45}Number of periods{col 63}={col 64}{res}      9
+
+{txt}AR parameter: {res}Common{txt}{col 45}Asymptotics: {res}N/T -> 0
+{txt}Panel means:  {res}Included
+{txt}Time trend:   {res}Not included
+
+{txt}ADF regressions: {res}1{txt} lag
+LR variance:     {res}Bartlett{txt} kernel, {res}6.00{txt} lags average (chosen by {res}LLC{txt})
+{hline 78}
+{col 21}Statistic{col 36}p-value
+{hline 78}
+{col 2}Unadjusted t{res}{col 21} -9.4241
+{txt}{col 2}Adjusted t*{res}{col 21} -8.1047{col 37}0.0000
+{txt}{hline 78}
+
+Levin-Lin-Chu unit-root test for {res}lSO2
+{txt}{hline 37}
+Ho: Panels contain unit roots{col 45}Number of panels{col 63}={col 64}{res}    180
+{txt}Ha: Panels are stationary{col 45}Number of periods{col 63}={col 64}{res}      9
+
+{txt}AR parameter: {res}Common{txt}{col 45}Asymptotics: {res}N/T -> 0
+{txt}Panel means:  {res}Included
+{txt}Time trend:   {res}Not included
+
+{txt}ADF regressions: {res}1{txt} lag
+LR variance:     {res}Bartlett{txt} kernel, {res}6.00{txt} lags average (chosen by {res}LLC{txt})
+{hline 78}
+{col 21}Statistic{col 36}p-value
+{hline 78}
+{col 2}Unadjusted t{res}{col 21} -5.4585
+{txt}{col 2}Adjusted t*{res}{col 21} -1.7280{col 37}0.0420
+{txt}{hline 78}
+
+Levin-Lin-Chu unit-root test for {res}lgovcrime
+{txt}{hline 42}
+Ho: Panels contain unit roots{col 45}Number of panels{col 63}={col 64}{res}    180
+{txt}Ha: Panels are stationary{col 45}Number of periods{col 63}={col 64}{res}      9
+
+{txt}AR parameter: {res}Common{txt}{col 45}Asymptotics: {res}N/T -> 0
+{txt}Panel means:  {res}Included
+{txt}Time trend:   {res}Not included
+
+{txt}ADF regressions: {res}1{txt} lag
+LR variance:     {res}Bartlett{txt} kernel, {res}6.00{txt} lags average (chosen by {res}LLC{txt})
+{hline 78}
+{col 21}Statistic{col 36}p-value
+{hline 78}
+{col 2}Unadjusted t{res}{col 21}-44.7853
+{txt}{col 2}Adjusted t*{res}{col 21}-40.4143{col 37}0.0000
+{txt}{hline 78}
+
+Levin-Lin-Chu unit-root test for {res}lwage
+{txt}{hline 38}
+Ho: Panels contain unit roots{col 45}Number of panels{col 63}={col 64}{res}    180
+{txt}Ha: Panels are stationary{col 45}Number of periods{col 63}={col 64}{res}      9
+
+{txt}AR parameter: {res}Common{txt}{col 45}Asymptotics: {res}N/T -> 0
+{txt}Panel means:  {res}Included
+{txt}Time trend:   {res}Not included
+
+{txt}ADF regressions: {res}1{txt} lag
+LR variance:     {res}Bartlett{txt} kernel, {res}6.00{txt} lags average (chosen by {res}LLC{txt})
+{hline 78}
+{col 21}Statistic{col 36}p-value
+{hline 78}
+{col 2}Unadjusted t{res}{col 21}-23.4921
+{txt}{col 2}Adjusted t*{res}{col 21}-22.4983{col 37}0.0000
+{txt}{hline 78}
+
+Levin-Lin-Chu unit-root test for {res}lpopu
+{txt}{hline 38}
+Ho: Panels contain unit roots{col 45}Number of panels{col 63}={col 64}{res}    180
+{txt}Ha: Panels are stationary{col 45}Number of periods{col 63}={col 64}{res}      9
+
+{txt}AR parameter: {res}Common{txt}{col 45}Asymptotics: {res}N/T -> 0
+{txt}Panel means:  {res}Included
+{txt}Time trend:   {res}Not included
+
+{txt}ADF regressions: {res}1{txt} lag
+LR variance:     {res}Bartlett{txt} kernel, {res}6.00{txt} lags average (chosen by {res}LLC{txt})
+{hline 78}
+{col 21}Statistic{col 36}p-value
+{hline 78}
+{col 2}Unadjusted t{res}{col 21}-12.7560
+{txt}{col 2}Adjusted t*{res}{col 21}-11.9051{col 37}0.0000
+{txt}{hline 78}
+
+Levin-Lin-Chu unit-root test for {res}lgdp
+{txt}{hline 37}
+Ho: Panels contain unit roots{col 45}Number of panels{col 63}={col 64}{res}    180
+{txt}Ha: Panels are stationary{col 45}Number of periods{col 63}={col 64}{res}      9
+
+{txt}AR parameter: {res}Common{txt}{col 45}Asymptotics: {res}N/T -> 0
+{txt}Panel means:  {res}Included
+{txt}Time trend:   {res}Not included
+
+{txt}ADF regressions: {res}1{txt} lag
+LR variance:     {res}Bartlett{txt} kernel, {res}6.00{txt} lags average (chosen by {res}LLC{txt})
+{hline 78}
+{col 21}Statistic{col 36}p-value
+{hline 78}
+{col 2}Unadjusted t{res}{col 21}-25.1761
+{txt}{col 2}Adjusted t*{res}{col 21}-23.8486{col 37}0.0000
+{txt}{hline 78}
+
+Levin-Lin-Chu unit-root test for {res}lpollctl
+{txt}{hline 41}
+Ho: Panels contain unit roots{col 45}Number of panels{col 63}={col 64}{res}    180
+{txt}Ha: Panels are stationary{col 45}Number of periods{col 63}={col 64}{res}      9
+
+{txt}AR parameter: {res}Common{txt}{col 45}Asymptotics: {res}N/T -> 0
+{txt}Panel means:  {res}Included
+{txt}Time trend:   {res}Not included
+
+{txt}ADF regressions: {res}1{txt} lag
+LR variance:     {res}Bartlett{txt} kernel, {res}6.00{txt} lags average (chosen by {res}LLC{txt})
+{hline 78}
+{col 21}Statistic{col 36}p-value
+{hline 78}
+{col 2}Unadjusted t{res}{col 21}-17.7216
+{txt}{col 2}Adjusted t*{res}{col 21} -1.8807{col 37}0.0300
+{txt}{hline 78}
+
+{com}. 
+. *ipshin test
+. local xx "lfdi lSO2 lgovcrime lwage lpopu lgdp lpollctl"
+{txt}
+{com}. foreach v of local xx {c -(}
+{txt}  2{com}.     ipshin `v',lag(1)
+{txt}  3{com}. {c )-}
+
+{txt}Im-Pesaran-Shin test for cross-sectionally demeaned {res}lfdi
+{txt}Deterministics chosen: {res}constant
+
+{txt}t-bar test, N,T = (180,9){col 35}Obs = 1260{col 48}
+Augmented by 1 lags (average) 
+
+    t-bar{col 15}cv10{col 25}cv5{col 35}cv1{col 41}W[t-bar]{col 53}P-value
+{res}   -1.426{col 10}        .{col 20}        .{col 30}        .{col 39}    0.742{col 49}    0.771
+
+{txt}Im-Pesaran-Shin test for cross-sectionally demeaned {res}lSO2
+{txt}Deterministics chosen: {res}constant
+
+{txt}t-bar test, N,T = (180,9){col 35}Obs = 1260{col 48}
+Augmented by 1 lags (average) 
+
+    t-bar{col 15}cv10{col 25}cv5{col 35}cv1{col 41}W[t-bar]{col 53}P-value
+{res}   -1.294{col 10}        .{col 20}        .{col 30}        .{col 39}    2.320{col 49}    0.990
+
+{txt}Im-Pesaran-Shin test for cross-sectionally demeaned {res}lgovcrime
+{txt}Deterministics chosen: {res}constant
+
+{txt}t-bar test, N,T = (180,9){col 35}Obs = 1260{col 48}
+Augmented by 1 lags (average) 
+
+    t-bar{col 15}cv10{col 25}cv5{col 35}cv1{col 41}W[t-bar]{col 53}P-value
+{res}   -1.790{col 10}        .{col 20}        .{col 30}        .{col 39}   -3.614{col 49}    0.000
+
+{txt}Im-Pesaran-Shin test for cross-sectionally demeaned {res}lwage
+{txt}Deterministics chosen: {res}constant
+
+{txt}t-bar test, N,T = (180,9){col 35}Obs = 1260{col 48}
+Augmented by 1 lags (average) 
+
+    t-bar{col 15}cv10{col 25}cv5{col 35}cv1{col 41}W[t-bar]{col 53}P-value
+{res}   -1.550{col 10}        .{col 20}        .{col 30}        .{col 39}   -0.742{col 49}    0.229
+
+{txt}Im-Pesaran-Shin test for cross-sectionally demeaned {res}lpopu
+{txt}Deterministics chosen: {res}constant
+
+{txt}t-bar test, N,T = (180,9){col 35}Obs = 1260{col 48}
+Augmented by 1 lags (average) 
+
+    t-bar{col 15}cv10{col 25}cv5{col 35}cv1{col 41}W[t-bar]{col 53}P-value
+{res}   -1.190{col 10}        .{col 20}        .{col 30}        .{col 39}    3.564{col 49}    1.000
+
+{txt}Im-Pesaran-Shin test for cross-sectionally demeaned {res}lgdp
+{txt}Deterministics chosen: {res}constant
+
+{txt}t-bar test, N,T = (180,9){col 35}Obs = 1260{col 48}
+Augmented by 1 lags (average) 
+
+    t-bar{col 15}cv10{col 25}cv5{col 35}cv1{col 41}W[t-bar]{col 53}P-value
+{res}   -1.482{col 10}        .{col 20}        .{col 30}        .{col 39}    0.072{col 49}    0.529
+
+{txt}Im-Pesaran-Shin test for cross-sectionally demeaned {res}lpollctl
+{txt}Deterministics chosen: {res}constant
+
+{txt}t-bar test, N,T = (180,9){col 35}Obs = 1260{col 48}
+Augmented by 1 lags (average) 
+
+    t-bar{col 15}cv10{col 25}cv5{col 35}cv1{col 41}W[t-bar]{col 53}P-value
+{res}   -1.570{col 10}        .{col 20}        .{col 30}        .{col 39}   -0.988{col 49}    0.162
+{txt}
+{com}. 
+. *xtfisher test
+. local xx "lfdi lSO2 lgovcrime lwage lpopu lgdp lpollctl"
+{txt}
+{com}. foreach v of local xx {c -(}
+{txt}  2{com}.     xtfisher `v',lag(1) trend
+{txt}  3{com}. {c )-}
+
+
+{txt}Fisher Test for panel unit root using an augmented Dickey-Fuller test (1 lags)
+
+Ho: unit root
+
+{col 10}chi2({res}360{txt}){col 23}={res}{col 25} 621.1922
+{col 10}{txt}Prob > chi2  ={res}{col 30}0.0000
+
+
+
+{txt}Fisher Test for panel unit root using an augmented Dickey-Fuller test (1 lags)
+
+Ho: unit root
+
+{col 10}chi2({res}360{txt}){col 23}={res}{col 25}1371.9854
+{col 10}{txt}Prob > chi2  ={res}{col 30}0.0000
+
+
+
+{txt}Fisher Test for panel unit root using an augmented Dickey-Fuller test (1 lags)
+
+Ho: unit root
+
+{col 10}chi2({res}360{txt}){col 23}={res}{col 25}1759.1548
+{col 10}{txt}Prob > chi2  ={res}{col 30}0.0000
+
+
+
+{txt}Fisher Test for panel unit root using an augmented Dickey-Fuller test (1 lags)
+
+Ho: unit root
+
+{col 10}chi2({res}360{txt}){col 23}={res}{col 25} 852.9191
+{col 10}{txt}Prob > chi2  ={res}{col 30}0.0000
+
+
+
+{txt}Fisher Test for panel unit root using an augmented Dickey-Fuller test (1 lags)
+
+Ho: unit root
+
+{col 10}chi2({res}360{txt}){col 23}={res}{col 25} 578.8485
+{col 10}{txt}Prob > chi2  ={res}{col 30}0.0000
+
+
+
+{txt}Fisher Test for panel unit root using an augmented Dickey-Fuller test (1 lags)
+
+Ho: unit root
+
+{col 10}chi2({res}360{txt}){col 23}={res}{col 25}  85.8727
+{col 10}{txt}Prob > chi2  ={res}{col 30}1.0000
+
+
+
+{txt}Fisher Test for panel unit root using an augmented Dickey-Fuller test (1 lags)
+
+Ho: unit root
+
+{col 10}chi2({res}360{txt}){col 23}={res}{col 25} 127.5304
+{col 10}{txt}Prob > chi2  ={res}{col 30}1.0000
+
+{txt}
+{com}. 
+. *autocorrelation test 
+. xtserial `xx'
+
+{txt}Wooldridge test for autocorrelation in panel data
+H0: no first-order autocorrelation
+{col 5}F(  1,     179) = {res}   742.641
+{txt}{col 12}Prob > F = {res}     0.0000
+{txt}
+{com}. 
+. *System GMM
+. *Arellano and Bond
+. 
+. *Assume with L2.lfdi and lgdp, lwage,lpopu are endogenous (appliable)
+. local xx   "lfdi L.lfdi L2.lfdi L(0/2).(lSO2 lgovcrime lpopu lwage lpollctl lgdp) i.year"
+{txt}
+{com}. local gmm6 "     L.lfdi L2.lfdi L(0/2).(               lpopu lwage  lgdp        )       "
+{txt}
+{com}. local iv6  "                    L(0/2).(lSO2 lgovcrime               lpollctl   ) i.year"
+{txt}
+{com}. xtabond2 `xx', gmm(`gmm6') iv(`iv6') twostep small
+{res}{txt}Favoring speed over space. To switch, type or click on {stata "mata: mata set matafavor space, perm"}.
+{res}Warning: Two-step estimated covariance matrix of moments is singular.
+{res}  Using a generalized inverse to calculate optimal weighting matrix for two-step estimation.
+{res}  Difference-in-Sargan/Hansen statistics may be negative.
+
+{txt}Dynamic panel-data estimation, two-step system GMM
+{hline 78}
+Group variable: {res}id{txt}{col 49}Number of obs      = {res}     1260
+{txt}Time variable : {res}year{txt}{col 49}Number of groups   = {res}      180
+{txt}Number of instruments = {res}169{col 49}{txt}Obs per group: min = {res}        7
+{txt}F({res}29{txt}, {res}179{txt}){col 15}= {res} 28146.40{col 64}{txt}avg = {res}     7.00
+{txt}Prob > F{col 15}={res}     0.000{col 64}{txt}max = {res}        7
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        lfdi{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}lfdi {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} 1.035012{col 26}{space 2} .1977666{col 37}{space 1}    5.23{col 46}{space 3}0.000{col 54}{space 4} .6447577{col 67}{space 3} 1.425265
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0291607{col 26}{space 2} .1213753{col 37}{space 1}    0.24{col 46}{space 3}0.810{col 54}{space 4}-.2103499{col 67}{space 3} .2686712
+{txt}{space 12} {c |}
+{space 8}lSO2 {c |}
+{space 9}--. {c |}{col 14}{res}{space 2}-.3388708{col 26}{space 2} .4734104{col 37}{space 1}   -0.72{col 46}{space 3}0.475{col 54}{space 4}-1.273054{col 67}{space 3} .5953125
+{txt}{space 9}L1. {c |}{col 14}{res}{space 2}-.6077331{col 26}{space 2} .2908184{col 37}{space 1}   -2.09{col 46}{space 3}0.038{col 54}{space 4}-1.181607{col 67}{space 3}-.0338596
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.1343201{col 26}{space 2} .3301606{col 37}{space 1}   -0.41{col 46}{space 3}0.685{col 54}{space 4}-.7858279{col 67}{space 3} .5171876
+{txt}{space 12} {c |}
+{space 3}lgovcrime {c |}
+{space 9}--. {c |}{col 14}{res}{space 2} .5254896{col 26}{space 2} .1800761{col 37}{space 1}    2.92{col 46}{space 3}0.004{col 54}{space 4} .1701444{col 67}{space 3} .8808347
+{txt}{space 9}L1. {c |}{col 14}{res}{space 2} .4807575{col 26}{space 2} .3378695{col 37}{space 1}    1.42{col 46}{space 3}0.157{col 54}{space 4}-.1859622{col 67}{space 3} 1.147477
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .8970913{col 26}{space 2} .3697503{col 37}{space 1}    2.43{col 46}{space 3}0.016{col 54}{space 4} .1674611{col 67}{space 3} 1.626722
+{txt}{space 12} {c |}
+{space 7}lpopu {c |}
+{space 9}--. {c |}{col 14}{res}{space 2}  4.27741{col 26}{space 2} 2.332297{col 37}{space 1}    1.83{col 46}{space 3}0.068{col 54}{space 4}-.3249236{col 67}{space 3} 8.879743
+{txt}{space 9}L1. {c |}{col 14}{res}{space 2}-8.331721{col 26}{space 2} 2.506568{col 37}{space 1}   -3.32{col 46}{space 3}0.001{col 54}{space 4}-13.27795{col 67}{space 3}-3.385496
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}  2.22868{col 26}{space 2} 1.185471{col 37}{space 1}    1.88{col 46}{space 3}0.062{col 54}{space 4}-.1106155{col 67}{space 3} 4.567975
+{txt}{space 12} {c |}
+{space 7}lwage {c |}
+{space 9}--. {c |}{col 14}{res}{space 2}-1.281943{col 26}{space 2} 2.116386{col 37}{space 1}   -0.61{col 46}{space 3}0.545{col 54}{space 4}-5.458218{col 67}{space 3} 2.894333
+{txt}{space 9}L1. {c |}{col 14}{res}{space 2} 7.261028{col 26}{space 2} 2.122322{col 37}{space 1}    3.42{col 46}{space 3}0.001{col 54}{space 4} 3.073039{col 67}{space 3} 11.44902
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-4.699983{col 26}{space 2} 1.709453{col 37}{space 1}   -2.75{col 46}{space 3}0.007{col 54}{space 4}-8.073255{col 67}{space 3} -1.32671
+{txt}{space 12} {c |}
+{space 4}lpollctl {c |}
+{space 9}--. {c |}{col 14}{res}{space 2}-.3235923{col 26}{space 2} .0879011{col 37}{space 1}   -3.68{col 46}{space 3}0.000{col 54}{space 4}-.4970481{col 67}{space 3}-.1501365
+{txt}{space 9}L1. {c |}{col 14}{res}{space 2}-.1346089{col 26}{space 2}  .024114{col 37}{space 1}   -5.58{col 46}{space 3}0.000{col 54}{space 4}-.1821932{col 67}{space 3}-.0870245
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0017261{col 26}{space 2} .0369887{col 37}{space 1}   -0.05{col 46}{space 3}0.963{col 54}{space 4}-.0747162{col 67}{space 3} .0712639
+{txt}{space 12} {c |}
+{space 8}lgdp {c |}
+{space 9}--. {c |}{col 14}{res}{space 2}-.0343995{col 26}{space 2}  1.28775{col 37}{space 1}   -0.03{col 46}{space 3}0.979{col 54}{space 4}-2.575523{col 67}{space 3} 2.506724
+{txt}{space 9}L1. {c |}{col 14}{res}{space 2}-1.202469{col 26}{space 2} .9548917{col 37}{space 1}   -1.26{col 46}{space 3}0.210{col 54}{space 4}-3.086762{col 67}{space 3} .6818239
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} 1.860944{col 26}{space 2} 1.397629{col 37}{space 1}    1.33{col 46}{space 3}0.185{col 54}{space 4}-.8970053{col 67}{space 3} 4.618893
+{txt}{space 12} {c |}
+{space 8}year {c |}
+{space 7}2006  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (empty)
+{space 7}2007  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (omitted)
+{space 7}2008  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (omitted)
+{space 7}2009  {c |}{col 14}{res}{space 2}-.3977804{col 26}{space 2} .1678705{col 37}{space 1}   -2.37{col 46}{space 3}0.019{col 54}{space 4}-.7290402{col 67}{space 3}-.0665207
+{txt}{space 7}2010  {c |}{col 14}{res}{space 2}-.5469998{col 26}{space 2} .2800395{col 37}{space 1}   -1.95{col 46}{space 3}0.052{col 54}{space 4}-1.099603{col 67}{space 3} .0056037
+{txt}{space 7}2011  {c |}{col 14}{res}{space 2}-.5412659{col 26}{space 2}  .475331{col 37}{space 1}   -1.14{col 46}{space 3}0.256{col 54}{space 4}-1.479239{col 67}{space 3} .3967074
+{txt}{space 7}2012  {c |}{col 14}{res}{space 2}-.9225928{col 26}{space 2} .6249115{col 37}{space 1}   -1.48{col 46}{space 3}0.142{col 54}{space 4}-2.155734{col 67}{space 3} .3105484
+{txt}{space 7}2013  {c |}{col 14}{res}{space 2}-1.077219{col 26}{space 2} .6886572{col 37}{space 1}   -1.56{col 46}{space 3}0.120{col 54}{space 4} -2.43615{col 67}{space 3}  .281712
+{txt}{space 7}2014  {c |}{col 14}{res}{space 2}-1.085852{col 26}{space 2} .7875193{col 37}{space 1}   -1.38{col 46}{space 3}0.170{col 54}{space 4}-2.639868{col 67}{space 3} .4681646
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 1.496366{col 26}{space 2} 13.37546{col 37}{space 1}    0.11{col 46}{space 3}0.911{col 54}{space 4} -24.8975{col 67}{space 3} 27.89023
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+Warning: Uncorrected two-step standard errors are unreliable.
+
+Instruments for first differences equation
+{col 3}Standard
+{col 5}D.(lSO2 L.lSO2 L2.lSO2 lgovcrime L.lgovcrime L2.lgovcrime lpollctl
+{col 5}L.lpollctl L2.lpollctl 2006b.year 2007.year 2008.year 2009.year 2010.year
+{col 5}2011.year 2012.year 2013.year 2014.year)
+{col 3}GMM-type (missing=0, separate instruments for each period unless collapsed)
+{col 5}L(1/8).(L.lfdi L2.lfdi lpopu L.lpopu L2.lpopu lwage L.lwage L2.lwage lgdp
+{col 5}L.lgdp L2.lgdp)
+Instruments for levels equation
+{col 3}Standard
+{col 5}lSO2 L.lSO2 L2.lSO2 lgovcrime L.lgovcrime L2.lgovcrime lpollctl L.lpollctl
+{col 5}L2.lpollctl 2006b.year 2007.year 2008.year 2009.year 2010.year 2011.year
+{col 5}2012.year 2013.year 2014.year
+{col 5}_cons
+{col 3}GMM-type (missing=0, separate instruments for each period unless collapsed)
+{col 5}D.(L.lfdi L2.lfdi lpopu L.lpopu L2.lpopu lwage L.lwage L2.lwage lgdp
+{col 5}L.lgdp L2.lgdp)
+{hline 78}
+Arellano-Bond test for AR(1) in first differences:{col 52}z = {res} -4.83{txt}  Pr > z = {res} 0.000
+{txt}Arellano-Bond test for AR(2) in first differences:{col 52}z = {res}  0.11{txt}  Pr > z = {res} 0.913
+{txt}{hline 78}
+Sargan test of overid. restrictions: chi2({res}139{txt}){col 49}={res}1129.57{txt}{col 59}Prob > chi2 = {res} 0.000
+{txt}  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2({res}139{txt}){col 49}={res}  17.40{txt}{col 59}Prob > chi2 = {res} 1.000
+{txt}  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  GMM instruments for levels
+    Hansen test excluding group:{col 38}chi2({res}96{txt}){col 49}={res}  30.41{txt}{col 59}Prob > chi2 = {res} 1.000
+{txt}    Difference (null H = exogenous):{col 38}chi2({res}43{txt}){col 49}={res} -13.01{txt}{col 59}Prob > chi2 = {res} 1.000
+{txt}  iv(lSO2 L.lSO2 L2.lSO2 lgovcrime L.lgovcrime L2.lgovcrime lpollctl L.lpollctl L2.lpollctl 2006b.year 2007.year 2008.year 2009.year 2010.year 2011.year 2012.year 2013.year 2014.year)
+    Hansen test excluding group:{col 38}chi2({res}124{txt}){col 49}={res}   7.91{txt}{col 59}Prob > chi2 = {res} 1.000
+{txt}    Difference (null H = exogenous):{col 38}chi2({res}15{txt}){col 49}={res}   9.49{txt}{col 59}Prob > chi2 = {res} 0.850
+
+{txt}
+{com}. est store panel1
+{txt}
+{com}. outreg2 panel1 using data1,word replace ctitle ("SYS-GMM") e(ar1 ar1p ar2 ar2p sargan sarganp N) noconsnoni noobs bdec(3) sdec(3)
+{err}option {bf:noconsnoni} not allowed
+{txt}{search r(198):r(198);}
+
+end of do-file
+
+{search r(198):r(198);}
+
+{com}. outreg2 panel1 using data1,word replace ctitle ("SYS-GMM") e(ar1 ar1p ar2 ar2p sargan sarganp N)  noobs bdec(3) sdec(3)
+{txt}{stata `"shellout using `"data1.rtf"'"':data1.rtf}
+{browse `"C:\stata\personal"' :dir}{com} : {txt}{stata `"seeout using "data1.txt""':seeout}
+
+{com}. do "C:\stata\personal\STD00000000.tmp"
+{txt}
+{com}. *comparison with different model
+. *Fixed effect model
+. local xx  "lfdi L.lfdi L2.lfdi L(0/2).(lSO2 lgovcrime lpopu lwage lpollctl lgdp) i.year"
+{txt}
+{com}. xtreg `xx',fe
+{res}
+{txt}Fixed-effects (within) regression{col 49}Number of obs{col 67}={col 69}{res}     1,260
+{txt}Group variable: {res}id{txt}{col 49}Number of groups{col 67}={col 69}{res}       180
+
+{txt}R-sq:{col 49}Obs per group:
+     within  = {res}0.7384{col 63}{txt}min{col 67}={col 69}{res}         7
+{txt}     between = {res}0.2098{col 63}{txt}avg{col 67}={col 69}{res}       7.0
+{txt}     overall = {res}0.2322{col 63}{txt}max{col 67}={col 69}{res}         7
+
+{txt}{col 49}F({res}26{txt},{res}1054{txt}){col 67}={col 70}{res}   114.43
+{txt}corr(u_i, Xb){col 16}= {res}0.0152{txt}{col 49}Prob > F{col 67}={col 73}{res}0.0000
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        lfdi{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}lfdi {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .8243912{col 26}{space 2} .0270644{col 37}{space 1}   30.46{col 46}{space 3}0.000{col 54}{space 4}  .771285{col 67}{space 3} .8774973
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.2278189{col 26}{space 2}  .027692{col 37}{space 1}   -8.23{col 46}{space 3}0.000{col 54}{space 4}-.2821565{col 67}{space 3}-.1734813
+{txt}{space 12} {c |}
+{space 8}lSO2 {c |}
+{space 9}--. {c |}{col 14}{res}{space 2} .2390866{col 26}{space 2} .0876182{col 37}{space 1}    2.73{col 46}{space 3}0.006{col 54}{space 4} .0671606{col 67}{space 3} .4110126
+{txt}{space 9}L1. {c |}{col 14}{res}{space 2} .1073516{col 26}{space 2} .1025067{col 37}{space 1}    1.05{col 46}{space 3}0.295{col 54}{space 4}-.0937888{col 67}{space 3} .3084919
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.2721362{col 26}{space 2} .0853689{col 37}{space 1}   -3.19{col 46}{space 3}0.001{col 54}{space 4}-.4396485{col 67}{space 3}-.1046239
+{txt}{space 12} {c |}
+{space 3}lgovcrime {c |}
+{space 9}--. {c |}{col 14}{res}{space 2}-.0508395{col 26}{space 2} .0442653{col 37}{space 1}   -1.15{col 46}{space 3}0.251{col 54}{space 4}-.1376977{col 67}{space 3} .0360186
+{txt}{space 9}L1. {c |}{col 14}{res}{space 2}-.1525708{col 26}{space 2} .0523235{col 37}{space 1}   -2.92{col 46}{space 3}0.004{col 54}{space 4}-.2552408{col 67}{space 3}-.0499008
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0694939{col 26}{space 2} .0514887{col 37}{space 1}    1.35{col 46}{space 3}0.177{col 54}{space 4}-.0315381{col 67}{space 3}  .170526
+{txt}{space 12} {c |}
+{space 7}lpopu {c |}
+{space 9}--. {c |}{col 14}{res}{space 2} 2.289649{col 26}{space 2} .4047204{col 37}{space 1}    5.66{col 46}{space 3}0.000{col 54}{space 4}   1.4955{col 67}{space 3} 3.083798
+{txt}{space 9}L1. {c |}{col 14}{res}{space 2}-1.012449{col 26}{space 2} .5151739{col 37}{space 1}   -1.97{col 46}{space 3}0.050{col 54}{space 4}-2.023333{col 67}{space 3}-.0015661
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.9754137{col 26}{space 2} .3959482{col 37}{space 1}   -2.46{col 46}{space 3}0.014{col 54}{space 4} -1.75235{col 67}{space 3}-.1984773
+{txt}{space 12} {c |}
+{space 7}lwage {c |}
+{space 9}--. {c |}{col 14}{res}{space 2} .5238631{col 26}{space 2} .2887665{col 37}{space 1}    1.81{col 46}{space 3}0.070{col 54}{space 4}-.0427595{col 67}{space 3} 1.090486
+{txt}{space 9}L1. {c |}{col 14}{res}{space 2} .0318033{col 26}{space 2} .3274349{col 37}{space 1}    0.10{col 46}{space 3}0.923{col 54}{space 4}-.6106952{col 67}{space 3} .6743018
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} 1.096146{col 26}{space 2} .2544725{col 37}{space 1}    4.31{col 46}{space 3}0.000{col 54}{space 4} .5968157{col 67}{space 3} 1.595476
+{txt}{space 12} {c |}
+{space 4}lpollctl {c |}
+{space 9}--. {c |}{col 14}{res}{space 2}-.0408142{col 26}{space 2} .0163746{col 37}{space 1}   -2.49{col 46}{space 3}0.013{col 54}{space 4}-.0729448{col 67}{space 3}-.0086836
+{txt}{space 9}L1. {c |}{col 14}{res}{space 2}-.0321812{col 26}{space 2}  .016763{col 37}{space 1}   -1.92{col 46}{space 3}0.055{col 54}{space 4}-.0650739{col 67}{space 3} .0007115
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0182849{col 26}{space 2} .0153176{col 37}{space 1}   -1.19{col 46}{space 3}0.233{col 54}{space 4}-.0483415{col 67}{space 3} .0117716
+{txt}{space 12} {c |}
+{space 8}lgdp {c |}
+{space 9}--. {c |}{col 14}{res}{space 2}-.6407182{col 26}{space 2} .3084361{col 37}{space 1}   -2.08{col 46}{space 3}0.038{col 54}{space 4}-1.245937{col 67}{space 3}-.0354996
+{txt}{space 9}L1. {c |}{col 14}{res}{space 2}-.2476581{col 26}{space 2} .3900472{col 37}{space 1}   -0.63{col 46}{space 3}0.526{col 54}{space 4}-1.013015{col 67}{space 3} .5176992
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.2326642{col 26}{space 2} .2670609{col 37}{space 1}   -0.87{col 46}{space 3}0.384{col 54}{space 4}-.7566957{col 67}{space 3} .2913674
+{txt}{space 12} {c |}
+{space 8}year {c |}
+{space 7}2009  {c |}{col 14}{res}{space 2}-.1091247{col 26}{space 2} .0461916{col 37}{space 1}   -2.36{col 46}{space 3}0.018{col 54}{space 4}-.1997627{col 67}{space 3}-.0184867
+{txt}{space 7}2010  {c |}{col 14}{res}{space 2}-.0343387{col 26}{space 2} .0774716{col 37}{space 1}   -0.44{col 46}{space 3}0.658{col 54}{space 4}-.1863549{col 67}{space 3} .1176775
+{txt}{space 7}2011  {c |}{col 14}{res}{space 2}-.0328565{col 26}{space 2} .1038284{col 37}{space 1}   -0.32{col 46}{space 3}0.752{col 54}{space 4}-.2365903{col 67}{space 3} .1708773
+{txt}{space 7}2012  {c |}{col 14}{res}{space 2}-.0744148{col 26}{space 2} .1345645{col 37}{space 1}   -0.55{col 46}{space 3}0.580{col 54}{space 4}-.3384596{col 67}{space 3} .1896299
+{txt}{space 7}2013  {c |}{col 14}{res}{space 2}-.1215467{col 26}{space 2} .1659048{col 37}{space 1}   -0.73{col 46}{space 3}0.464{col 54}{space 4}-.4470879{col 67}{space 3} .2039945
+{txt}{space 7}2014  {c |}{col 14}{res}{space 2}-.1388496{col 26}{space 2}  .191156{col 37}{space 1}   -0.73{col 46}{space 3}0.468{col 54}{space 4}-.5139392{col 67}{space 3}   .23624
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-5.845071{col 26}{space 2} 3.014098{col 37}{space 1}   -1.94{col 46}{space 3}0.053{col 54}{space 4}-11.75939{col 67}{space 3} .0692448
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+     sigma_u {c |} {res} 1.3840419
+     {txt}sigma_e {c |} {res} .18274058
+         {txt}rho {c |} {res} .98286573{txt}   (fraction of variance due to u_i)
+{hline 13}{c BT}{hline 64}
+F test that all u_i=0: F({res}179{txt}, {res}1054{txt}) = {res}3.19{col 62}{txt}Prob > F = {res}0.0000
+{txt}
+{com}. est store fe 
+{txt}
+{com}. outreg2 using data1,word append ctitle ("Fixed effect")
+{txt}{stata `"shellout using `"data1.rtf"'"':data1.rtf}
+{browse `"C:\stata\personal"' :dir}{com} : {txt}{stata `"seeout using "data1.txt""':seeout}
+
+{com}. 
+. *Random effect model
+. local xx  "lfdi L.lfdi L2.lfdi L(0/2).(lSO2 lgovcrime lpopu lwage lpollctl lgdp) i.year"
+{txt}
+{com}. xtreg `xx',re
+{res}
+{txt}Random-effects GLS regression                   Number of obs     = {res}     1,260
+{txt}Group variable: {res}id                              {txt}Number of groups  = {res}       180
+
+{txt}R-sq:                                           Obs per group:
+     within  = {res}0.6858                                         {txt}min = {res}         7
+{txt}     between = {res}0.9982                                         {txt}avg = {res}       7.0
+{txt}     overall = {res}0.9829                                         {txt}max = {res}         7
+
+                                                {txt}Wald chi2({res}26{txt})     =  {res} 70787.80
+{txt}corr(u_i, X)   = {res}0{txt} (assumed)                    Prob > chi2       =     {res}0.0000
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        lfdi{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}lfdi {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} 1.144221{col 26}{space 2} .0264891{col 37}{space 1}   43.20{col 46}{space 3}0.000{col 54}{space 4} 1.092303{col 67}{space 3} 1.196139
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.1714265{col 26}{space 2} .0276065{col 37}{space 1}   -6.21{col 46}{space 3}0.000{col 54}{space 4}-.2255344{col 67}{space 3}-.1173187
+{txt}{space 12} {c |}
+{space 8}lSO2 {c |}
+{space 9}--. {c |}{col 14}{res}{space 2} .2458423{col 26}{space 2} .0860943{col 37}{space 1}    2.86{col 46}{space 3}0.004{col 54}{space 4} .0771004{col 67}{space 3} .4145841
+{txt}{space 9}L1. {c |}{col 14}{res}{space 2}-.0089705{col 26}{space 2} .1165718{col 37}{space 1}   -0.08{col 46}{space 3}0.939{col 54}{space 4} -.237447{col 67}{space 3}  .219506
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}  -.23751{col 26}{space 2} .0819703{col 37}{space 1}   -2.90{col 46}{space 3}0.004{col 54}{space 4}-.3981688{col 67}{space 3}-.0768512
+{txt}{space 12} {c |}
+{space 3}lgovcrime {c |}
+{space 9}--. {c |}{col 14}{res}{space 2} .1102414{col 26}{space 2} .0416153{col 37}{space 1}    2.65{col 46}{space 3}0.008{col 54}{space 4} .0286769{col 67}{space 3} .1918058
+{txt}{space 9}L1. {c |}{col 14}{res}{space 2}-.0824393{col 26}{space 2} .0534737{col 37}{space 1}   -1.54{col 46}{space 3}0.123{col 54}{space 4}-.1872459{col 67}{space 3} .0223673
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0731825{col 26}{space 2} .0461923{col 37}{space 1}    1.58{col 46}{space 3}0.113{col 54}{space 4}-.0173527{col 67}{space 3} .1637177
+{txt}{space 12} {c |}
+{space 7}lpopu {c |}
+{space 9}--. {c |}{col 14}{res}{space 2} 1.766474{col 26}{space 2} .3735985{col 37}{space 1}    4.73{col 46}{space 3}0.000{col 54}{space 4} 1.034234{col 67}{space 3} 2.498713
+{txt}{space 9}L1. {c |}{col 14}{res}{space 2} -1.19995{col 26}{space 2} .5845347{col 37}{space 1}   -2.05{col 46}{space 3}0.040{col 54}{space 4}-2.345617{col 67}{space 3}-.0542832
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.4348891{col 26}{space 2} .3805111{col 37}{space 1}   -1.14{col 46}{space 3}0.253{col 54}{space 4}-1.180677{col 67}{space 3}  .310899
+{txt}{space 12} {c |}
+{space 7}lwage {c |}
+{space 9}--. {c |}{col 14}{res}{space 2} .9460577{col 26}{space 2} .2652592{col 37}{space 1}    3.57{col 46}{space 3}0.000{col 54}{space 4} .4261591{col 67}{space 3} 1.465956
+{txt}{space 9}L1. {c |}{col 14}{res}{space 2}-.1154762{col 26}{space 2} .3696347{col 37}{space 1}   -0.31{col 46}{space 3}0.755{col 54}{space 4} -.839947{col 67}{space 3} .6089946
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.5843104{col 26}{space 2} .2417104{col 37}{space 1}   -2.42{col 46}{space 3}0.016{col 54}{space 4}-1.058054{col 67}{space 3}-.1105668
+{txt}{space 12} {c |}
+{space 4}lpollctl {c |}
+{space 9}--. {c |}{col 14}{res}{space 2}-.0264645{col 26}{space 2} .0164149{col 37}{space 1}   -1.61{col 46}{space 3}0.107{col 54}{space 4}-.0586371{col 67}{space 3} .0057081
+{txt}{space 9}L1. {c |}{col 14}{res}{space 2}-.0097313{col 26}{space 2} .0172408{col 37}{space 1}   -0.56{col 46}{space 3}0.572{col 54}{space 4}-.0435226{col 67}{space 3}   .02406
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0078901{col 26}{space 2} .0152363{col 37}{space 1}   -0.52{col 46}{space 3}0.605{col 54}{space 4}-.0377526{col 67}{space 3} .0219725
+{txt}{space 12} {c |}
+{space 8}lgdp {c |}
+{space 9}--. {c |}{col 14}{res}{space 2} .5163054{col 26}{space 2} .2719928{col 37}{space 1}    1.90{col 46}{space 3}0.058{col 54}{space 4}-.0167908{col 67}{space 3} 1.049402
+{txt}{space 9}L1. {c |}{col 14}{res}{space 2}-.7963281{col 26}{space 2} .4371065{col 37}{space 1}   -1.82{col 46}{space 3}0.068{col 54}{space 4}-1.653041{col 67}{space 3} .0603849
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}  .222838{col 26}{space 2} .2650806{col 37}{space 1}    0.84{col 46}{space 3}0.401{col 54}{space 4}-.2967106{col 67}{space 3} .7423865
+{txt}{space 12} {c |}
+{space 8}year {c |}
+{space 7}2009  {c |}{col 14}{res}{space 2}  .013277{col 26}{space 2}  .034178{col 37}{space 1}    0.39{col 46}{space 3}0.698{col 54}{space 4}-.0537107{col 67}{space 3} .0802646
+{txt}{space 7}2010  {c |}{col 14}{res}{space 2} .0516858{col 26}{space 2} .0370954{col 37}{space 1}    1.39{col 46}{space 3}0.164{col 54}{space 4}-.0210197{col 67}{space 3} .1243914
+{txt}{space 7}2011  {c |}{col 14}{res}{space 2} .0071448{col 26}{space 2} .0344173{col 37}{space 1}    0.21{col 46}{space 3}0.836{col 54}{space 4}-.0603119{col 67}{space 3} .0746015
+{txt}{space 7}2012  {c |}{col 14}{res}{space 2}-.0363352{col 26}{space 2}  .040278{col 37}{space 1}   -0.90{col 46}{space 3}0.367{col 54}{space 4}-.1152787{col 67}{space 3} .0426083
+{txt}{space 7}2013  {c |}{col 14}{res}{space 2} -.090469{col 26}{space 2} .0438491{col 37}{space 1}   -2.06{col 46}{space 3}0.039{col 54}{space 4}-.1764116{col 67}{space 3}-.0045264
+{txt}{space 7}2014  {c |}{col 14}{res}{space 2}-.0032167{col 26}{space 2} .0497002{col 37}{space 1}   -0.06{col 46}{space 3}0.948{col 54}{space 4}-.1006273{col 67}{space 3}  .094194
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-3.260538{col 26}{space 2} .6301673{col 37}{space 1}   -5.17{col 46}{space 3}0.000{col 54}{space 4}-4.495643{col 67}{space 3}-2.025433
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+     sigma_u {c |} {res}         0
+     {txt}sigma_e {c |} {res} .18274058
+         {txt}rho {c |} {res}         0{txt}   (fraction of variance due to u_i)
+{hline 13}{c BT}{hline 64}
+
+{com}. est store re 
+{txt}
+{com}. outreg2 using data1,word append ctitle ("random effect")
+{txt}{stata `"shellout using `"data1.rtf"'"':data1.rtf}
+{browse `"C:\stata\personal"' :dir}{com} : {txt}{stata `"seeout using "data1.txt""':seeout}
+
+{com}. 
+. *difference GMM
+. local xx  "lfdi L.lfdi L2.lfdi L(0/2).(lSO2 lgovcrime lpopu lwage lpollctl lgdp) i.year"
+{txt}
+{com}. local gmm7 "     L.lfdi L2.lfdi L(0/2).(lgdp lwage lpopu lpollctl)                     "
+{txt}
+{com}. local iv7  "            L(0/2).(lSO2 lgovcrime                       )i.year   "
+{txt}
+{com}. xtabond2 `xx', gmm(`gmm7') iv(`iv7') nolevel robust
+{res}{txt}Favoring speed over space. To switch, type or click on {stata "mata: mata set matafavor space, perm"}.
+{res}Warning: Two-step estimated covariance matrix of moments is singular.
+{res}  Using a generalized inverse to calculate robust weighting matrix for Hansen test.
+{res}  Difference-in-Sargan/Hansen statistics may be negative.
+
+{txt}Dynamic panel-data estimation, one-step difference GMM
+{hline 78}
+Group variable: {res}id{txt}{col 49}Number of obs      = {res}     1080
+{txt}Time variable : {res}year{txt}{col 49}Number of groups   = {res}      180
+{txt}Number of instruments = {res}155{col 49}{txt}Obs per group: min = {res}        6
+{txt}Wald chi2({res}29{txt}){col 15}= {res}123707.21{col 64}{txt}avg = {res}     6.00
+{txt}Prob > chi2{col 15}={res}     0.000{col 64}{txt}max = {res}        6
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}        lfdi{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}lfdi {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .7974315{col 26}{space 2}  .022288{col 37}{space 1}   35.78{col 46}{space 3}0.000{col 54}{space 4} .7537479{col 67}{space 3}  .841115
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.2175169{col 26}{space 2} .0392938{col 37}{space 1}   -5.54{col 46}{space 3}0.000{col 54}{space 4}-.2945314{col 67}{space 3}-.1405024
+{txt}{space 12} {c |}
+{space 8}lSO2 {c |}
+{space 9}--. {c |}{col 14}{res}{space 2} .0834828{col 26}{space 2} .1000409{col 37}{space 1}    0.83{col 46}{space 3}0.404{col 54}{space 4}-.1125938{col 67}{space 3} .2795595
+{txt}{space 9}L1. {c |}{col 14}{res}{space 2} .1168113{col 26}{space 2}  .107304{col 37}{space 1}    1.09{col 46}{space 3}0.276{col 54}{space 4}-.0935006{col 67}{space 3} .3271233
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.2094612{col 26}{space 2} .0919275{col 37}{space 1}   -2.28{col 46}{space 3}0.023{col 54}{space 4}-.3896358{col 67}{space 3}-.0292867
+{txt}{space 12} {c |}
+{space 3}lgovcrime {c |}
+{space 9}--. {c |}{col 14}{res}{space 2}-.0467903{col 26}{space 2} .0308675{col 37}{space 1}   -1.52{col 46}{space 3}0.130{col 54}{space 4}-.1072895{col 67}{space 3} .0137088
+{txt}{space 9}L1. {c |}{col 14}{res}{space 2} -.151773{col 26}{space 2} .0472393{col 37}{space 1}   -3.21{col 46}{space 3}0.001{col 54}{space 4}-.2443604{col 67}{space 3}-.0591857
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0860977{col 26}{space 2} .0520216{col 37}{space 1}    1.66{col 46}{space 3}0.098{col 54}{space 4}-.0158627{col 67}{space 3} .1880581
+{txt}{space 12} {c |}
+{space 7}lpopu {c |}
+{space 9}--. {c |}{col 14}{res}{space 2}  2.28488{col 26}{space 2}  .444315{col 37}{space 1}    5.14{col 46}{space 3}0.000{col 54}{space 4} 1.414039{col 67}{space 3} 3.155722
+{txt}{space 9}L1. {c |}{col 14}{res}{space 2}-.8680375{col 26}{space 2} .3878676{col 37}{space 1}   -2.24{col 46}{space 3}0.025{col 54}{space 4}-1.628244{col 67}{space 3}-.1078309
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-1.077365{col 26}{space 2}  .360044{col 37}{space 1}   -2.99{col 46}{space 3}0.003{col 54}{space 4}-1.783038{col 67}{space 3}-.3716913
+{txt}{space 12} {c |}
+{space 7}lwage {c |}
+{space 9}--. {c |}{col 14}{res}{space 2} .7322136{col 26}{space 2} .3316906{col 37}{space 1}    2.21{col 46}{space 3}0.027{col 54}{space 4}  .082112{col 67}{space 3} 1.382315
+{txt}{space 9}L1. {c |}{col 14}{res}{space 2} .1080479{col 26}{space 2} .2646186{col 37}{space 1}    0.41{col 46}{space 3}0.683{col 54}{space 4}-.4105952{col 67}{space 3} .6266909
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} 1.132762{col 26}{space 2} .2235341{col 37}{space 1}    5.07{col 46}{space 3}0.000{col 54}{space 4} .6946437{col 67}{space 3} 1.570881
+{txt}{space 12} {c |}
+{space 4}lpollctl {c |}
+{space 9}--. {c |}{col 14}{res}{space 2}-.0544557{col 26}{space 2} .0126452{col 37}{space 1}   -4.31{col 46}{space 3}0.000{col 54}{space 4}-.0792397{col 67}{space 3}-.0296716
+{txt}{space 9}L1. {c |}{col 14}{res}{space 2}-.0411002{col 26}{space 2}  .018236{col 37}{space 1}   -2.25{col 46}{space 3}0.024{col 54}{space 4}-.0768421{col 67}{space 3}-.0053582
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0265215{col 26}{space 2} .0171239{col 37}{space 1}   -1.55{col 46}{space 3}0.121{col 54}{space 4}-.0600837{col 67}{space 3} .0070406
+{txt}{space 12} {c |}
+{space 8}lgdp {c |}
+{space 9}--. {c |}{col 14}{res}{space 2} -.323417{col 26}{space 2} .3199306{col 37}{space 1}   -1.01{col 46}{space 3}0.312{col 54}{space 4}-.9504694{col 67}{space 3} .3036354
+{txt}{space 9}L1. {c |}{col 14}{res}{space 2}-.3656996{col 26}{space 2}  .338869{col 37}{space 1}   -1.08{col 46}{space 3}0.281{col 54}{space 4}-1.029871{col 67}{space 3} .2984716
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.2890849{col 26}{space 2} .2186643{col 37}{space 1}   -1.32{col 46}{space 3}0.186{col 54}{space 4} -.717659{col 67}{space 3} .1394893
+{txt}{space 12} {c |}
+{space 8}year {c |}
+{space 7}2006  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (empty)
+{space 7}2007  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (omitted)
+{space 7}2008  {c |}{col 14}{res}{space 2} .3046567{col 26}{space 2}  .148011{col 37}{space 1}    2.06{col 46}{space 3}0.040{col 54}{space 4} .0145604{col 67}{space 3} .5947529
+{txt}{space 7}2009  {c |}{col 14}{res}{space 2} .1521886{col 26}{space 2} .1079816{col 37}{space 1}    1.41{col 46}{space 3}0.159{col 54}{space 4}-.0594514{col 67}{space 3} .3638286
+{txt}{space 7}2010  {c |}{col 14}{res}{space 2} .1462262{col 26}{space 2}    .0634{col 37}{space 1}    2.31{col 46}{space 3}0.021{col 54}{space 4} .0219644{col 67}{space 3}  .270488
+{txt}{space 7}2011  {c |}{col 14}{res}{space 2} .0768035{col 26}{space 2} .0315056{col 37}{space 1}    2.44{col 46}{space 3}0.015{col 54}{space 4} .0150536{col 67}{space 3} .1385534
+{txt}{space 7}2012  {c |}{col 14}{res}{space 2}-.0071705{col 26}{space 2} .0224644{col 37}{space 1}   -0.32{col 46}{space 3}0.750{col 54}{space 4}-.0511999{col 67}{space 3}  .036859
+{txt}{space 7}2013  {c |}{col 14}{res}{space 2}-.0927621{col 26}{space 2}   .04137{col 37}{space 1}   -2.24{col 46}{space 3}0.025{col 54}{space 4}-.1738459{col 67}{space 3}-.0116783
+{txt}{space 7}2014  {c |}{col 14}{res}{space 2}-.1432333{col 26}{space 2} .0754223{col 37}{space 1}   -1.90{col 46}{space 3}0.058{col 54}{space 4}-.2910583{col 67}{space 3} .0045917
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+Instruments for first differences equation
+{col 3}Standard
+{col 5}D.(lSO2 L.lSO2 L2.lSO2 lgovcrime L.lgovcrime L2.lgovcrime 2006b.year
+{col 5}2007.year 2008.year 2009.year 2010.year 2011.year 2012.year 2013.year
+{col 5}2014.year)
+{col 3}GMM-type (missing=0, separate instruments for each period unless collapsed)
+{col 5}L(1/8).(L.lfdi L2.lfdi lgdp L.lgdp L2.lgdp lwage L.lwage L2.lwage lpopu
+{col 5}L.lpopu L2.lpopu lpollctl L.lpollctl L2.lpollctl)
+{hline 78}
+Arellano-Bond test for AR(1) in first differences:{col 52}z = {res} -7.10{txt}  Pr > z = {res} 0.000
+{txt}Arellano-Bond test for AR(2) in first differences:{col 52}z = {res} -5.08{txt}  Pr > z = {res} 0.000
+{txt}{hline 78}
+Sargan test of overid. restrictions: chi2({res}126{txt}){col 49}={res}1092.64{txt}{col 59}Prob > chi2 = {res} 0.000
+{txt}  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2({res}126{txt}){col 49}={res}  23.85{txt}{col 59}Prob > chi2 = {res} 1.000
+{txt}  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  iv(lSO2 L.lSO2 L2.lSO2 lgovcrime L.lgovcrime L2.lgovcrime 2006b.year 2007.year 2008.year 2009.year 2010.year 2011.year 2012.year 2013.year 2014.year)
+    Hansen test excluding group:{col 38}chi2({res}115{txt}){col 49}={res}  25.14{txt}{col 59}Prob > chi2 = {res} 1.000
+{txt}    Difference (null H = exogenous):{col 38}chi2({res}11{txt}){col 49}={res}  -1.29{txt}{col 59}Prob > chi2 = {res} 1.000
+
+{txt}
+{com}. est store paneldi
+{txt}
+{com}. outreg2 paneldi using data1,word append ctitle ("Difference effect")
+{txt}{stata `"shellout using `"data1.rtf"'"':data1.rtf}
+{browse `"C:\stata\personal"' :dir}{com} : {txt}{stata `"seeout using "data1.txt""':seeout}
+
+{com}. 
+. close log
+{err}command {bf}close{sf} is unrecognized
+{txt}{search r(199):r(199);}
+
+end of do-file
+
+{search r(199):r(199);}
+
+{com}. do "C:\stata\personal\STD00000000.tmp"
+{txt}
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\stata\personal\data.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}25 Apr 2017, 10:21:07
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

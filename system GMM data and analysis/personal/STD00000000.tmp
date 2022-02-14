@@ -1,0 +1,31 @@
+
+*Assume with L2.lfdi and lgdp, lwage,lpopu are endogenous (appliable)
+local xx   "lfdi L.lfdi L2.lfdi L(0/2).(lSO2 lgovcrime lpopu lwage lpollctl lgdp) i.year"
+local gmm6 "     L.lfdi L2.lfdi L(0/2).(               lpopu lwage          lgdp)       "
+local iv6  "                    L(0/2).(lSO2 lgovcrime             lpollctl     ) i.year"
+xtabond2 `xx', gmm(`gmm6') iv(`iv6') twostep small
+est store panel1
+outreg2 panel1 using data1,word replace ctitle ("SYS-GMM") e(ar1 ar1p ar2 ar2p sargan sarganp N)  noobs bdec(3) sdec(3) drop(i.year)
+
+
+*comparison with different model
+*Fixed effect model
+local xx  "lfdi L.lfdi L2.lfdi L(0/2).(lSO2 lgovcrime lpopu lwage lpollctl lgdp) i.year"
+xtreg `xx',fe cluster(id)
+est store fe 
+outreg2 using data1,word append ctitle ("Fixed effect") drop(i.year)
+
+*Random effect model
+local xx  "lfdi L.lfdi L2.lfdi L(0/2).(lSO2 lgovcrime lpopu lwage lpollctl lgdp) i.year"
+xtreg `xx',re cluster(id)
+est store re 
+outreg2 using data1,word append ctitle ("random effect") drop(i.year)
+
+*difference GMM
+local xx  "lfdi L.lfdi L2.lfdi L(0/2).(lSO2 lgovcrime lpopu lwage lpollctl lgdp) i.year"
+local gmm7 "     L.lfdi L2.lfdi L(0/2).(lgdp lwage lpopu lpollctl)                     "
+local iv7  "            L(0/2).(lSO2 lgovcrime                       )i.year   "
+xtabond2 `xx', gmm(`gmm7') iv(`iv7') nolevel robust
+est store paneldi
+outreg2 paneldi using data1,word append ctitle ("Difference GMM")drop(i.year)
+shellout using `"data1.rtf"'

@@ -1,0 +1,14 @@
+*set the working directory
+cd "C:\stata\final data"
+log using mylognew.log,text replace
+
+*input data
+use cityfinal,clear
+
+*data summary
+summarize
+*declare individual identifier and time indentifier
+xtset id year
+
+*panel description of dataset
+describe

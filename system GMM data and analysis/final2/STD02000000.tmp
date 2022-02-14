@@ -1,0 +1,7 @@
+local xx "lfine lpopu_c  lsecgrp_c llaborinsec_c ldelivery_c lwage_c seaside vice  year2-year8"
+xtdpd lso2_c ldomestic_c lland_c lgov_c `xx',dgmmiv(ldomestic_c lpopu_c lgov_c ) div(year2-year8) twostep
+est store dycs_2endog
+estat abond 
+estat sargan
+ outreg2 using data333,excel append ctitle ("lso2_b") drop(year1-year8) e(arm1 arm2 artests sargan sarganp  N N_g)  noobs bdec(3) sdec(3)
+  

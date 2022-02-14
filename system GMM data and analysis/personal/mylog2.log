@@ -1,0 +1,388 @@
+-------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\stata\personal\mylog2.log
+  log type:  text
+ opened on:  25 Jan 2022, 16:03:44
+
+. *System GMM
+. *Arellano and Bond
+. 
+. *Assume with L2.lfdi and lgdp, lwage,lpopu are endogenous (appliable)
+. local xx   "lfdi L.lfdi L2.lfdi L(0/2).(lSO2 lgovcrime lpopu lwage lpollctl lgdp) i.year"
+
+. local gmm6 "     L.lfdi L2.lfdi L(0/2).(               lpopu lwage          lgdp)       "
+
+. local iv6  "                    L(0/2).(lSO2 lgovcrime             lpollctl     ) i.year"
+
+. xtabond2 `xx', gmm(`gmm6') iv(`iv6') twostep small
+Favoring speed over space. To switch, type or click on mata: mata set matafavor space, perm.
+Warning: Two-step estimated covariance matrix of moments is singular.
+  Using a generalized inverse to calculate optimal weighting matrix for two-step estimation.
+  Difference-in-Sargan/Hansen statistics may be negative.
+
+Dynamic panel-data estimation, two-step system GMM
+------------------------------------------------------------------------------
+Group variable: id                              Number of obs      =      1260
+Time variable : year                            Number of groups   =       180
+Number of instruments = 169                     Obs per group: min =         7
+F(29, 179)    =  28146.40                                      avg =      7.00
+Prob > F      =     0.000                                      max =         7
+------------------------------------------------------------------------------
+        lfdi |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        lfdi |
+         L1. |   1.035012   .1977666     5.23   0.000     .6447577    1.425265
+         L2. |   .0291607   .1213753     0.24   0.810    -.2103499    .2686712
+             |
+        lSO2 |
+         --. |  -.3388708   .4734104    -0.72   0.475    -1.273054    .5953125
+         L1. |  -.6077331   .2908184    -2.09   0.038    -1.181607   -.0338596
+         L2. |  -.1343201   .3301606    -0.41   0.685    -.7858279    .5171876
+             |
+   lgovcrime |
+         --. |   .5254896   .1800761     2.92   0.004     .1701444    .8808347
+         L1. |   .4807575   .3378695     1.42   0.157    -.1859622    1.147477
+         L2. |   .8970913   .3697503     2.43   0.016     .1674611    1.626722
+             |
+       lpopu |
+         --. |    4.27741   2.332297     1.83   0.068    -.3249236    8.879743
+         L1. |  -8.331721   2.506568    -3.32   0.001    -13.27795   -3.385496
+         L2. |    2.22868   1.185471     1.88   0.062    -.1106155    4.567975
+             |
+       lwage |
+         --. |  -1.281943   2.116386    -0.61   0.545    -5.458218    2.894333
+         L1. |   7.261028   2.122322     3.42   0.001     3.073039    11.44902
+         L2. |  -4.699983   1.709453    -2.75   0.007    -8.073255    -1.32671
+             |
+    lpollctl |
+         --. |  -.3235923   .0879011    -3.68   0.000    -.4970481   -.1501365
+         L1. |  -.1346089    .024114    -5.58   0.000    -.1821932   -.0870245
+         L2. |  -.0017261   .0369887    -0.05   0.963    -.0747162    .0712639
+             |
+        lgdp |
+         --. |  -.0343995    1.28775    -0.03   0.979    -2.575523    2.506724
+         L1. |  -1.202469   .9548917    -1.26   0.210    -3.086762    .6818239
+         L2. |   1.860944   1.397629     1.33   0.185    -.8970053    4.618893
+             |
+        year |
+       2006  |          0  (empty)
+       2007  |          0  (omitted)
+       2008  |          0  (omitted)
+       2009  |  -.3977804   .1678705    -2.37   0.019    -.7290402   -.0665207
+       2010  |  -.5469998   .2800395    -1.95   0.052    -1.099603    .0056037
+       2011  |  -.5412659    .475331    -1.14   0.256    -1.479239    .3967074
+       2012  |  -.9225928   .6249115    -1.48   0.142    -2.155734    .3105484
+       2013  |  -1.077219   .6886572    -1.56   0.120     -2.43615     .281712
+       2014  |  -1.085852   .7875193    -1.38   0.170    -2.639868    .4681646
+             |
+       _cons |   1.496366   13.37546     0.11   0.911     -24.8975    27.89023
+------------------------------------------------------------------------------
+Warning: Uncorrected two-step standard errors are unreliable.
+
+Instruments for first differences equation
+  Standard
+    D.(lSO2 L.lSO2 L2.lSO2 lgovcrime L.lgovcrime L2.lgovcrime lpollctl
+    L.lpollctl L2.lpollctl 2006b.year 2007.year 2008.year 2009.year 2010.year
+    2011.year 2012.year 2013.year 2014.year)
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    L(1/8).(L.lfdi L2.lfdi lpopu L.lpopu L2.lpopu lwage L.lwage L2.lwage lgdp
+    L.lgdp L2.lgdp)
+Instruments for levels equation
+  Standard
+    lSO2 L.lSO2 L2.lSO2 lgovcrime L.lgovcrime L2.lgovcrime lpollctl L.lpollctl
+    L2.lpollctl 2006b.year 2007.year 2008.year 2009.year 2010.year 2011.year
+    2012.year 2013.year 2014.year
+    _cons
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    D.(L.lfdi L2.lfdi lpopu L.lpopu L2.lpopu lwage L.lwage L2.lwage lgdp
+    L.lgdp L2.lgdp)
+------------------------------------------------------------------------------
+Arellano-Bond test for AR(1) in first differences: z =  -4.83  Pr > z =  0.000
+Arellano-Bond test for AR(2) in first differences: z =   0.11  Pr > z =  0.913
+------------------------------------------------------------------------------
+Sargan test of overid. restrictions: chi2(139)  =1129.57  Prob > chi2 =  0.000
+  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2(139)  =  17.40  Prob > chi2 =  1.000
+  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  GMM instruments for levels
+    Hansen test excluding group:     chi2(96)   =  30.41  Prob > chi2 =  1.000
+    Difference (null H = exogenous): chi2(43)   = -13.01  Prob > chi2 =  1.000
+  iv(lSO2 L.lSO2 L2.lSO2 lgovcrime L.lgovcrime L2.lgovcrime lpollctl L.lpollctl L2.lpollctl 2006b.year 2007.year 2008.year 2009.year 2010.year 20
+> 11.year 2012.year 2013.year 2014.year)
+    Hansen test excluding group:     chi2(124)  =   7.91  Prob > chi2 =  1.000
+    Difference (null H = exogenous): chi2(15)   =   9.49  Prob > chi2 =  0.850
+
+
+. est store panel1
+
+. outreg2 panel1 using data1,word replace ctitle ("SYS-GMM") e(ar1 ar1p ar2 ar2p sargan sarganp N)  noobs bdec(3) sdec(3) drop(i.year)
+data1.rtf
+dir : seeout
+
+. 
+. 
+. *comparison with different model
+. *Fixed effect model
+. local xx  "lfdi L.lfdi L2.lfdi L(0/2).(lSO2 lgovcrime lpopu lwage lpollctl lgdp) i.year"
+
+. xtreg `xx',fe cluster(id)
+
+Fixed-effects (within) regression               Number of obs     =      1,260
+Group variable: id                              Number of groups  =        180
+
+R-sq:                                           Obs per group:
+     within  = 0.7384                                         min =          7
+     between = 0.2098                                         avg =        7.0
+     overall = 0.2322                                         max =          7
+
+                                                F(26,179)         =    1851.58
+corr(u_i, Xb)  = 0.0152                         Prob > F          =     0.0000
+
+                                   (Std. Err. adjusted for 180 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        lfdi |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        lfdi |
+         L1. |   .8243912   .0163896    50.30   0.000     .7920495    .8567328
+         L2. |  -.2278189    .036638    -6.22   0.000    -.3001168    -.155521
+             |
+        lSO2 |
+         --. |   .2390866   .0977373     2.45   0.015      .046221    .4319522
+         L1. |   .1073516   .1096742     0.98   0.329    -.1090691    .3237722
+         L2. |  -.2721362   .0916635    -2.97   0.003    -.4530163   -.0912562
+             |
+   lgovcrime |
+         --. |  -.0508395   .0325671    -1.56   0.120    -.1151044    .0134254
+         L1. |  -.1525708   .0479182    -3.18   0.002     -.247128   -.0580137
+         L2. |   .0694939   .0481645     1.44   0.151    -.0255494    .1645372
+             |
+       lpopu |
+         --. |   2.289649   .4496371     5.09   0.000     1.402378     3.17692
+         L1. |  -1.012449   .4070549    -2.49   0.014    -1.815693   -.2092056
+         L2. |  -.9754137   .3617146    -2.70   0.008    -1.689187   -.2616403
+             |
+       lwage |
+         --. |   .5238631   .2592604     2.02   0.045     .0122632    1.035463
+         L1. |   .0318033   .2669737     0.12   0.905    -.4950173    .5586239
+         L2. |   1.096146   .2120616     5.17   0.000     .6776837    1.514608
+             |
+    lpollctl |
+         --. |  -.0408142   .0125442    -3.25   0.001    -.0655677   -.0160607
+         L1. |  -.0321812   .0175586    -1.83   0.068    -.0668296    .0024672
+         L2. |  -.0182849   .0164652    -1.11   0.268    -.0507759     .014206
+             |
+        lgdp |
+         --. |  -.6407182   .2617496    -2.45   0.015     -1.15723   -.1242062
+         L1. |  -.2476581   .3542628    -0.70   0.485    -.9467267    .4514106
+         L2. |  -.2326642   .2233797    -1.04   0.299    -.6734605    .2081322
+             |
+        year |
+       2009  |  -.1091247   .0391743    -2.79   0.006    -.1864275   -.0318219
+       2010  |  -.0343387     .07404    -0.46   0.643    -.1804423    .1117648
+       2011  |  -.0328565    .101891    -0.32   0.747    -.2339186    .1682056
+       2012  |  -.0744148   .1296478    -0.57   0.567    -.3302495    .1814199
+       2013  |  -.1215467   .1483815    -0.82   0.414    -.4143488    .1712554
+       2014  |  -.1388496   .1757083    -0.79   0.430    -.4855757    .2078765
+             |
+       _cons |  -5.845071   3.210064    -1.82   0.070    -12.17951    .4893654
+-------------+----------------------------------------------------------------
+     sigma_u |  1.3840419
+     sigma_e |  .18274058
+         rho |  .98286573   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+
+. est store fe 
+
+. outreg2 using data1,word append ctitle ("Fixed effect") drop(i.year)
+data1.rtf
+dir : seeout
+
+. 
+. *Random effect model
+. local xx  "lfdi L.lfdi L2.lfdi L(0/2).(lSO2 lgovcrime lpopu lwage lpollctl lgdp) i.year"
+
+. xtreg `xx',re cluster(id)
+
+Random-effects GLS regression                   Number of obs     =      1,260
+Group variable: id                              Number of groups  =        180
+
+R-sq:                                           Obs per group:
+     within  = 0.6858                                         min =          7
+     between = 0.9982                                         avg =        7.0
+     overall = 0.9829                                         max =          7
+
+                                                Wald chi2(26)     =   1.49e+06
+corr(u_i, X)   = 0 (assumed)                    Prob > chi2       =     0.0000
+
+                                   (Std. Err. adjusted for 180 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        lfdi |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        lfdi |
+         L1. |   1.144221   .0188434    60.72   0.000     1.107289    1.181153
+         L2. |  -.1714265   .0203447    -8.43   0.000    -.2113014   -.1315517
+             |
+        lSO2 |
+         --. |   .2458423   .0998461     2.46   0.014     .0501475     .441537
+         L1. |  -.0089705   .1223706    -0.07   0.942    -.2488125    .2308714
+         L2. |    -.23751   .0718694    -3.30   0.001    -.3783714   -.0966486
+             |
+   lgovcrime |
+         --. |   .1102414   .0415233     2.65   0.008     .0288572    .1916255
+         L1. |  -.0824393   .0390814    -2.11   0.035    -.1590375   -.0058411
+         L2. |   .0731825   .0499016     1.47   0.143    -.0246229    .1709879
+             |
+       lpopu |
+         --. |   1.766474   .3541133     4.99   0.000     1.072424    2.460523
+         L1. |   -1.19995   .5164473    -2.32   0.020    -2.212168    -.187732
+         L2. |  -.4348891   .3539644    -1.23   0.219    -1.128647    .2588684
+             |
+       lwage |
+         --. |   .9460577   .2308694     4.10   0.000     .4935619    1.398553
+         L1. |  -.1154762   .2908639    -0.40   0.691    -.6855589    .4546065
+         L2. |  -.5843104   .2745607    -2.13   0.033     -1.12244   -.0461813
+             |
+    lpollctl |
+         --. |  -.0264645   .0135574    -1.95   0.051    -.0530365    .0001076
+         L1. |  -.0097313   .0202158    -0.48   0.630    -.0493535    .0298908
+         L2. |  -.0078901   .0147999    -0.53   0.594    -.0368974    .0211173
+             |
+        lgdp |
+         --. |   .5163054   .3345887     1.54   0.123    -.1394763    1.172087
+         L1. |  -.7963281   .5166641    -1.54   0.123    -1.808971     .216315
+         L2. |    .222838   .2693589     0.83   0.408    -.3050958    .7507717
+             |
+        year |
+       2009  |    .013277   .0338446     0.39   0.695    -.0530572    .0796112
+       2010  |   .0516858   .0308044     1.68   0.093    -.0086896    .1120613
+       2011  |   .0071448   .0275243     0.26   0.795    -.0468019    .0610915
+       2012  |  -.0363352   .0381481    -0.95   0.341    -.1111041    .0384336
+       2013  |   -.090469   .0394487    -2.29   0.022     -.167787    -.013151
+       2014  |  -.0032167   .0446743    -0.07   0.943    -.0907766    .0843433
+             |
+       _cons |  -3.260538   .5008126    -6.51   0.000    -4.242113   -2.278963
+-------------+----------------------------------------------------------------
+     sigma_u |          0
+     sigma_e |  .18274058
+         rho |          0   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+
+. est store re 
+
+. outreg2 using data1,word append ctitle ("random effect") drop(i.year)
+data1.rtf
+dir : seeout
+
+. 
+. *difference GMM
+. local xx  "lfdi L.lfdi L2.lfdi L(0/2).(lSO2 lgovcrime lpopu lwage lpollctl lgdp) i.year"
+
+. local gmm7 "     L.lfdi L2.lfdi L(0/2).(lgdp lwage lpopu lpollctl)                     "
+
+. local iv7  "            L(0/2).(lSO2 lgovcrime                       )i.year   "
+
+. xtabond2 `xx', gmm(`gmm7') iv(`iv7') nolevel robust
+Favoring speed over space. To switch, type or click on mata: mata set matafavor space, perm.
+Warning: Two-step estimated covariance matrix of moments is singular.
+  Using a generalized inverse to calculate robust weighting matrix for Hansen test.
+  Difference-in-Sargan/Hansen statistics may be negative.
+
+Dynamic panel-data estimation, one-step difference GMM
+------------------------------------------------------------------------------
+Group variable: id                              Number of obs      =      1080
+Time variable : year                            Number of groups   =       180
+Number of instruments = 155                     Obs per group: min =         6
+Wald chi2(29) = 123707.21                                      avg =      6.00
+Prob > chi2   =     0.000                                      max =         6
+------------------------------------------------------------------------------
+             |               Robust
+        lfdi |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        lfdi |
+         L1. |   .7974315    .022288    35.78   0.000     .7537479     .841115
+         L2. |  -.2175169   .0392938    -5.54   0.000    -.2945314   -.1405024
+             |
+        lSO2 |
+         --. |   .0834828   .1000409     0.83   0.404    -.1125938    .2795595
+         L1. |   .1168113    .107304     1.09   0.276    -.0935006    .3271233
+         L2. |  -.2094612   .0919275    -2.28   0.023    -.3896358   -.0292867
+             |
+   lgovcrime |
+         --. |  -.0467903   .0308675    -1.52   0.130    -.1072895    .0137088
+         L1. |   -.151773   .0472393    -3.21   0.001    -.2443604   -.0591857
+         L2. |   .0860977   .0520216     1.66   0.098    -.0158627    .1880581
+             |
+       lpopu |
+         --. |    2.28488    .444315     5.14   0.000     1.414039    3.155722
+         L1. |  -.8680375   .3878676    -2.24   0.025    -1.628244   -.1078309
+         L2. |  -1.077365    .360044    -2.99   0.003    -1.783038   -.3716913
+             |
+       lwage |
+         --. |   .7322136   .3316906     2.21   0.027      .082112    1.382315
+         L1. |   .1080479   .2646186     0.41   0.683    -.4105952    .6266909
+         L2. |   1.132762   .2235341     5.07   0.000     .6946437    1.570881
+             |
+    lpollctl |
+         --. |  -.0544557   .0126452    -4.31   0.000    -.0792397   -.0296716
+         L1. |  -.0411002    .018236    -2.25   0.024    -.0768421   -.0053582
+         L2. |  -.0265215   .0171239    -1.55   0.121    -.0600837    .0070406
+             |
+        lgdp |
+         --. |   -.323417   .3199306    -1.01   0.312    -.9504694    .3036354
+         L1. |  -.3656996    .338869    -1.08   0.281    -1.029871    .2984716
+         L2. |  -.2890849   .2186643    -1.32   0.186     -.717659    .1394893
+             |
+        year |
+       2006  |          0  (empty)
+       2007  |          0  (omitted)
+       2008  |   .3046567    .148011     2.06   0.040     .0145604    .5947529
+       2009  |   .1521886   .1079816     1.41   0.159    -.0594514    .3638286
+       2010  |   .1462262      .0634     2.31   0.021     .0219644     .270488
+       2011  |   .0768035   .0315056     2.44   0.015     .0150536    .1385534
+       2012  |  -.0071705   .0224644    -0.32   0.750    -.0511999     .036859
+       2013  |  -.0927621     .04137    -2.24   0.025    -.1738459   -.0116783
+       2014  |  -.1432333   .0754223    -1.90   0.058    -.2910583    .0045917
+------------------------------------------------------------------------------
+Instruments for first differences equation
+  Standard
+    D.(lSO2 L.lSO2 L2.lSO2 lgovcrime L.lgovcrime L2.lgovcrime 2006b.year
+    2007.year 2008.year 2009.year 2010.year 2011.year 2012.year 2013.year
+    2014.year)
+  GMM-type (missing=0, separate instruments for each period unless collapsed)
+    L(1/8).(L.lfdi L2.lfdi lgdp L.lgdp L2.lgdp lwage L.lwage L2.lwage lpopu
+    L.lpopu L2.lpopu lpollctl L.lpollctl L2.lpollctl)
+------------------------------------------------------------------------------
+Arellano-Bond test for AR(1) in first differences: z =  -7.10  Pr > z =  0.000
+Arellano-Bond test for AR(2) in first differences: z =  -5.08  Pr > z =  0.000
+------------------------------------------------------------------------------
+Sargan test of overid. restrictions: chi2(126)  =1092.64  Prob > chi2 =  0.000
+  (Not robust, but not weakened by many instruments.)
+Hansen test of overid. restrictions: chi2(126)  =  23.85  Prob > chi2 =  1.000
+  (Robust, but weakened by many instruments.)
+
+Difference-in-Hansen tests of exogeneity of instrument subsets:
+  iv(lSO2 L.lSO2 L2.lSO2 lgovcrime L.lgovcrime L2.lgovcrime 2006b.year 2007.year 2008.year 2009.year 2010.year 2011.year 2012.year 2013.year 2014
+> .year)
+    Hansen test excluding group:     chi2(115)  =  25.14  Prob > chi2 =  1.000
+    Difference (null H = exogenous): chi2(11)   =  -1.29  Prob > chi2 =  1.000
+
+
+. est store paneldi
+
+. outreg2 paneldi using data1,word append ctitle ("Difference GMM")drop(i.year)
+data1.rtf
+dir : seeout
+
+. shellout using `"data1.rtf"'
+
+. 
+. log close
+      name:  <unnamed>
+       log:  C:\stata\personal\mylog2.log
+  log type:  text
+ closed on:  25 Apr 2017, 16:03:49
+-------------------------------------------------------------------------------------------------------------------------------------------------
